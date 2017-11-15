@@ -16,7 +16,7 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo Yii::$app->request->baseUrl;?>/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo Yii::$app->request->baseUrl;?>/favic.ico">
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
