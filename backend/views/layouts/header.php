@@ -30,7 +30,7 @@ use common\widgets\Alert;
             //['label' => 'Главная', 'url' => ['/site/index']],
             ['label' => 'Клиенты', 'url' => ['/client/index'], 'active'=> ($status == 'client')],
             ['label' => 'Объекты', 'url' => ['/unit/index']],
-            ['label' => 'Данныеsdsdewaf', 'url' => ['/data/default/index'], 'active'=> ($status == 'data')],
+            ['label' => 'Данные', 'url' => ['/data/default/index'], 'active'=> ($status == 'data')],
             
         ];
 
