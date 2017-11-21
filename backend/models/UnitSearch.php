@@ -78,7 +78,7 @@ class UnitSearch extends Unit
             $query->andFilterWhere(['like', 'client.idClient', $id]);
         }
 
-        $query->andFilterWhere(['like', 'comment', $this->comment])
+        $query->andFilterWhere(['like', 'Unit.comment', $this->comment])
                 ->andFilterWhere(['like', 'Sim.sim', $this->idSim])
                 ->andFilterWhere(['like', 'Sim.icc', $this->idIcc])
                 ->andFilterWhere(['like', 'imei', $this->imei])
