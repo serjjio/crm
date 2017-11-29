@@ -211,5 +211,11 @@ a.create {
 .mytable .col-md-12 {
     padding: 0px;
 }
+.pull-right {
+    display: none;
+}
+#unitsearch-dateInstaller-container div span b.caret {
+    display: none;
+}
 
 

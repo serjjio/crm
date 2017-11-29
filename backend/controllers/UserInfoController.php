@@ -67,6 +67,8 @@ class UserInfoController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->idClient = $id;
+            //var_dump($model->idClient);
+            //exit;
                 if($model->save()){
                     echo 1;
                 }else{

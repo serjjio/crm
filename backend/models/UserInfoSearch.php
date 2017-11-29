@@ -58,13 +58,15 @@ class UserInfoSearch extends UserInfo
         }
         $query->joinWith('idClient0');
         // grid filtering conditions
+        
         $query->andFilterWhere([
             'idUser' => $this->idUser,
-            //'idClient' => $this->idClient,
+            //'client.idClient' => $id,
             'idServer' => $this->idServer,
         ]);
+        //$query->andFilterWhere(['client.idClient' => $id]);
         if($id){
-            $query->andFilterWhere(['like', 'client.idClient', $id]);
+            $query->andFilterWhere(['client.idClient' => $id]);
         }
         $query->andFilterWhere(['like', 'login', $this->login])
             ->andFilterWhere(['like', 'nameUser', $this->nameUser])

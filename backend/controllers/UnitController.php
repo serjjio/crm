@@ -78,6 +78,11 @@ class UnitController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->idIcc = $model->idSim;
+            if(!empty($model->dateInstaller)){
+                $date = strtotime($model->dateInstaller);
+                $model->dateInstaller = date('Y-m-d', $date);
+            }
+            
             if($model->idClient != ""){
                 $client = Client::findOne($model->idClient);
                 $client->clientCountObj++;
@@ -158,7 +163,10 @@ class UnitController extends Controller
         if ($model->load(Yii::$app->request->post())) {
 
             $model->idIcc = $model->idSim;
-                
+            if(!empty($model->dateInstaller)){
+                $date = strtotime($model->dateInstaller);
+                $model->dateInstaller = date('Y-m-d', $date);
+            }
             $model->save();
             if($idClientCurrent != $model->idClient){
                 $countOld = Client::findOne($idClientCurrent);

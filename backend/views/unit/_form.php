@@ -11,6 +11,7 @@ use app\models\Sim;
 use app\models\TypeUnit;
 use yii\web\JsExpression;
 use kartik\checkbox\CheckboxX;
+use kartik\date\DatePicker;
 
 
 
@@ -138,6 +139,21 @@ use kartik\checkbox\CheckboxX;
                                 'threeState' => false,
                             ] 
         ])?>
+                </div>
+            </div>
+            <div class="form-group">
+                <?= Html::activeLabel($model, 'dateInstaller', ['label' => 'Дата установки', 'class' => 'col-sm-2 control-label'])?>
+                <div class="col-sm-3">
+                        <?= $form->field($model, 'dateInstaller', ['showLabels' => false])->widget(DatePicker::classname(),[
+                                'name' => 'dp_1',
+                                'type' => DatePicker::TYPE_COMPONENT_PREPEND,
+                                //'value' => '28-May-1989',
+                                'pluginOptions'=> [
+                                    'autoclose' => true,
+                                    'format' => 'dd-m-yyyy'
+                                ],
+                                //'options' => ['placeholder' => 'Select date...']
+                        ])?>
                 </div>
             </div>
             <div class="form-group" >

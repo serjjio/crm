@@ -26,6 +26,8 @@ class Unit extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $from_date;
+    public $to_date;
     public static function tableName()
     {
         return 'Unit';
@@ -38,7 +40,8 @@ class Unit extends \yii\db\ActiveRecord
     {
         return [
             [['number', 'imei', 'idTypeUnit'], 'required'],
-            [['idClient', 'idSim', 'idIcc', 'comment'], 'safe'],
+            [['idClient', 'idSim', 'idIcc', 'comment', 'from_date', 'to_date'], 'safe'],
+            [['dateInstaller'], 'string', 'max'=>256],
             [['number', 'imei', 'idTypeUnit', 'idSim', 'idIcc', 'idClient', 'status'], 'integer'],
             [['idTypeUnit'], 'exist', 'skipOnError' => true, 'targetClass' => TypeUnit::className(), 'targetAttribute' => ['idTypeUnit' => 'idTypeUnit']],
             [['idSim'], 'exist', 'skipOnError' => true, 'targetClass' => Sim::className(), 'targetAttribute' => ['idSim' => 'idSim']],
@@ -59,9 +62,12 @@ class Unit extends \yii\db\ActiveRecord
             'idTypeUnit' => 'Id Type Unit',
             'idSim' => 'Id Sim',
             'idIcc' => 'Id Icc',
+            'dateInstaller' => 'Date Installer',
             'idClient' => 'Id Client',
             'comment' => 'Comment',
-            'status' => 'Активный/Неактивный'
+            'status' => 'Активный/Неактивный',
+            'from_date' => 'From Date',
+            'to_date' => 'To Date'
         ];
     }
 

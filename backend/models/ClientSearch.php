@@ -41,7 +41,7 @@ class ClientSearch extends Client
      */
     public function search($params)
     {
-        $query = Client::find();
+        $query = Client::find()->orderBy(['clientName' => SORT_ASC]);
 
         // add conditions that should always apply here
 

@@ -38,6 +38,7 @@
         "miloschuman/yii2-highcharts-widget": "dev-master",
         "kartik-v/yii2-checkbox-x": "*",
         "philippfrenzel/yii2fullcalendar": "*",
+        "kartik-v/yii2-date-range": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -84,6 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a($name, [Url::to('client/detail-view/'.$model->idClient)], ['data-pjax' => 0]);
                 },
                 'hAlign' => 'center',
+                'contentOptions' => ['style' => 'max-width:300px; white-space:normal']
             ],
             [
                 //'class' => 'kartik\grid\EditableColumn',
@@ -92,11 +93,32 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'СИМ-карта',
                 'hAlign' => 'center',
             ],
-            [
+            /*[
                 'attribute' => 'idIcc',
                 'hAlign' => 'center',
                 'label' => 'ICC',
                 'value' => 'idIcc0.icc'
+            ],*/
+            [
+                //'class' => 'yii\grid\DataColumn',
+                'attribute' => 'dateInstaller',
+                'format' => ['date', 'php:Y-m-d'],
+                'width' => 'auto',
+                'value' => 'dateInstaller',
+                'filterType' => GridView::FILTER_DATE_RANGE,
+                'filterWidgetOptions' => [
+                    'model' => $model,
+                    'attribute' => 'dateInstaller',
+                    'presetDropdown' => true,
+                    'defaultPresetValueOptions' => [
+                        'style' => 'display:none',
+                    ],
+                    'hideInput' => true,
+                    'convertFormat' => true,
+                    'pluginOptions' => [
+                        'locale' => ['format' => 'Y-m-d', 'separator' => ' : ']
+                    ]
+                ],
             ],
             [
                 'class' => 'kartik\grid\BooleanColumn',

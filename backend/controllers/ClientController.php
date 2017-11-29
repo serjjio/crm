@@ -117,6 +117,7 @@ class ClientController extends Controller
         }
             $searchModel = new UserInfoSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $id);
+            
 
             return $this->render('detail-view', [
                 'model' => $model,
