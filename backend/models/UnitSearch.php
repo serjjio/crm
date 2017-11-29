@@ -84,7 +84,7 @@ class UnitSearch extends Unit
             self::tableName() . '.status' => $this->status,
         ]);
         if($id){
-            $query->andFilterWhere(['like', 'client.idClient', $id]);
+            $query->andFilterWhere(['client.idClient' => $id]);
         }
 
         $query->andFilterWhere(['like', 'Unit.comment', $this->comment])
