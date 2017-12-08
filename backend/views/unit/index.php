@@ -103,6 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'class' => 'yii\grid\DataColumn',
                 'attribute' => 'dateInstaller',
                 'format' => ['date', 'php:Y-m-d'],
+                'label' => 'Дата установки',
                 'width' => 'auto',
                 'value' => 'dateInstaller',
                 'filterType' => GridView::FILTER_DATE_RANGE,
