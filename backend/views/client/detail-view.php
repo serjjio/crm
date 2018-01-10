@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Клиенты', 'url' => ['index'
 $this->params['breadcrumbs'][] = $this->title;
 /*echo Html::submitButton('Hello', ['class' => 'btn btn-primary my-button']);*/
 ?>
+
 <?php
 $beforePanel = <<<HTML
 
@@ -59,7 +60,7 @@ HTML;
 
 		<?= $model->logo ? Html::img("/images/".$model->idClient.'/logo/'.$model->logo, ['class' => 'img-thumbnail', 'style' => 'border:none']) : Html::img("/images/logo/empty.jpg", ['class' => 'img-thumbnail', 'style' => 'border:none'])?>
 	<div>		
-			    <?php
+ 	<?php
 
         echo DetailView::widget([
                 
@@ -122,7 +123,7 @@ HTML;
                 ],
                 'responsive' => false,
                 'mode' => 'view',
-                'enableEditMode' => 'false',
+                'enableEditMode' => 'true',
                 
                 'formOptions' => [
                     'options' => ['data-pjax' => 0],
@@ -159,7 +160,7 @@ Pjax::begin(['id' => 'test-test']);
                 'condensed' => true,
                 'hover' => true,
                 'responsive' => true,
-                'mode' => 'view',
+                'mode' => DetailView::MODE_VIEW,
                 //'container' => ['id'=>'detail-container'],
                 'attributes' => [
                 	[
@@ -540,7 +541,7 @@ HTML;
             ],
 	]
 ?>
-
+    <!-- Information about users for this client -->
 	<?= GridView::widget([
 	        'dataProvider' => $dataProvider,
 	        //'filterModel' => $searchModel,

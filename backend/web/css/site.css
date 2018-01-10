@@ -211,7 +211,7 @@ a.create {
 .mytable .col-md-12 {
     padding: 0px;
 }
-.pull-right {
+.kv-drp-dropdown .pull-right >b.caret{
     display: none;
 }
 #unitsearch-dateInstaller-container div span b.caret {
