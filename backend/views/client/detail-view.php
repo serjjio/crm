@@ -20,10 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php
-$beforePanel = <<<HTML
-
-            <button class="btn btn-create" data-attribute-url="/sim/create"><i class="glyphicon glyphicon-plus"></i> Создать СИМ-карту</button>
-HTML;
 
 foreach($serviceContract as $service){
     $id_serv = $service['id_service_contract'];
@@ -447,7 +443,7 @@ Pjax::begin(['id' => 'test-test']);
                     'heading'=>  $model->logo ? Html::img("/images/".$model->idClient.'/logo/'.$model->logo, ['style'=>'max-width:5%;max-height:5%']) : Html::img("/images/logo/empty.jpg", ['style'=>'max-width:5%;max-height:5%']),
                     'type'=>DetailView::TYPE_INFO,
                 ],
-                'buttons1' => '{update}',
+                'buttons1' => (Yii::$app->user->identity->username = "sale") ? '' : '{update}',
                 'formOptions' => [
                     'options' => ['data-pjax' => 1],
                     'enableClientValidation' => true
@@ -463,7 +459,7 @@ Pjax::end();
 
 	<?php
 
-$beforePanel = <<<HTML
+$beforePanel = (Yii::$app->user->identity->username = "sale") ? '' : <<<HTML
 
             <a class="user-create" href="/user-info/create/$id"><u>Создать пользователя</u></a>
 HTML;
@@ -509,7 +505,7 @@ HTML;
         ],
         [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{update} {delete}',
+                'template' => (Yii::$app->user->identity->username != "sale") ? '{update} {delete}': '',
                 'buttons' => [
                         'update' => function($url, $model, $key){
                             return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#root',

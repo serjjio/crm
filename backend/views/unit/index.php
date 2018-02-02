@@ -145,7 +145,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{update} {delete}',
+                'template' => (Yii::$app->user->identity->username != "sale") ? '{update} {delete}' : '',
                 'buttons' => [
                     'update' => 
                             function($url, $model, $key){
@@ -215,7 +215,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['create'], 
                             [
                                 'data-pjax'=>1, 
-                                'class'=> 'btn create create-unit', 
+                                'class' => (Yii::$app->user->identity->username = "sale") ? 'btn create create-unit disabled' : 'btn create create-unit',
                                 'title' => Yii::t('app', 'Добавить блок'),
                             ])
 

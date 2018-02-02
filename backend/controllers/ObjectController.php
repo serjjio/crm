@@ -7,6 +7,7 @@ use app\models\Object;
 use app\models\ObjectSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use app\models\Client;
 use yii\data\ActiveDataProvider;
@@ -75,6 +76,7 @@ class ObjectController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Object();
 
         if ($model->load(Yii::$app->request->post())) {

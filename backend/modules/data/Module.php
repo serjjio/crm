@@ -4,6 +4,7 @@ namespace backend\modules\data;
 
 
 use Yii;
+use yii\web\ForbiddenHttpException;
 
 /**
  * data module definition class
@@ -20,6 +21,9 @@ class Module extends \yii\base\Module
      */
     public function init()
     {
+        if (Yii::$app->user->identity->username = 'sale'){
+            throw new ForbiddenHttpException('Доступ закрыт');
+        }
         Yii::$app->view->params['status'] = 'data';
         $this->setLayoutPath('@app/views/layouts');
         $this->layout = 'main-reference';

@@ -8,6 +8,7 @@ use app\models\ClientSearch;
 use app\models\ServiceContract;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use app\models\Contract;
 use app\models\UserInfoSearch;
@@ -42,6 +43,7 @@ class ClientController extends Controller
      */
     public function actionIndex()
     {
+        
         Yii::$app->language = 'ru-RU';
         $searchModel = new ClientSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -137,6 +139,9 @@ class ClientController extends Controller
      */
     public function actionCreate()
     {
+        if (Yii::$app->user->identity->username = 'sale'){
+            throw new ForbiddenHttpException('Доступ закрыт');
+        }
         Yii::$app->language = 'ru-RU';
         $model = new Client();
         $modelContract = new Contract();

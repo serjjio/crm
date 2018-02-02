@@ -7,6 +7,7 @@ use app\models\Unit;
 use app\models\UnitSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use app\models\Sim;
 use yii\db\Query;
@@ -74,6 +75,9 @@ class UnitController extends Controller
      */
     public function actionCreate()
     {
+        if (Yii::$app->user->identity->username = 'sale'){
+            throw new ForbiddenHttpException('Доступ закрыт');
+        }
         $model = new Unit();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -158,6 +162,9 @@ class UnitController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->identity->username = 'sale'){
+            throw new ForbiddenHttpException('Доступ закрыт');
+        }
         $model = $this->findModel($id);
         $idClientCurrent = $model->idClient;
         if ($model->load(Yii::$app->request->post())) {

@@ -18,10 +18,8 @@ $this->title = $name;
     </div>
 
     <p>
-        The above error occurred while the Web server was processing your request.
+        Если вам не понятна возникшая ошибка вашего запроса. Обратитесь к администратору: <h style="color:#a94442"><?=Yii::$app->params['adminEmail']?></h>.
     </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
+    
 
 </div>

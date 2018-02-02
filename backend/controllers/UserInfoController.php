@@ -7,6 +7,7 @@ use app\models\UserInfo;
 use app\models\UserInfoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -63,6 +64,9 @@ class UserInfoController extends Controller
      */
     public function actionCreate($id)
     {
+        if (Yii::$app->user->identity->username = 'sale'){
+            throw new ForbiddenHttpException('Доступ закрыт');
+        }
         $model = new UserInfo();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -90,6 +94,9 @@ class UserInfoController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->identity->username = 'sale'){
+            throw new ForbiddenHttpException('Доступ закрыт');
+        }
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
