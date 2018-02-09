@@ -75,7 +75,7 @@ class UnitController extends Controller
      */
     public function actionCreate()
     {
-        if (Yii::$app->user->identity->username = 'sale'){
+        if (Yii::$app->user->identity->username == 'sale'){
             throw new ForbiddenHttpException('Доступ закрыт');
         }
         $model = new Unit();
@@ -162,7 +162,7 @@ class UnitController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (Yii::$app->user->identity->username = 'sale'){
+        if (Yii::$app->user->identity->username == 'sale'){
             throw new ForbiddenHttpException('Доступ закрыт');
         }
         $model = $this->findModel($id);

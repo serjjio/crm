@@ -205,7 +205,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
             //'type' => 'success',
-            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['data-pjax'=>0, 'class'=> (Yii::$app->user->identity->username="sale") ? "btn btn-default disabled" : "btn btn-default", 'title' => Yii::t('app', 'Добавить клиента')]),
+            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['data-pjax'=>0, 'class'=> (Yii::$app->user->identity->username=="sale") ? "btn btn-default disabled" : "btn btn-default", 'title' => Yii::t('app', 'Добавить клиента')]),
             
         ],
         

@@ -21,7 +21,7 @@ class Module extends \yii\base\Module
      */
     public function init()
     {
-        if (Yii::$app->user->identity->username = 'sale'){
+        if (Yii::$app->user->identity->username == 'sale'){
             throw new ForbiddenHttpException('Доступ закрыт');
         }
         Yii::$app->view->params['status'] = 'data';
