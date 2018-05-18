@@ -5,6 +5,7 @@ use yii\helpers\Url;
 use kartik\grid\GridView;
 use app\models\Unit;
 use app\models\Client;
+use app\models\TypeUnit;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\Modal;
 use yii\widgets\Pjax;
@@ -72,8 +73,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 
                 'label' => 'Тип трекера',
                 'contentOptions' => ['style' => 'width:150px;; white-space:normal'],
-                
-                
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => ArrayHelper::map(TypeUnit::find()->orderBy('name')->asArray()->all(), 'idTypeUnit', 'name'),
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear'=>true]
+                ],
+                'format' => 'raw',
+                'filterInputOptions' => ['placeholder' => 'Тип'],   
             ],
             [
                 'attribute' => 'idClient',

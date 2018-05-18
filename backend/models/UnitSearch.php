@@ -68,7 +68,7 @@ class UnitSearch extends Unit
         $query->joinWith('idClient0');
         $query->joinWith('idSim0', 'idIcc0');
         //$query->joinWith('idIcc0');
-        $query->joinWith('idTypeUnit0');
+        //$query->joinWith('idTypeUnit0');
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -77,7 +77,7 @@ class UnitSearch extends Unit
             //'status' => $this->status,
             //'number' => $this->number,
             //'imei' => $this->imei,
-            //'idTypeUnit' => $this->idTypeUnit,
+            'idTypeUnit' => $this->idTypeUnit,
             //'idSim' => $this->idSim,
             //'idIcc' => $this->idIcc,
             //'idClient' => $this->idClient,
@@ -94,8 +94,8 @@ class UnitSearch extends Unit
                 ->andFilterWhere(['like', 'Sim.icc', $this->idIcc])
                 ->andFilterWhere(['like', 'imei', $this->imei])
                 ->andFilterWhere(['like', 'number', $this->number])
-                ->andFilterWhere(['like', 'client.clientName', $this->idClient])
-                ->andFilterWhere(['like', 'TypeUnit.name', $this->idTypeUnit]);
+                ->andFilterWhere(['like', 'client.clientName', $this->idClient]);
+                //->andFilterWhere(['like', 'TypeUnit.name', $this->idTypeUnit]);
 
         return $dataProvider;
     }
