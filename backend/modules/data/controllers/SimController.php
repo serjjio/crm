@@ -93,7 +93,7 @@ class SimController extends Controller
                     $unit->number = $rowData[0][0];
                     $unit->imei = number_format($rowData[0][1],0,'','');
                     if(!$unit->imei){
-                        $unit->imei = $unit->number;
+                        $unit->imei = 0;
                     }
                     $unit->idTypeUnit = $rowData[0][2];
                     $unit->idClient = $rowData[0][4];                                    
