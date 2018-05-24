@@ -1911,12 +1911,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "baaa8f8b8bbaed1ed0aea56fb0564c5ab340d7d3"
+                "reference": "d08a5b302fe04216bd04290f0e99e26386801a37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/baaa8f8b8bbaed1ed0aea56fb0564c5ab340d7d3",
-                "reference": "baaa8f8b8bbaed1ed0aea56fb0564c5ab340d7d3",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/d08a5b302fe04216bd04290f0e99e26386801a37",
+                "reference": "d08a5b302fe04216bd04290f0e99e26386801a37",
                 "shasum": ""
             },
             "require": {
@@ -1956,7 +1956,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-11-25 06:02:18"
+            "time": "2018-02-24 05:28:25"
         },
         {
             "name": "kartik-v/yii2-widget-sidenav",
@@ -2212,6 +2212,7 @@
                 "xls",
                 "xlsx"
             ],
+            "abandoned": "phpoffice/phpspreadsheet",
             "time": "2015-05-01T07:00:55+00:00"
         },
         {

@@ -62,8 +62,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
         
         $columns = [
-            ['class' => 'yii\grid\SerialColumn'],
-
+            //['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'idClient',
+                'label' => 'id',
+                'format' => 'raw'
+            ],
             [
                 'vAlign' => 'middle',
                 'filterWidgetOptions' => [

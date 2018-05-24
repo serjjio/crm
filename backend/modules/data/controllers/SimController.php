@@ -5,6 +5,8 @@ namespace app\modules\data\controllers;
 
 use Yii;
 use app\models\Sim;
+use app\models\Unit;
+use app\models\Client;
 use app\models\SimSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -76,6 +78,7 @@ class SimController extends Controller
                 {
                     die('Error');
                 }
+                
                 $sheet = $objPHPExcel->getSheet(0);
                 $highestRow = $sheet->getHighestRow();
                 $highestColumn = $sheet->getHighestColumn();
@@ -86,7 +89,34 @@ class SimController extends Controller
                     if($row == 0){
                         continue;
                     }
-                    $sim = new Sim;
+                    $unit = new Unit;
+                    $unit->number = $rowData[0][0];
+                    $unit->imei = number_format($rowData[0][1],0,'','');
+                    $unit->idTypeUnit = $rowData[0][2];
+                    $unit->idClient = $rowData[0][4];                                    
+                    $num_sim = $rowData[0][3];
+                    if($sim = Sim::find()->where(['sim' => $num_sim])->one()){
+                        $unit->idSim = $sim->idSim;
+                        $unit->idIcc = $sim->idSim;
+                    }else{
+                        $sim = new Sim;
+                        $sim->sim = $num_sim;
+                        $sim->save();
+                        $unit->idSim = $sim->idSim;
+                        $unit->idIcc = $sim->idSim;
+                    }
+                    if (!$unit->save()){
+                        print_r($unit->getErrors());
+                    }else{
+                        $count_client = Client::findOne($unit->idClient);
+                        $count_client->clientCountObj++;
+                        $count_client->save();
+                    }
+                    
+                    /*$number = number_format($rowData[0][1],0,'','');
+                    echo strval($number);*/
+                    //echo $rowData[0][0].' '.number_format($rowData[0][1],0,'','').' '.$rowData[0][2].' '.$rowData[0][3].'<br>';
+                   /* $sim = new Sim;
                     if ($rowData[0][1] == "Действующий"){
                         $sim->status = 1;
                     }else{
@@ -99,15 +129,16 @@ class SimController extends Controller
                          //print_r($row.' - '.$sim->getErrors());
                          continue;
                     }
-
+*/
                     //echo $model->sim;
+
                 }
 
             }else{
                 echo "Bad";
                 exit;
             }
-            return $this->redirect(['/data/sim']);
+            //return $this->redirect(['/data/sim']);
         }else{
             return $this->render('upload',
                 ['model' => $model]);
