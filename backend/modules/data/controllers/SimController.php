@@ -92,9 +92,16 @@ class SimController extends Controller
                     $unit = new Unit;
                     $unit->number = $rowData[0][0];
                     $unit->imei = number_format($rowData[0][1],0,'','');
+                    if(!$unit->imei){
+                        $unit->imei = $unit->number;
+                    }
                     $unit->idTypeUnit = $rowData[0][2];
                     $unit->idClient = $rowData[0][4];                                    
                     $num_sim = $rowData[0][3];
+
+                    if (strlen($num_sim) > 9){
+                        $num_sim = substr($num_sim, -9);
+                       }
                     if($sim = Sim::find()->where(['sim' => $num_sim])->one()){
                         $unit->idSim = $sim->idSim;
                         $unit->idIcc = $sim->idSim;
