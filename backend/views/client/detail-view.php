@@ -527,10 +527,10 @@ HTML;
                                     [
                                         'title' => Yii::t('app', 'Удалить'),
                                         'class' => 'ajax-delete',
-                                        /*'data' => [
-                                        	'confirm' => 'Вы действительно хотите удалить пользователя?',
-                                        	'method' => 'post',
-                                        ],*/
+                                        'data' => [
+                                        	//'confirm' => 'Вы действительно хотите удалить пользователя?',
+                                        	//'method' => 'post',
+                                        ],
                                         'delete-url' => '/user-info/delete/'.$key,
                                         
                                         'data-pjax' => 0

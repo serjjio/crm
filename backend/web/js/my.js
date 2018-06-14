@@ -76,26 +76,38 @@ $(document).on({
 	
 })*/
 
+
+/*
+Аякс удаление пользователей у клиента
+*/
+
 $(document).on({
 	ready: function(){
 		return $('body').on('click', '.ajax-delete', function(e){
 			e.preventDefault();
 			var deleteurl = $(this).attr('delete-url');
-			var isGood = confirm('Вы действительно хотите удалить пользователя?');
-			if (isGood==true){
-				$.ajax({
-						url: deleteurl,
-						type: 'post',
-						error: function (xhr, status, error) {
-							alert('There was an error with your request. '
-									+xhr.responseText);
-						}
-					}).done(function(data){
-						$.pjax.reload({container:'#user-pjax-container'})
-				})
-			}else{
-				return false;
-			}
+			BootstrapDialog.confirm({
+				type : BootstrapDialog.TYPE_WARNING,
+				title : 'Подтверждение',
+				message : 'Вы уверены, что хотите удалить этот элемент?',
+				callback : function(result){
+					if(result){
+						$.ajax({
+							url: deleteurl,
+							type: 'post',
+							error: function (xhr, status, error) {
+								alert('There was an error with your request. '
+										+xhr.responseText);
+							}
+						}).done(function(data){
+							$.pjax.reload({container:'#user-pjax-container'})
+						})
+					}else{
+						return;
+					}
+				}
+			})
+
 		})
 	}
 })
