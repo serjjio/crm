@@ -196,6 +196,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container']],
         'responsive' => true,
         'striped' => true,
+        'condensed' => true,
+        'resizableColumns'=>true,
         'responsiveWrap' => true,
         'hover' => true,
         'persistResize' => false,

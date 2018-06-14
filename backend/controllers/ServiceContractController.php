@@ -8,6 +8,7 @@ use app\models\ServiceContractSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * ServiceContractController implements the CRUD actions for ServiceContract model.
@@ -51,10 +52,12 @@ class ServiceContractController extends Controller
      */
     public function actionView($id)
     {
+
         Yii::$app->language = 'ru-RU';
         $post = Yii::$app->request->post();
         $model = $this->findModel($id);
         if($model->load($post)){
+
             Yii::$app->session->setFlash('kv-detail-success', 'Параметры договора успешно изменены');
             
             $model->save();
@@ -65,6 +68,45 @@ class ServiceContractController extends Controller
         return $this->renderAjax('view', [
             'model' => $model,
         ]);
+    }
+     /**
+     * Deletes an existing ServiceContract model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete()
+    {
+
+        $post = Yii::$app->request->post();
+        if (Yii::$app->request->isAjax && isset($post['pldelete'])){
+            $id = $post['id'];
+            if ($model = $this->findModel($id)){
+                $idClient = $model->idClient;
+                $model->delete();
+                //Yii::$app->session->setFlash('kv-detail-success', 'Параметры договора успешно изменены');
+                echo Json::encode([
+                      //'deleted' => true,
+                      'success' => true,
+                      'messages' => ['kv-detail-success' => 'Deleted successfully'] 
+                    ]);
+                Yii::$app->session->setFlash('kv-detail-success', 'Договор удален');
+            
+            }else{
+                echo Json::encode([
+                      'success' => false,
+                      'messages' => ['kv-detail-error' => 'Delete failed'] 
+                    ]);
+                Yii::$app->session->setFlash('kv-detail-error', 'Возникла ошибка, обратитесь к администратору');
+            }
+            return;
+        }
+        
+        /*if ($model = $this->findModel($id)){
+            Yii::$app->session->setFlash('kv-detail-success', 'Договор удален');
+        };*/
+        //var_dump($model->idClient);
+        //return $this->redirect('/client/detail-view/'.$model->idClient);
     }
 
     /**
@@ -125,18 +167,7 @@ class ServiceContractController extends Controller
         }
     }
 
-    /**
-     * Deletes an existing ServiceContract model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
+   
 
     /**
      * Finds the ServiceContract model based on its primary key value.

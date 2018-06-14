@@ -41,12 +41,18 @@ class ClientSearch extends Client
      */
     public function search($params)
     {
-        $query = Client::find()->orderBy(['clientName' => SORT_ASC]);
+        $query = Client::find();
+        //->orderBy(['clientName' => SORT_ASC]);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'clientName' => SORT_ASC,
+                ]
+            ]
         ]);
 
         $this->load($params);

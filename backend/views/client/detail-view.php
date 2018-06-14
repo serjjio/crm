@@ -26,7 +26,7 @@ foreach($serviceContract as $service){
     $name_serv = $service['name_service_contract'];
     $date_serv = $service['date_service_contract'];
     $contract .= <<<HTML
-            <a href="/service-contract/$id_serv" class="service-view">$name_serv ($date_serv)</a>&nbsp
+            <a href="/service-contract/$id_serv" class="service-view"><h style='background-color:#2eb82e;color:#fff'>$name_serv</h> ($date_serv)</a>&nbsp&nbsp
 
 
 HTML;
@@ -443,12 +443,17 @@ Pjax::begin(['id' => 'test-test']);
                     'heading'=>  $model->logo ? Html::img("/images/".$model->idClient.'/logo/'.$model->logo, ['style'=>'max-width:5%;max-height:5%']) : Html::img("/images/logo/empty.jpg", ['style'=>'max-width:5%;max-height:5%']),
                     'type'=>DetailView::TYPE_INFO,
                 ],
-                'buttons1' => (Yii::$app->user->identity->username == "sale") ? '' : '{update}',
+                'buttons1' => (Yii::$app->user->identity->username == "sale") ? '' : '{update}{delete}',
+                'deleteOptions' => [
+                    'url' => ['delete', 'id' => $model->idClient],
+                    'method' => 'post',
+                ],
                 'formOptions' => [
                     'options' => ['data-pjax' => 1],
                     'enableClientValidation' => true
                     //'action' => Url::to('delete')
                 ],
+                'container' => ['id'=>'client-container'],
             ]);
 Pjax::end();
 
@@ -567,13 +572,13 @@ HTML;
 <?php
 $script = <<<JS
 
-$(document).ready(function(){
+/*$(document).ready(function(){
 	if($('.kv-alert-container').is(':visible')){
 		setTimeout(function(){
 			$('.kv-alert-container').fadeOut('slow')
 		},3000);
 	}
-});
+});*/
 $('.my-button').click(function(){
     $.ajax({
         url: '/service-contract/create-ajax',

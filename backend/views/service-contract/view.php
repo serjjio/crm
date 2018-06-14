@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
 use kartik\editable\Editable;
 use app\models\Client;
 use Yii;
+use yii\helpers\Json;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ServiceContract */
@@ -78,7 +79,7 @@ use Yii;
         ]
 ?>
 <?php
-Pjax::begin(['id' => 'test-test']);
+
     echo DetailView::widget([
         'model' => $model,
         'condensed' => true,
@@ -94,10 +95,33 @@ Pjax::begin(['id' => 'test-test']);
             'heading' => 'Детали доп. соглашения',
             'type'=>DetailView::TYPE_INFO,
         ],
-        'buttons1' => '{update}',
-        //'container' => ['id'=>'detail-container'],
+        'buttons1' => (Yii::$app->user->identity->username == "sale") ? '' : '{update}{delete}',
+        'deleteOptions' => [
+                    'url' => ['delete'],
+                    'params' => ['id' => $model->id_service_contract, 'pldelete' => true],
+                    //'method' => 'post',
+                    'ajaxSettings' => [
+                        'success' => new \yii\web\JsExpression("
+                            function(data) {
+                                $('#root').modal('hide');
+                                $.pjax.reload({container:'#test-test'});
+                                function deletAlert(){
+                                  $('#client-container .kv-alert-container').fadeOut('slow');  
+                                };
+                                setTimeout(deletAlert, 3000);
+                                //$('#client-container .kv-alert-container').addClass('kv-detail-success').show().append('sdsdsd')
+                                
+
+                             }
+                        ")
+                    ]
+                ],
+        'container' => ['id'=>'contract-container'],
         'attributes' => $columns,
     ]) ;
-Pjax::end();
+
 ?>
 </div>
+
+
+
