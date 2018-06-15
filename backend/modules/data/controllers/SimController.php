@@ -140,6 +140,7 @@ class SimController extends Controller
                     //echo $model->sim;
 
                 }
+                return $this->redirect('/unit');
 
             }else{
                 echo "Bad";

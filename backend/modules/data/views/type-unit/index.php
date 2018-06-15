@@ -34,9 +34,19 @@ use yii\bootstrap\Modal;
 <?php
 
     $columns = [
-            ['class' => 'yii\grid\SerialColumn'],
+            /*[
+                'class' => 'yii\grid\SerialColumn',
+                //'value' => 'idTypeUnit',
+            ],*/
 
-            //'Id',
+            //'idTypeUnit',
+            [
+                'attribute' => 'idTypeUnit',
+                'label' => '#',
+                //'hAlign' => 'center',
+                'width' => '50px',
+                
+            ],
             'name',
 
             [

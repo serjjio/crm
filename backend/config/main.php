@@ -17,7 +17,10 @@ return [
         ],
         'data' => [
             'class' => 'backend\modules\data\Module',
-        ]
+        ],
+        'admin' => [
+            'class' => 'backend\modules\admin\Module',
+        ],
     ],
     'components' => [
         'request' => [
