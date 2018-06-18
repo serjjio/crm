@@ -164,6 +164,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             }
                 ]
 
+            ],
+            [
+                'class' => 'kartik\grid\CheckboxColumn',
+                'headerOptions' => ['class' => 'kartik-sheet-style']
             ]
             
             
@@ -173,6 +177,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
 
     <?= GridView::widget([
+        'id' => 'pl-grid-units',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         //'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => ''],
@@ -198,7 +203,7 @@ $this->params['breadcrumbs'][] = $this->title;
             return $model->status ? ['style' => 'word-wrap:break-word'] : ['style' => 'word-wrap:break-word', 'class' => GridView::TYPE_DANGER];
         },
         
-        'layout' => $layout,
+        //'layout' => $layout,
 
         'responsive' => false,
         'responsiveWrap' => true,
@@ -223,7 +228,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'data-pjax'=>1, 
                                 'class' => (Yii::$app->user->identity->username == "sale") ? 'btn create create-unit disabled' : 'btn create create-unit',
                                 'title' => Yii::t('app', 'Добавить блок'),
-                            ])
+                            ]),
+            'after' => Html::a('<i class="glyphicon glyphicon-trash"></i> Удалить выбраные', 
+                            ['delete-selected'], 
+                            [
+                                //'data-pjax'=>0, 
+                                'class' => (Yii::$app->user->identity->username == "sale") ? 'btn btn-danger disabled hide' : 'btn btn-danger delete-selected disabled',
+                                'title' => Yii::t('app', 'Delete Selected'),
+                                //'id' => 'delete-selected',
+                            ]),
+            'afterOptions' => ['class' => 'kv-panel-after pull-right']
 
         ],
     ]); ?>

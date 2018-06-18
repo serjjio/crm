@@ -108,9 +108,7 @@ use yii\helpers\Json;
                                 function deletAlert(){
                                   $('#client-container .kv-alert-container').fadeOut('slow');  
                                 };
-                                setTimeout(deletAlert, 3000);
-                                //$('#client-container .kv-alert-container').addClass('kv-detail-success').show().append('sdsdsd')
-                                
+                                setTimeout(deletAlert, 3000);                         
 
                              }
                         ")

@@ -76,6 +76,68 @@ $(document).on({
 	
 })*/
 
+/*DELETE Check ALL*/
+
+$(document).on({
+	ready: function(){
+		return $('body').on('click', '.delete-selected', function(e){
+			e.preventDefault();
+			var keys = $('#pl-grid-units').yiiGridView('getSelectedRows');
+			var url = $(this).attr('href');
+			if(keys.length > 0){
+				BootstrapDialog.confirm({
+					type : BootstrapDialog.TYPE_WARNING,
+					title : 'Подтверждение',
+					message : 'Вы уверены, что хотите удалить выбранные элементы?',
+					callback : function(result){
+						if(result){
+							$.ajax({
+								url: url,
+								type: 'post',
+								data: ({keys : keys}),
+								
+							}).done(function(data){
+								$.pjax.reload({container:'#kv-pjax-container'})
+							})
+						}else{
+							return;
+						}
+					}
+				})
+			}
+		})
+	}
+})
+
+/*visable button on delete all*/
+
+/*$(document).on({
+	ready: function(){
+		return $(':checkbox').change(function(){
+			if ($('.kv-row-checkbox').is(':checked')){
+				$('.delete-selected').removeClass('disabled');
+			}else{
+				$('.delete-selected').addClass('disabled')
+			}
+
+	})
+}
+})*/
+
+
+
+$(document).on({
+	ready: function(){
+		return $('body').on('change', ':checkbox', function(){
+			if ($('.kv-row-checkbox').is(':checked')){
+				$('.delete-selected').removeClass('disabled');
+			}else{
+				$('.delete-selected').addClass('disabled')
+			}
+
+	})
+}
+})
 
 /*
 Аякс удаление пользователей у клиента

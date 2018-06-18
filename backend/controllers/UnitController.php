@@ -68,6 +68,7 @@ class UnitController extends Controller
         ]);
     }
 
+
     /**
      * Creates a new Unit model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -236,6 +237,24 @@ class UnitController extends Controller
         $unit->delete();
 
         return $this->redirect(Yii::$app->request->referrer);
+    }
+    /*Delete all unit from client*/
+    public function actionDeleteSelected(){
+        $post = Yii::$app->request->post();
+        if (Yii::$app->request->isAjax && isset($post['keys'])){
+            $keys = $post[keys];
+            for ($i=0; $i<count($keys); $i++){
+                $unit = $this->findModel($keys[$i]);
+                if(!is_null($unit->idClient)){
+                    $client = Client::findOne($unit->idClient);
+                    $client->clientCountObj--;
+                    $client->save();
+                }
+                $unit->delete();
+
+            }
+            return true;
+        }
     }
 
     /**
