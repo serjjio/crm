@@ -23,6 +23,13 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    public $permission;
+    public $re_password;
+    public $new_password;
+    public $re_new_password;
+
+
+
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
@@ -51,8 +58,38 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            ['username', 'required', 'message' => 'Необходимо заполнить поле'],
+            ['username', 'unique', 'message' => 'Такой логин уже зарегистрирован.'],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+
+            [['full_name', 'department', 'position', 'phone'], 'safe'],
+
+            ['permission', 'safe'],
+
+            ['email', 'trim'],
+            ['email', 'required', 'message' => 'Необходимо заполнить поле'],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+
+            
+
+            //['re_new_password', 'required', 'message' => 'Необходимо заполнить поле'],
+            ['re_new_password', 'string', 'min' => 6, 'tooShort' => 'Поле должно содержать больше 6 символов'],
+
+            [
+                'new_password', 'required',    'when' => function($model){
+                                                            return !empty($model->re_new_password);
+                                                         }, 
+                                                'whenClient' => "function (attribute, value){
+                                                                    return !$('#re_new_password')
+                                                                }",
+                                                'message' => 'Необходимо заполнить поле'
+            ],
+            ['new_password', 'string', 'min' => 6, 'tooShort' => 'Поле должно содержать больше 6 символов'],
+            ['new_password', 'compare', 'compareAttribute' => 're_new_password', 'message' => 'Не совпадает'],
         ];
     }
 
@@ -185,5 +222,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /*
+    * Update Password
+    */
+    public function updatePassword($new_password)
+    {
+        $this->password_hash = Yii::$app->security->generatePasswordHash($new_password);
     }
 }

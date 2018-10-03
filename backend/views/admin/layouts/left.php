@@ -19,7 +19,7 @@ use yii\helpers\Url;
         </div>
 
         <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
+        <!-- <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search..."/>
               <span class="input-group-btn">
@@ -27,7 +27,7 @@ use yii\helpers\Url;
                 </button>
               </span>
             </div>
-        </form>
+        </form> -->
         <!-- /.search form -->
 
         <?= dmstr\widgets\Menu::widget(
@@ -35,19 +35,22 @@ use yii\helpers\Url;
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Меню', 'options' => ['class' => 'header']],
-                    ['label' => 'Пользователи', 'icon' => 'file-code-o', 'url' => Url::to(['user/'])],
-                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
+                    ['label' => 'Пользователи', 'icon' => 'user', 'url' => Url::to(['user/']), 'active' => ($item == 'user')],
+                    //['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
-                        'label' => 'Same tools',
+                        'label' => 'Данные',
                         'icon' => 'share',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
+                            ['label' => 'Сим-карты', 'icon' => 'dashboard', 'url' => ['sim/'], 'active' => ($item == 'sim')],
+                            ['label' => 'Тип оборудования', 'icon' => 'dashboard', 'url' => ['type-unit/'], 'active' => ($item == 'type-unit')],
+                            ['label' => 'Програмное обеспечение', 'icon' => 'dashboard', 'url' => ['server/'], 'active' => ($item == 'server')],
+                            ['label' => 'Сегмент', 'icon' => 'dashboard', 'url' => ['segment/'], 'active' => ($item == 'segment')],
                             
                         ],
                     ],
+                    ['label' => 'Журнал', 'icon' => 'user', 'url' => '#', 'active' => ($item == 'jornual')],
                 ],
             ]
         ) ?>

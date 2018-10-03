@@ -32,7 +32,7 @@ class Server extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['server'], 'required'],
+            [['server'], 'required', 'message' => 'Необходимо заполнить поле'],
             [['server', 'location', 'comment', 'nameSoft', 'version', 'link'], 'string', 'max' => 256],
            
         ];

@@ -31,7 +31,7 @@ class Soft extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nameSoft'], 'required'],
+            [['nameSoft'], 'required', 'message' => 'Необходимо заполнить поле'],
             [['nameSoft', 'version', 'comments'], 'string', 'max' => 256],
         ];
     }

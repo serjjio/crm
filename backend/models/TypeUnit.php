@@ -28,7 +28,7 @@ class TypeUnit extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name'], 'required', 'message' => 'Необходимо заполнить поле'],
             [['name'], 'string', 'max' => 256],
         ];
     }

@@ -28,7 +28,7 @@ class Segment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nameSegment'], 'required'],
+            [['nameSegment'], 'required', 'message' => 'Необходимо заполнить поле'],
             [['nameSegment'], 'string', 'max' => 256],
         ];
     }

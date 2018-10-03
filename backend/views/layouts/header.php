@@ -30,7 +30,9 @@ use common\widgets\Alert;
             //['label' => 'Главная', 'url' => ['/site/index']],
             ['label' => 'Клиенты', 'url' => ['/client/index'], 'active'=> ($status == 'client')],
             ['label' => 'Объекты', 'url' => ['/unit/index']],
-            (Yii::$app->user->identity->username !== "sale") ? ['label' => 'Данные', 'url' => ['/data/default/index'], 'active'=> ($status == 'data')] : '',
+
+            Yii::$app->user->can('admin') ? ['label' => 'Админка', 'url' => ['/admin']] : '',
+            
             
         ];
 

@@ -32,7 +32,7 @@ class Contact extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idClient', 'email'], 'required'],
+            [['idClient', 'email'], 'required', 'message' => 'Необходимо заполнить поле'],
             [['idClient'], 'integer'],
             [['contactName', 'tel', 'email', 'comment'], 'string', 'max' => 256],
             [['idClient'], 'exist', 'skipOnError' => true, 'targetClass' => Client::className(), 'targetAttribute' => ['idClient' => 'idClient']],

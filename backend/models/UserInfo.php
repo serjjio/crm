@@ -32,7 +32,7 @@ class UserInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idClient', 'login'], 'required'],
+            [['idClient', 'login'], 'required', 'message' => 'Необходимо заполнить поле'],
             [['idServer', 'comment'], 'safe'],
             [['idClient', 'idServer'], 'integer'],
             [['login', 'nameUser', 'email'], 'string', 'max' => 256],

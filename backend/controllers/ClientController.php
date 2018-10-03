@@ -15,6 +15,7 @@ use app\models\UserInfoSearch;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 use app\models\Doc;
+use yii\filters\AccessControl;
 
 /**
  * ClientController implements the CRUD actions for Client model.
@@ -28,6 +29,25 @@ class ClientController extends Controller
     {
         Yii::$app->view->params['status'] = 'client';
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['login', 'error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['index', 'detail-view', 'logout', 'doc'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['create', 'delete', 'update', 'doc-upload', 'download-doc'],
+                        'allow' => true,
+                        'roles' => ['createClient'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

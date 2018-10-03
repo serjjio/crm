@@ -12,13 +12,29 @@ use yii\bootstrap\Alert;
 /* @var $searchModel backend\modules\admin\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'Пользователи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+
+     <?php
+
+        Modal::begin([
+                'options' => ['tabindex' => false, 'class' => 'modal-dialog-user'],
+                'id' => 'root',
+                'size' => 'modal-lg',
+                'header' => 'Создание пользователя',
+                
+
+            ]);
+        echo "<div id='modalContent'></div>";
+        Modal::end();
+
+    ?>
+
 
 <?php
     $columns = [
@@ -29,7 +45,29 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Номер блока',
    
             ],
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'email',
+                'label' => 'Email'
+            ],
+            [
+                'attribute' => 'full_name',
+                'label' => 'ФИО'
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'buttons' => [
+                    'update' => 
+                            function($url, $model, $key){
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['user/update/'.$key], 
+                                    [
+                                        'class' => 'create-object',
+                                        'title' => Yii::t('app', 'Редактировать'),
+                                        'data-pjax' => 0
+                                    ]);
+                            }
+                ]
+            ],
     ]            
 ?>
 
@@ -40,6 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'tableOptions' => ['class' => 'mytable kv-grid-table table table-hover table-bordered table-condensed' ],
         'columns' => $columns,
         'condensed' => true,
+        //'id' => 'table-user',
         'resizableColumns'=>true,
         'persistResize' => false,
         'pjax' => true,
@@ -77,38 +116,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
             //'type' => 'success',
-            'heading' => 'Блоки',
-            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Создать', 
+            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Создать пользователя', 
                             ['create'], 
                             [
                                 'data-pjax'=>1, 
-                                'class' => (Yii::$app->user->identity->username == "sale") ? 'btn create create-unit disabled' : 'btn create create-unit',
+                                'class' => 'btn create create-object',
                                 'title' => Yii::t('app', 'Создать пользователя'),
-                            ])
+                            ]),
+            'after' => false,
+            'footer' => false,
 
         ],
     ]); ?>
 
+ <!--    <?= Html::button(Html::a('Test', 'user/test'), ['class' => 'btn btn-default'])?> -->
 
 
-
-    <!-- <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            // 'email:email',
-            // 'status',
-            // 'created_at',
-            // 'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?> -->
-</div>

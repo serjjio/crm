@@ -1,8 +1,8 @@
 $(document).on({
 	ready: function(){
-		return $('body').on('click', '.create-unit', function(e){
+		return $('body').on('click', '.create-object', function(e){
 			e.preventDefault();
-			$('#unit').modal('show')
+			$('#root').modal('show')
 						.find('#modalContent')
 						.load($(this).attr('href'));
 		})
@@ -15,7 +15,7 @@ $(document).on({
 */
 $(document).on({
 	ready: function(){
-		return $('body').on('click', '.user-create', function(e){
+		return $('body').on('click', '#user-create', function(e){
 			e.preventDefault();
 			$('#root').modal('show')
 						.find('#modalContent')
@@ -56,11 +56,6 @@ $(document).on({
 /*
 *Detail view service-contract/id in modal
 */
-$(document).on({
-	ready: function(){
-		return $('body').on('click', '')
-	}
-})
 
 
 
@@ -197,5 +192,16 @@ $(document).on({
 					.find('#modalContent')
 					.load($(this).attr('data-attribute-url'));
 		})
+	}
+})
+
+// Активация вкладок
+$(document).on({
+	ready:function(){
+		return $('body').on('click', '#user-tabs a', function(e){
+			e.preventDefault()
+			$(this).tab('show')
+		})
+			
 	}
 })

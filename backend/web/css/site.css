@@ -198,6 +198,18 @@ a.create {
     /*max-width: 10% !important*/;
     vertical-align: middle; 
 }
+
+ .table-bordered > thead > tr > th,
+ .table-bordered > tbody > tr > th,
+ .table-bordered > tfoot > tr > th,
+ .table-bordered > thead > tr > td,
+ .table-bordered > tbody > tr > td,
+ .table-bordered > tfoot > tr > td {
+    border: 1px solid #ddd !important;
+}
+.mytable .form-control {
+    border-radius: 4px;
+}
 .mytable >tbody >tr > td {
     /*max-width: 10% !important*/;
     vertical-align: middle;
@@ -215,7 +227,75 @@ a.create {
     display: none;
 }
 #unitsearch-dateInstaller-container div span b.caret {
-    display: none;
+    display: none;l
 }
+.modal-dialog-user .modal-dialog{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    display: table;
+    
+
+}
+.modal-dialog-user .modal-header {
+    text-align: center;
+    height: 28px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #cecece;
+    text-align: center;
+    line-height: 28px;
+    padding: 0;
+    margin-right: 5px;
+    border: none;
+}
+.modal-dialog-user .modal-content {
+    background-color: #cecece;
+    display: table-cell;
+}
+@media screen and (min-width:1000px){
+    .modal-dialog-user .panel{
+        padding: 10px;
+        height: 500px;
+    }
+}
+@media screen and (min-width:1000px){
+    .modal-dialog-user #modalContent .right-help .help-block{
+        position: absolute;
+        margin-left: 45%
+    }
+}
+@media screen and (min-width:1000px){
+    .modal-dialog-user #modalContent .right-help .col-md-12 > input{
+        width: 40%;
+        float:left;
+    }
+}
+.modal-dialog-user .modal-body {
+    padding:0;
+    padding-bottom: 2px;
+    margin:0px;
+}
+.modal-dialog-user .btn {
+    min-width: 65px; 
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+.modal-dialog-user #modalContent {
+    
+    margin: 5px;
+    margin-top: 0;
+    background:#f6f6f6;
+    border: 1px solid #9c9da1;
+    padding:5px;
+    
+}
+
+
 
 

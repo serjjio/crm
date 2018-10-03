@@ -30,10 +30,10 @@ $type = 'info';
 				['label' => 'Програмное обеспечение', 'icon' => 'th', 'url' => Url::to(['server/']), 'active'=> ($item == 'server')],
 				['label' => 'Сегмент', 'icon' => 'th', 'url' => Url::to(['segment/']), 'active'=> ($item == 'segment')],
 				
-				/*['label'=>'УТГ', 'icon'=>'list', 'items' => [
+				['label'=>'УТГ', 'icon'=>'list', 'items' => [
 					['label' => 'Филиал', 'url' => Url::to(['fil/']), 'active' => ($item == 'fil')],
 					['label' => 'Подразделение', 'url' => Url::to(['pod/']), 'active' => ($item == 'pod')],
-				]],*/
+				]],
 			]
 
 		])

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         Modal::begin([
                 'options' => ['tabindex' => false],
-                'id' => 'unit',
+                'id' => 'root',
                 'size' => 'modal-lg',
 
             ]);
@@ -151,13 +151,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => (Yii::$app->user->identity->username !== "sale") ? '{update} {delete}' : '',
+                'template' => (Yii::$app->user->can('createObject')) ? '{update} {delete}' : '',
                 'buttons' => [
                     'update' => 
                             function($url, $model, $key){
                                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['unit/update/'.$key], 
                                     [
-                                        'class' => 'create-unit',
+                                        'class' => 'create-object',
                                         'title' => Yii::t('app', 'Редактировать'),
                                         'data-pjax' => 0
                                     ]);
@@ -226,14 +226,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['create'], 
                             [
                                 'data-pjax'=>1, 
-                                'class' => (Yii::$app->user->identity->username == "sale") ? 'btn create create-unit disabled' : 'btn create create-unit',
+                                'class' => !Yii::$app->user->can('createObject') ? 'btn create create-object disabled' : 'btn create create-object',
                                 'title' => Yii::t('app', 'Добавить блок'),
                             ]),
             'after' => Html::a('<i class="glyphicon glyphicon-trash"></i> Удалить выбраные', 
                             ['delete-selected'], 
                             [
                                 //'data-pjax'=>0, 
-                                'class' => (Yii::$app->user->identity->username == "sale") ? 'btn btn-danger disabled hide' : 'btn btn-danger delete-selected disabled',
+                                'class' => !Yii::$app->user->can('createObject') ? 'btn btn-danger disabled hide' : 'btn btn-danger delete-selected disabled',
                                 'title' => Yii::t('app', 'Delete Selected'),
                                 //'id' => 'delete-selected',
                             ]),

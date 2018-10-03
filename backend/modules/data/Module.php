@@ -21,8 +21,8 @@ class Module extends \yii\base\Module
      */
     public function init()
     {
-        if (Yii::$app->user->identity->username == 'sale'){
-            throw new ForbiddenHttpException('Доступ закрыт');
+        if (!Yii::$app->user->can('admin')){
+            throw new ForbiddenHttpException('Access denied');
         }
         Yii::$app->view->params['status'] = 'data';
         $this->setLayoutPath('@app/views/layouts');

@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use app\models\Sim;
 use yii\db\Query;
 use app\models\Client;
+use yii\filters\AccessControl;
 
 /**
  * UnitController implements the CRUD actions for Unit model.
@@ -24,6 +25,25 @@ class UnitController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['login', 'error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['index', 'view', 'logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['create', 'delete', 'update', 'sim-list', 'delete-selected', 'add-sim', 'get-icc'],
+                        'allow' => true,
+                        'roles' => ['createObject'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -163,9 +183,7 @@ class UnitController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (Yii::$app->user->identity->username == 'sale'){
-            throw new ForbiddenHttpException('Доступ закрыт');
-        }
+        
         $model = $this->findModel($id);
         $idClientCurrent = $model->idClient;
         if ($model->load(Yii::$app->request->post())) {

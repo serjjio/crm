@@ -28,7 +28,7 @@ class Type extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nameType'], 'required'],
+            [['nameType'], 'required', 'message' => 'Необходимо заполнить поле'],
             [['nameType'], 'string', 'max' => 256],
         ];
     }

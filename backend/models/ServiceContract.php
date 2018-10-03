@@ -30,7 +30,7 @@ class ServiceContract extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date_service_contract', 'idClient'], 'required'],
+            [['date_service_contract', 'idClient'], 'required', 'message' => 'Необходимо заполнить поле'],
             [['date_service_contract', 'description_service_contract'], 'safe'],
             [['idClient'], 'integer'],
             [['name_service_contract'], 'string', 'max' => 256],

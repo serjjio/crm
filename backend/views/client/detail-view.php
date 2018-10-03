@@ -443,7 +443,7 @@ Pjax::begin(['id' => 'test-test']);
                     'heading'=>  $model->logo ? Html::img("/images/".$model->idClient.'/logo/'.$model->logo, ['style'=>'max-width:5%;max-height:5%']) : Html::img("/images/logo/empty.jpg", ['style'=>'max-width:5%;max-height:5%']),
                     'type'=>DetailView::TYPE_INFO,
                 ],
-                'buttons1' => (Yii::$app->user->identity->username == "sale") ? '' : '{update}{delete}',
+                'buttons1' => !Yii::$app->user->can('createClient') ? '' : '{update}{delete}',
                 'deleteOptions' => [
                     'url' => ['delete', 'id' => $model->idClient],
                     'method' => 'post',
@@ -464,9 +464,9 @@ Pjax::end();
 
 	<?php
 
-$beforePanel = (Yii::$app->user->identity->username == "sale") ? '' : <<<HTML
+$beforePanel = !Yii::$app->user->can('createClient') ? '' : <<<HTML
 
-            <a class="user-create" href="/user-info/create/$id"><u>Создать пользователя</u></a>
+            <a id="user-create" href="/user-info/create/$id"><u>Создать пользователя</u></a>
 HTML;
 
 ?>
@@ -510,7 +510,7 @@ HTML;
         ],
         [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => (Yii::$app->user->identity->username !== "sale") ? '{update} {delete}': '',
+                'template' => Yii::$app->user->can('createClient') ? '{update} {delete}': '',
                 'buttons' => [
                         'update' => function($url, $model, $key){
                             return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#root',

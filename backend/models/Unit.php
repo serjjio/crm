@@ -39,7 +39,7 @@ class Unit extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['number', 'imei', 'idTypeUnit'], 'required'],
+            [['number', 'imei', 'idTypeUnit'], 'required', 'message' => 'Необходимо заполнить поле'],
             [['idClient', 'idSim', 'idIcc', 'comment', 'from_date', 'to_date'], 'safe'],
             [['dateInstaller'], 'string', 'max'=>256],
             [['number', 'imei', 'idTypeUnit', 'idSim', 'idIcc', 'idClient', 'status'], 'integer'],

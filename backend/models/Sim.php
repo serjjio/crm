@@ -32,7 +32,7 @@ class Sim extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sim'], 'required'],
+            [['sim'], 'required', 'message' => 'Необходимо заполнить поле'],
             [['status', 'sim'], 'integer'],
             [['excel'], 'file'],
             [['icc', 'code'], 'string', 'max' => 256],
