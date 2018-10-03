@@ -13,6 +13,7 @@ use yii\filters\VerbFilter;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -119,7 +120,9 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-
+        if ($id == 1){
+            throw new ForbiddenHttpException('Access denied');
+        }
         $model = SignupForm::findModel($id);
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())){
