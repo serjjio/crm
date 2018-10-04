@@ -61,7 +61,7 @@ class ClientController extends Controller
      * Lists all Client models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndexx()
     {
         
         Yii::$app->language = 'ru-RU';
