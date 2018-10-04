@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'attribute' => 'username',
-                'label' => 'Номер блока',
+                'label' => 'Имя пользователя',
    
             ],
             [
