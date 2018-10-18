@@ -35,6 +35,7 @@ use yii\helpers\Url;
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Меню', 'options' => ['class' => 'header']],
+                    ['label' => 'Главная', 'icon' => 'home', 'url' => Url::to(['/client'])],
                     ['label' => 'Пользователи', 'icon' => 'user', 'url' => Url::to(['user/']), 'active' => ($item == 'user')],
                     //['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
