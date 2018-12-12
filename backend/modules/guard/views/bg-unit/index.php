@@ -115,6 +115,10 @@ use backend\modules\guard\models\BgClient;
                 'attribute' => 'gos_number',
                 'label' => 'Гос номер', 
             ],
+            [
+                'attribute' => 'vin_number',
+                'label' => 'VIN', 
+            ],
             /*[
                 'attribute' => 'id_model',
                 'label' => 'Модель', 
