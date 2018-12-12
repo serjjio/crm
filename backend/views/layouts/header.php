@@ -28,8 +28,10 @@ use common\widgets\Alert;
 
         $menuItems = [
             //['label' => 'Главная', 'url' => ['/site/index']],
-            ['label' => 'Клиенты', 'url' => ['/client/index'], 'active'=> ($status == 'client')],
-            ['label' => 'Объекты', 'url' => ['/unit/index']],
+            //['label' => 'Клиенты', 'url' => ['/client/index'], 'active'=> ($status == 'client')],
+            //['label' => 'Мониторинг', 'url' => ['/client'], 'active'=> ($status == 'monitoring')],
+            //['label' => 'Объекты', 'url' => ['/unit/index']],
+             //Yii::$app->user->can('viewGuard') ? ['label' => 'Охрана', 'url' => ['/guard/bg-client'], 'active'=> ($status == 'guard')] : '',
 
             Yii::$app->user->can('admin') ? ['label' => 'Админка', 'url' => ['/admin']] : '',
             

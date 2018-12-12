@@ -154,10 +154,12 @@ class UserController extends Controller
                         $per_user->delete();
                     }   
                 }
-                $auth = Yii::$app->authManager;
-                foreach ($model->permission as $value) {
-                    $role = $auth->getPermission($value);
-                    $auth->assign($role, $id);
+                if($model->permission){
+                    $auth = Yii::$app->authManager;
+                    foreach ($model->permission as $value) {
+                        $role = $auth->getPermission($value);
+                        $auth->assign($role, $id);
+                    }
                 }
             }
         return $this->redirect('/admin/user');

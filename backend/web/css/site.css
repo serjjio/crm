@@ -263,14 +263,14 @@ a.create {
     }
 }
 @media screen and (min-width:1000px){
-    .modal-dialog-user #modalContent .right-help .help-block{
+    /*.modal-dialog-user #modalContent */.right-help .help-block{
         position: absolute;
         margin-left: 45%
     }
 }
 @media screen and (min-width:1000px){
-    .modal-dialog-user #modalContent .right-help .col-md-12 > input{
-        width: 40%;
+    /*.modal-dialog-user #modalContent */.right-help .col-md-12 > input{
+        width: 38%;
         float:left;
     }
 }
@@ -294,6 +294,21 @@ a.create {
     border: 1px solid #9c9da1;
     padding:5px;
     
+}
+.bottombuttons {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    border-top: 2px solid;
+    padding-left: 35px;
+    height: 55px;
+    background: #fff;
+    z-index: 100;
+    
+}
+#insurance {
+    display: none;
 }
 
 

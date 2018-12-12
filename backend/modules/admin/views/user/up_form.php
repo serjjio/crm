@@ -19,7 +19,7 @@ use kartik\widgets\CheckboxX;
 	
 		
 
-		<?php $form = ActiveForm::begin(['id' => $model->formName(), 'type' => ActiveForm::TYPE_HORIZONTAL, 'enableAjaxValidation' => true]); ?>
+		<?php $form = ActiveForm::begin(['id' => $model->formName(), 'type' => ActiveForm::TYPE_HORIZONTAL, 'enableAjaxValidation' => true, 'successCssClass' => false]); ?>
 			 <div class="panel">
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="basic">

@@ -76,6 +76,7 @@ class ClientSearch extends Client
             'clientCountObj' => $this->clientCountObj,
             'active' => $this->active,
         ]);
+        
 
         $query->andFilterWhere(['like', 'clientName', $this->clientName])
             ->andFilterWhere(['like', 'structure', $this->structure])

@@ -133,12 +133,12 @@ use kartik\date\DatePicker;
                 <?= Html::activeLabel($model, 'status', ['label' => 'Статус', 'class' => 'col-sm-2 control-label'])?>
                 <div class="col-sm-3">
                     <?= $form->field($model, 'status', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => 1],
+                            'options' => ['value' => $model->status === 0 ? 0 : 1],
                             'pluginOptions' => [
 
                                 'threeState' => false,
                             ] 
-        ])?>
+                    ])?>
                 </div>
             </div>
             <div class="form-group">

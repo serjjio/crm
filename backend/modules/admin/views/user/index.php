@@ -43,6 +43,15 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'username',
                 'label' => 'Имя пользователя',
+                'format' => 'raw',
+                'value' => function($model, $key){
+                    return Html::a($model->username, ['user/update/'.$key], 
+                                    [
+                                        'class' => 'create-object',
+                                        'title' => Yii::t('app', 'Редактировать'),
+                                        'data-pjax' => 0
+                                    ]);
+                }
    
             ],
             [

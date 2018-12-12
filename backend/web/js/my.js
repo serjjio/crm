@@ -32,6 +32,28 @@ $(document).on({
 		},3000))
 	}
 })
+/*Show id insurance until change segment*/
+$(document).on({
+	ready: function(){
+		return $('body').on('change', '#bgunit-id_segment', function(){
+			if ($('#bgunit-id_segment').val() == 2){
+				$('#insurance').show();
+			}else{
+				$('#insurance').hide();
+			}
+
+	})
+}
+})
+$(document).on({
+	ready: function(){
+		if ($('#bgunit-id_segment').val() == 2){
+				$('#insurance').show();
+			}
+
+	
+}
+})
 
 /*$(document).on({
 	ready: function(){
@@ -201,6 +223,32 @@ $(document).on({
 		return $('body').on('click', '#user-tabs a', function(e){
 			e.preventDefault()
 			$(this).tab('show')
+		})
+			
+	}
+})
+
+$(document).on({
+	ready:function(){
+		return $('body').on('click', '.dynamic-create', function(e){
+			e.preventDefault()
+			var url = $(this).attr('href');
+			var data = $('#dynamic-input').val()
+			if (data){
+				$.ajax({
+					url: url,
+					type: 'post',
+					data: {data : data},
+					error: function (xhr, status, error) {
+						alert('There was an error with your request. '
+										+xhr.responseText);
+					}
+				}).done(function(data){
+							$.pjax.reload({container:'#kv-pjax-container'})
+				})
+			}else{
+				return
+			}
 		})
 			
 	}

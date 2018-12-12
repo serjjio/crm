@@ -27,7 +27,8 @@ class ClientController extends Controller
      */
     public function behaviors()
     {
-        Yii::$app->view->params['status'] = 'client';
+        Yii::$app->view->params['status'] = 'monitoring';
+        Yii::$app->view->params['item'] = 'client';
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -81,6 +82,7 @@ class ClientController extends Controller
      */
     public function actionDetailView($id)
     {
+        $this->layout = 'main-view';
         Yii::$app->language = 'ru-RU';
         $post = Yii::$app->request->post();
         $model = $this->findModel($id);

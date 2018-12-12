@@ -21,6 +21,9 @@ return [
         'admin' => [
             'class' => 'backend\modules\admin\Module',
         ],
+        'guard' => [
+            'class' => 'backend\modules\guard\Module',
+        ],
     ],
     'components' => [
         'request' => [

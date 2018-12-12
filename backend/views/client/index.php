@@ -16,8 +16,6 @@ use app\models\Segment;
 /* @var $searchModel app\models\InstSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Клиенты';
-$this->params['breadcrumbs'][] = $this->title;
 
 
 
@@ -160,6 +158,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 
             ],
+
+            
             
             /*[
                 'class' => 'yii\grid\ActionColumn',

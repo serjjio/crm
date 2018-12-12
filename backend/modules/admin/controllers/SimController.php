@@ -65,6 +65,7 @@ class SimController extends Controller
 
     public function actionUploadExcel()
     {
+
         $model = new Sim;
         if ($model->load(Yii::$app->request->post())){
 
@@ -89,7 +90,28 @@ class SimController extends Controller
                     if($row == 0){
                         continue;
                     }
-                    $unit = new Unit;
+                    /* name model backend\modules\guard\models\Bg*/
+                    $marka_model = new \backend\modules\guard\models\BgMarka();
+                    $model_model = new \backend\modules\guard\models\BgModel();
+
+                    $marka = $rowData[0][0];
+                    $find = \backend\modules\guard\models\BgMarka::find()->where(['name_marka' => $marka])->one();
+                    if ($find){
+                        $model_model->name_model = $rowData[0][1];
+                        $model_model->id_marka = $find->id_marka;
+                        //$model_model->save();
+                        
+                    }else{
+                        $marka_model->name_marka = $marka;
+                        //$marka_model->save();
+                        $model_model->name_model = $rowData[0][1];
+                        $model_model->id_marka = $marka_model->id_marka;
+                        //$model_model->save();
+                        
+                        
+                    }
+
+                   /* $unit = new Unit;
                     $unit->number = $rowData[0][0];
                     $unit->imei = number_format($rowData[0][1],0,'','');
                     if(!$unit->imei){
@@ -118,26 +140,7 @@ class SimController extends Controller
                         $count_client = Client::findOne($unit->idClient);
                         $count_client->clientCountObj++;
                         $count_client->save();
-                    }
-                    
-                    /*$number = number_format($rowData[0][1],0,'','');
-                    echo strval($number);*/
-                    //echo $rowData[0][0].' '.number_format($rowData[0][1],0,'','').' '.$rowData[0][2].' '.$rowData[0][3].'<br>';
-                   /* $sim = new Sim;
-                    if ($rowData[0][1] == "Действующий"){
-                        $sim->status = 1;
-                    }else{
-                        $sim->status = 0;
-                    }
-                    $sim->code = '40926020';
-                    $sim->sim = $rowData[0][0];
-                    
-                    if(!$sim->save()){
-                         //print_r($row.' - '.$sim->getErrors());
-                         continue;
-                    }
-*/
-                    //echo $model->sim;
+                    }*/
 
                 }
                 return $this->redirect('/unit');

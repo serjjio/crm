@@ -30,22 +30,26 @@ AppAsset::register($this);
     
     <?=$this->render('header.php', ['status'=>$this->params['status']])?>
 
-    <div class="container" style="width:90%">
+    <div class="container" style="padding-top: 100px">
+
+        <?=$this->render('left-menu.php', ['item'=>$this->params['item']])?>
+
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?= $content ?>
+
+        <?=$this->render('content-reference.php', ['content' => $content])?>
     </div>
 </div>
 
-<footer class="footer">
+<!-- <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; <?= date('Y') ?></p>
 
         
     </div>
-</footer>
+</footer> -->
 
 <?php $this->endBody() ?>
 </body>

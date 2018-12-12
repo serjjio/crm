@@ -14,12 +14,11 @@ use yii\web\JsExpression;
 use kartik\export\ExportMenu;
 
 
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\InstSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Блоки';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="inst-index">
@@ -221,7 +220,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
             //'type' => 'success',
-            'heading' => 'Блоки',
+            //'heading' => 'Блоки',
             'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Добавить блок', 
                             ['create'], 
                             [

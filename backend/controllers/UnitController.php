@@ -24,6 +24,8 @@ class UnitController extends Controller
      */
     public function behaviors()
     {
+        Yii::$app->view->params['status'] = 'monitoring';
+        Yii::$app->view->params['item'] = 'unit';
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -108,7 +110,7 @@ class UnitController extends Controller
                 $model->dateInstaller = date('Y-m-d', $date);
             }
             
-            if($model->idClient != ""){
+            if($model->idClient != null){
                 $client = Client::findOne($model->idClient);
                 $client->clientCountObj++;
                 $client->save();
@@ -200,7 +202,7 @@ class UnitController extends Controller
                     $countOld->clientCountObj --;
                     $countOld->save();
                 } 
-                if($model->idClient != ""){
+                elseif($model->idClient != null){
                     $countNew = Client::findOne($model->idClient);
                     $countNew->clientCountObj++;
                     $countNew->save();
