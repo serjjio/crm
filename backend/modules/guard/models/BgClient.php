@@ -26,6 +26,8 @@ use Yii;
  */
 class BgClient extends \yii\db\ActiveRecord
 {
+    public $active_obj;
+    public $inactive_obj;
     /**
      * @inheritdoc
      */

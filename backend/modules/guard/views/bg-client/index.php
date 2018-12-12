@@ -60,7 +60,7 @@ use yii\web\JsExpression;
                 'label' => 'Имя Клиента', 
                 'format' => 'raw',
                 'value' => function($model, $key){
-                    return Html::a($model->client_name, ['bg-client/update/'.$key], 
+                    return Html::a($model->client_name, ['/guard/bg-client/update/'.$key], 
                                     [
                                         //'class' => 'create-object',
                                         'title' => Yii::t('app', 'Редактировать'),

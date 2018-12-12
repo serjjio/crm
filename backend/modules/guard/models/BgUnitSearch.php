@@ -63,7 +63,7 @@ class BgUnitSearch extends BgUnit
         // grid filtering conditions
         $query->andFilterWhere([
             'id_unit' => $this->id_unit,
-            'unit_number' => $this->unit_number,
+            //'unit_number' => $this->unit_number,
             //'id_type_unit' => $this->id_type_unit,
             'test_date' => $this->test_date,
             'id_city' => $this->id_city,
@@ -98,6 +98,7 @@ class BgUnitSearch extends BgUnit
             ->andFilterWhere(['like', 'name_model', $this->name_model])
             ->andFilterWhere(['like', 'gos_number', $this->gos_number])
             ->andFilterWhere(['like', 'color', $this->color])
+            ->andFilterWhere(['like', 'unit_number', $this->unit_number])
             ->andFilterWhere(['like', 'passport_number', $this->passport_number])
             ->andFilterWhere(['like', 'name_owner', $this->name_owner]);
 

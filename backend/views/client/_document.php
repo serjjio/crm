@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="inst-document">
     <div class="panel panel-success">
         <div class="panel-heading" style="background-color: #3CB371; color: white">
-            <h>Документы</h>
+            <h>Документы <?=$client_name?></h>
         </div>
         <div class="panel-body my-panel">
 

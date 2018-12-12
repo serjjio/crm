@@ -43,7 +43,7 @@ class ClientController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['create', 'delete', 'update', 'doc-upload', 'download-doc'],
+                        'actions' => ['create', 'delete', 'update', 'doc-upload', 'download-doc', 'doc-delete'],
                         'allow' => true,
                         'roles' => ['createClient'],
                     ],
@@ -103,15 +103,14 @@ class ClientController extends Controller
                 }
              
 
-        }
+
         //$model->number = $contract->number;
         $model->date_service_contract = $contract->date_service_contract;
         $model->date_provider_contract = $contract->date_provider_contract;
         $model->numberContractProvider = $contract->numberContractProvider;
         $model->serviceContract = $contract->serviceContract;
 
-        
-        if ($model->load($post)){
+
             $model->imgLogo= UploadedFile::getInstance($model, 'imgLogo');
             if ($model->imgLogo !== NULL){
                 
@@ -274,6 +273,7 @@ class ClientController extends Controller
         $docs = Doc::find()
                     ->where(['idClient' => $id])
                     ->all();
+        $client_name = Client::findOne($id)->clientName;
 
         if (!$docs){
             $model->idClient = $id;
@@ -284,7 +284,7 @@ class ClientController extends Controller
                 $explode = explode(".", $doc->docName);
                 $type = array_pop($explode);
                 
-                if ($type == 'jpg' || $type =='png' || $type=='bmp'){
+                if ($type == 'jpg' || $type =='png' || $type=='bmp' || $type=='jpeg'){
                     $initialPreview[] = '/docs/'.$id.'/'.$doc->docName;
                     $initialPreviewConfig[] = ['caption' => $doc->docName, 'size' => $doc->size, 'url' => '/client/doc-delete', 'key' => $doc->idDoc,];
                 }elseif($type == 'docx'){
@@ -318,6 +318,7 @@ class ClientController extends Controller
 
             return $this->render('_document',[
                     'model' => $model,
+                    'client_name' => $client_name,
                     'id' => $id,
                     'initialPreview' => $initialPreview,
                     'initialPreviewConfig' => $initialPreviewConfig

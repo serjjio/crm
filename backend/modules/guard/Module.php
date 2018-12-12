@@ -29,7 +29,7 @@ class Module extends \yii\base\Module
         }
         //Yii::$app->view->params['status'] = 'data';
         Yii::$app->view->params['status'] = 'guard';
-        //$this->setLayoutPath('@app/views/layouts');
+        $this->setLayoutPath('@app/views/layouts');
         //$this->layout = 'main-reference';
         \Yii::$app->language = 'ru-RU';
         parent::init();

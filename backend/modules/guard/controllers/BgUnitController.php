@@ -256,12 +256,12 @@ class BgUnitController extends Controller
                 $model->made_auto_date = date('Y-m-d', $made_auto_date);
             }
             if($id_client_current != $model->id_client){
-                $countOld = BgClient::findOne($id_client_current);
                 if (!is_null($id_client_current)){
+                    $countOld = BgClient::findOne($id_client_current);
                     $countOld->count_obj --;
                     !$countOld->save() ? print_r($countOld->getErrors()) : true;
                 } 
-                elseif($model->id_client != null){
+                if($model->id_client){
                     $countNew = BgClient::findOne($model->id_client);
                     $countNew->count_obj++;
                     !$countNew->save() ? print_r($countNew->getErrors()) : true;

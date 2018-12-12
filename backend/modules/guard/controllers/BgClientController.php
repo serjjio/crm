@@ -32,7 +32,7 @@ class BgClientController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['index', 'update'],
+                        'actions' => ['index', 'update', 'detail-view'],
                         'allow' => true,
                         'roles' => ['viewGuard'],
                     ],
@@ -112,6 +112,28 @@ class BgClientController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    /*View end edit to clients*/
+
+    public function actionDetailView($id){
+
+        //$this->setLayoutPath('@app/views/layouts');
+        $this->layout = 'main-view';
+        Yii::$app->language = 'ru-RU';
+        $post = Yii::$app->request->post();
+        $model = $this->findModel($id);
+
+
+
+        return $this->render('detail-view', [
+                'model' => $model,
+                //'searchModel' => $searchModel,
+                //'dataProvider' => $dataProvider,
+                'id' => $id,
+                'serviceContract' => $serviceContract,
+            ]);
+
     }
 
     /**
