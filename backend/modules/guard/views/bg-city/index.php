@@ -27,7 +27,7 @@ use backend\modules\guard\models\BgOblast;
             [
                 'attribute' => 'name_oblast',
                 'label' => 'Область', 
-                'value' => 'name_oblast',
+                //'value' => 'name_oblast',
                 'group' => true,
                 'filterType' => GridView::FILTER_SELECT2,
                 'filter' => ArrayHelper::map(BgCity::find()->orderBy('name_oblast')->asArray()->all(), 'name_oblast', 'name_oblast'),

@@ -29,7 +29,9 @@ class BgDillerInstaller extends \yii\db\ActiveRecord
     {
         return [
             [['name_diller_installer'], 'required'],
-            [['name_diller_installer'], 'string', 'max' => 256],
+            [['name_diller_installer', 'name_city'], 'string', 'max' => 256],
+            [['id_city'], 'integer'],
+            [['id_city'], 'exist', 'skipOnError' => true, 'targetClass' => BgCity::className(), 'targetAttribute' => ['id_city' => 'id_city']],
         ];
     }
 
@@ -50,5 +52,10 @@ class BgDillerInstaller extends \yii\db\ActiveRecord
     public function getBgUnits()
     {
         return $this->hasMany(BgUnit::className(), ['id_diller_installer' => 'id_diller_installer']);
+    }
+
+    public function getIdCity()
+    {
+        return $this->hasOne(BgCity::className(), ['id_city' => 'id_city']);
     }
 }

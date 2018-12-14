@@ -18,8 +18,8 @@ class BgDillerInstallerSearch extends BgDillerInstaller
     public function rules()
     {
         return [
-            [['id_diller_installer'], 'integer'],
-            [['name_diller_installer'], 'safe'],
+            [['id_diller_installer', 'id_city'], 'integer'],
+            [['name_diller_installer', 'name_city'], 'safe'],
         ];
     }
 
@@ -60,9 +60,11 @@ class BgDillerInstallerSearch extends BgDillerInstaller
         // grid filtering conditions
         $query->andFilterWhere([
             'id_diller_installer' => $this->id_diller_installer,
+            'id_city' => $this->id_city,
         ]);
 
-        $query->andFilterWhere(['like', 'name_diller_installer', $this->name_diller_installer]);
+        $query->andFilterWhere(['like', 'name_diller_installer', $this->name_diller_installer])
+            ->andFilterWhere(['like', 'name_city', $this->name_city]);
 
         return $dataProvider;
     }

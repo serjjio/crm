@@ -8,7 +8,7 @@ use yii\bootstrap\Modal;
 use yii\widgets\Pjax;
 use yii\bootstrap\Alert;
 use yii\web\JsExpression;
-use backend\modules\guard\models\BgOperators;
+use backend\modules\guard\models\BgDillerInstaller;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\guard\models\BgDillerInstallerSearch */
@@ -24,6 +24,20 @@ use backend\modules\guard\models\BgOperators;
             ['class' => 'yii\grid\SerialColumn'],
 
             [
+                'attribute' => 'name_city',
+                'label' => 'Город', 
+                //'value' => 'name_city',
+                'group' => true,
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => ArrayHelper::map(BgDillerInstaller::find()->orderBy('name_city')->asArray()->all(), 'name_city', 'name_city'),
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear'=>true],
+                ],
+               'filterInputOptions' => ['placeholder' => 'Город'],
+               'format' => 'raw',
+            ],
+
+            [
                 'class' => 'kartik\grid\EditableColumn',
                 'attribute' => 'name_diller_installer',
                 'label' => 'Диллер утановщик', 
@@ -37,6 +51,20 @@ use backend\modules\guard\models\BgOperators;
     }else{
         $columns = [
             ['class' => 'yii\grid\SerialColumn'],
+
+            [
+                'attribute' => 'name_city',
+                'label' => 'Город', 
+                'value' => 'name_city',
+                'group' => true,
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => ArrayHelper::map(BgDillerInstaller::find()->orderBy('name_city')->asArray()->all(), 'name_city', 'name_city'),
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear'=>true],
+                ],
+               'filterInputOptions' => ['placeholder' => 'Город'],
+               'format' => 'raw',
+            ],
 
             [
                 'attribute' => 'name_diller_installer',

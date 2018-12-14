@@ -91,25 +91,30 @@ class SimController extends Controller
                         continue;
                     }
                     /* name model backend\modules\guard\models\Bg*/
-                    $marka_model = new \backend\modules\guard\models\BgMarka();
-                    $model_model = new \backend\modules\guard\models\BgModel();
+                    $diller_inst_model = new \backend\modules\guard\models\BgDillerInstaller();
+                    $diller_model = new \backend\modules\guard\models\BgDiller();
 
-                    $marka = $rowData[0][0];
-                    $find = \backend\modules\guard\models\BgMarka::find()->where(['name_marka' => $marka])->one();
-                    if ($find){
-                        $model_model->name_model = $rowData[0][1];
-                        $model_model->id_marka = $find->id_marka;
-                        //$model_model->save();
-                        
-                    }else{
-                        $marka_model->name_marka = $marka;
-                        //$marka_model->save();
-                        $model_model->name_model = $rowData[0][1];
-                        $model_model->id_marka = $marka_model->id_marka;
-                        //$model_model->save();
-                        
-                        
-                    }
+                    
+                    $id_city = $rowData[0][0];
+                    $name_city =  $rowData[0][1];
+                    $name_diller = $rowData[0][3].', '.$rowData[0][2];
+                    
+                    $diller_model->name_diller_reteiler = $name_diller;
+                    $diller_inst_model->name_diller_installer = $name_diller;
+
+                    $diller_model->id_city = $id_city;
+                    $diller_inst_model->id_city = $id_city; 
+
+                    $diller_model->name_city = $name_city;
+                    $diller_inst_model->name_city = $name_city;
+
+                    $diller_model->save();
+                    $diller_inst_model->save();
+
+
+
+
+
 
                    /* $unit = new Unit;
                     $unit->number = $rowData[0][0];

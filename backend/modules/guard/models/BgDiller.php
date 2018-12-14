@@ -29,7 +29,9 @@ class BgDiller extends \yii\db\ActiveRecord
     {
         return [
             [['name_diller_reteiler'], 'required'],
-            [['name_diller_reteiler'], 'string', 'max' => 255],
+            [['name_diller_reteiler', 'name_city'], 'string', 'max' => 255],
+            [['id_city'], 'integer'],
+            [['id_city'], 'exist', 'skipOnError' => true, 'targetClass' => BgCity::className(), 'targetAttribute' => ['id_city' => 'id_city']],
         ];
     }
 
@@ -50,5 +52,10 @@ class BgDiller extends \yii\db\ActiveRecord
     public function getBgClients()
     {
         return $this->hasMany(BgClient::className(), ['id_diller_reteiler' => 'id_diller_reteiler']);
+    }
+
+    public function getIdCity()
+    {
+        return $this->hasOne(BgCity::className(), ['id_city' => 'id_city']);
     }
 }
