@@ -28,7 +28,7 @@ class BgDillerInstaller extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name_diller_installer'], 'required'],
+            [['name_diller_installer', 'id_city'], 'required', 'message' => 'Необходимо заполнить поле'],
             [['name_diller_installer', 'name_city'], 'string', 'max' => 256],
             [['id_city'], 'integer'],
             [['id_city'], 'exist', 'skipOnError' => true, 'targetClass' => BgCity::className(), 'targetAttribute' => ['id_city' => 'id_city']],

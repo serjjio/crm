@@ -108,8 +108,8 @@ class SimController extends Controller
                     $diller_model->name_city = $name_city;
                     $diller_inst_model->name_city = $name_city;
 
-                    $diller_model->save();
-                    $diller_inst_model->save();
+                    //$diller_model->save();
+                    //$diller_inst_model->save();
 
 
 

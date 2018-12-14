@@ -10,6 +10,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\widgets\ActiveForm;
+use backend\modules\guard\models\BgCity;
 
 /**
  * BgDillerInstallerController implements the CRUD actions for BgDillerInstaller model.
@@ -87,14 +89,28 @@ class BgDillerInstallerController extends Controller
     {
         $model = new BgDillerInstaller();
         $diller = new BgDiller();
-        $post = Yii::$app->request->post();
-        if(Yii::$app->request->isAjax && isset($post)){
-            $data = $_POST['data'];
-            if ($data){
-                $diller->name_diller_reteiler = $data; 
-                $model->name_diller_installer = $data;
-                return $model->save() &&  $diller->save()? true : false;
-            }
+            
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())){
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $diller->name_diller_reteiler = $model->name_diller_installer;
+            $name_city = BgCity::findOne($model->id_city)->name_sity;
+            $diller->name_city = $name_city;
+            $model->name_city = $name_city;
+            $diller->id_city = $model->id_city;
+            $model->save();
+            $diller->save();
+
+
+            return $this->redirect('/guard/bg-diller-installer');
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
     }
 

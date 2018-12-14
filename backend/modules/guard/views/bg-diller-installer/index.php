@@ -107,11 +107,11 @@ use backend\modules\guard\models\BgDillerInstaller;
             'type' => GridView::TYPE_DEFAULT,
             //'type' => 'success',
             //'heading' => 'Блоки',
-            'before' => Yii::$app->user->can('createGuard') ? '<input id="dynamic-input" type="text" placeholder="Имя диллера" class="form-control" style="width:30%;display:inline">'.Html::a('<i class="glyphicon glyphicon-plus"></i> Добавить', 
+            'before' => Yii::$app->user->can('createGuard') ? Html::a('<i class="glyphicon glyphicon-plus"></i> Добавить', 
                             ['create'], 
                             [
                                 'data-pjax'=>0, 
-                                'class' =>'btn dynamic-create',
+                                'class' =>'btn create',
                                 'title' => Yii::t('app', 'Добавить'),
                             ]) : false,
             
