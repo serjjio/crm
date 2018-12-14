@@ -177,10 +177,27 @@ use kartik\checkbox\CheckboxX;
             <div class="col-sm-4">
                 <?= $form->field($model, 'id_city', ['showLabels' => false])->widget(Select2::classname(), 
                     [
+                        'initValueText' => $model->id_city ? BgCity::findOne($model->id_city)->name_sity : '',
                         //'data' => ['Kievska' => ['Kiev', 'Brovari'], 'Lvivska' => ['Lviv', 'Srn']],
-                        'data' => ArrayHelper::map(BgCity::find()->all(), 'id_city', 'name_sity', 'name_oblast'),
+                        //'data' => ArrayHelper::map(BgCity::find()->all(), 'id_city', 'name_sity', 'name_oblast'),
                         'options' => ['placeholder' => 'Укажите город...'],
-                        'pluginOptions' => ['allowClear' => true]
+                        'pluginOptions' => [
+                            'allowClear' => true,
+                            'minimumInputLength' => 3,
+                                    'language' => [
+                                        'errorLoading' => new JsExpression("function () {return 'Ожидание...'}"),
+                                        'inputTooShort' => new JsExpression("function () {return 'Введите больше 3 символов'}"),
+                                        'noResults' => new JsExpression("function () {return 'Совпадений не найдено'}"),
+                                    ],
+                                    'ajax' => [
+                                        'url' => '/guard/bg-city/cities-list',
+                                        'dataType' => 'json',
+                                        'data' => new JsExpression("function (params) {return {q:params.term};}"),
+                                    ],
+                                    'escapeMarkup' => new JsExpression("function (markup) {return markup;}"),
+                                    'templateResult' => new JsExpression("function (id_city) {var res = id_city.text+', '+id_city.obl; return res}"),
+                                    'templateSelection' => new JsExpression("function (id_city) {return id_city.text;}"),
+                        ]
                     ]) ?>
             </div>
                     

@@ -14,7 +14,7 @@ use app\models\Server;
 use yii\bootstrap\Modal;
 
 $this->title = 'Детали';
-$this->params['breadcrumbs'][] = ['label' => 'Клиенты', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Клиенты мониторинг', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 /*echo Html::submitButton('Hello', ['class' => 'btn btn-primary my-button']);*/
 ?>

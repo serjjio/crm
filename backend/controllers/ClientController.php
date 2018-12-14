@@ -89,6 +89,7 @@ class ClientController extends Controller
         $contract = Contract::findOne($model->idConract);
         $serviceContract = ServiceContract::find()->where(['idClient' => $id])->asArray()->all();
         if($model->load($post)){
+            
                 if ($contract->numberContractProvider != $model->numberContractProvider || $contract->date_service_contract != $model->date_service_contract || $contract->serviceContract != $model->serviceContract){
                      
                     $date_service_contract = strtotime($model->date_service_contract);

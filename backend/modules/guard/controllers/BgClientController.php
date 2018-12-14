@@ -11,6 +11,8 @@ use yii\filters\VerbFilter;
 use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
+use backend\modules\guard\models\BgLogin;
+use backend\modules\guard\models\BgLoginSearch;
 
 /**
  * BgClientController implements the CRUD actions for BgClient model.
@@ -37,7 +39,7 @@ class BgClientController extends Controller
                         'roles' => ['viewGuard'],
                     ],
                     [
-                        'actions' => ['create', 'delete-selected'],
+                        'actions' => ['create', 'delete-selected', 'create-login', 'update-login', 'delete-login'],
                         'allow' => true,
                         'roles' => ['createGuard'],
                     ],
@@ -123,17 +125,83 @@ class BgClientController extends Controller
         Yii::$app->language = 'ru-RU';
         $post = Yii::$app->request->post();
         $model = $this->findModel($id);
+        if ($model->load($post)){
 
+            if($model->contract_date){
+                $contract_date= strtotime($model->contract_date);
+                $model->contract_date = date('Y-m-d', $contract_date);
+            }
+        
+            
+            $model->save();
+            Yii::$app->session->setFlash('kv-detail-success', 'Параметры успешно изменены');
+            $success = true;
+            return;
+        }
 
+            
+            
+            
 
-        return $this->render('detail-view', [
+        
+
+            $searchModel = new BgLoginSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $id);
+            return $this->render('detail-view', [
+                    'model' => $model,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                    'id' => $id,
+                ]);
+        
+
+    }
+
+    /*Create logins for Starcom online*/
+
+    public function actionCreateLogin($id){
+        $model = new BgLogin();
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->id_client = $id;
+            //var_dump($model->idClient);
+            //exit;
+                if($model->save()){
+                    echo 1;
+                }else{
+                    echo 2;
+                }
+
+        } else {
+            return $this->renderAjax('create-login', [
                 'model' => $model,
-                //'searchModel' => $searchModel,
-                //'dataProvider' => $dataProvider,
-                'id' => $id,
-                'serviceContract' => $serviceContract,
             ]);
+        }
+    }
 
+    /*Update logins for Starcom online*/
+    public function actionUpdateLogin($id){
+        $model = BgLogin::findOne($id);
+
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->save()){
+                echo 1;
+            }else{
+                echo 2;
+            }
+        } else {
+            return $this->renderAjax('create-login', [
+                'model' => $model,
+            ]);
+        }
+    }
+    /*Ajax-delete logins for Starcom online*/
+    public function actionDeleteLogin($id)
+    {
+        if (BgLogin::findOne($id)->delete()){
+            echo 1;
+        }
+        //return $this->redirect(['index']);
     }
 
     /**

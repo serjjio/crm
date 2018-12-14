@@ -36,7 +36,7 @@ class BgCityController extends Controller
                         'roles' => ['viewGuard'],
                     ],
                     [
-                        'actions' => ['create', 'city-list', 'edit-name'],
+                        'actions' => ['create', 'city-list', 'edit-name', 'cities-list'],
                         'allow' => true,
                         'roles' => ['createGuard'],
                     ],
@@ -101,8 +101,39 @@ class BgCityController extends Controller
             
         }
         elseif ($id > 0){
-            
             $out['results'] = ['id' => $id, 'text' => BgCity::find($id_city)->name_sity];
+        }
+       
+        return $out;
+    }
+    /*Ajax request for to search Cities*/
+    public function actionCitiesList($q = null, $id = null){
+
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if(!is_null($q)){
+            
+            $query = new Query;
+            $query->select(['id_city  AS id', 'name_sity AS text', 'name_oblast AS obl'])
+                    ->from('bg_city')
+                    ->where(['like', 'name_sity', $q])
+                    ->limit(50);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            
+            //var_dump($id);
+            //exit;
+            $out['results'] = array_values($data);
+            //var_dump($out);
+            //exit;
+            
+        }
+        elseif ($id > 0){
+            $cities = BgCity::find($id_city);
+            $city = $cities->name_sity;
+            $obl = $cities->name_oblast;
+            $out['results'] = ['id' => $id, 'text' => $city];
         }
        
         return $out;

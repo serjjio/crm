@@ -146,7 +146,7 @@ use kartik\checkbox\CheckboxX;
                         <?= Html::activeLabel($model, 'id_client', ['label' => 'Электронная почта'])?>
                     </div>      
                     <div class="col-sm-10 right-help">
-                        <?= $form->field($model, 'email', ['showLabels' => false])->textInput()?>
+                        <?= $form->field($model, 'email', ['showLabels' => false,])->textInput(['placeholder' => 'email'])?>
                     </div> 
                 </div>
 
