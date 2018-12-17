@@ -13,7 +13,7 @@ use yii\bootstrap\Modal;
 use yii\web\JsExpression;
 use backend\modules\guard\models\BgTypeUnit;
 use backend\modules\guard\models\BgClient;
-use backend\modules\guard\models\BgDillerInstaller;
+use backend\modules\guard\models\BgDillerAll;
 use backend\modules\guard\models\BgOperators;
 use backend\modules\guard\models\BgCity;
 use backend\modules\guard\models\BgMarka;
@@ -145,7 +145,7 @@ use kartik\checkbox\CheckboxX;
             <div class="col-sm-3">
                 <?= $form->field($model, 'id_diller_installer', ['showLabels' => false])->widget(Select2::classname(), 
                     [
-                        'data' => ArrayHelper::map(BgDillerInstaller::find()->all(), 'id_diller_installer', 'name_diller_installer', 'name_city'),
+                        'data' => ArrayHelper::map(BgDillerAll::find()->all(), 'id_diller', 'name_diller', 'name_city'),
                         'options' => ['placeholder' => 'Укажите диллера...'],
                         'pluginOptions' => ['allowClear' => true]
                     ]) ?>

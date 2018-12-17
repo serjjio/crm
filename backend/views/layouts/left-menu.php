@@ -41,7 +41,7 @@ use yii\helpers\Url;
 					
 					['label'=>'Справочник', 'icon'=>'list', 'items' => [
 						['label' => 'Тип устройства', 'url' => Url::to(['/guard/bg-type-unit/']), 'active' => ($item == 'bg-type-unit')],
-						['label' => 'Диллер', 'url' => Url::to(['/guard/bg-diller-installer/']), 'active' => ($item == 'bg-diller')],
+						['label' => 'Диллер', 'url' => Url::to(['/guard/bg-diller-all/']), 'active' => ($item == 'bg-diller')],
 						['label' => 'Операторы', 'url' => Url::to(['/guard/bg-operators/']), 'active' => ($item == 'bg-tester-operator')],
 						['label' => 'Страховые', 'url' => Url::to(['/guard/bg-insurance/']), 'active' => ($item == 'bg-insurance')],
 						['label' => 'Тарифный план', 'url' => Url::to(['/guard/bg-package/']), 'active' => ($item == 'bg-package')],

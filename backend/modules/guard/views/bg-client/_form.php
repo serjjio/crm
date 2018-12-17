@@ -8,7 +8,7 @@ use kartik\select2\Select2;
 use kartik\date\DatePicker;
 use yii\web\JsExpression;
 use backend\modules\guard\models\BgClient;
-use backend\modules\guard\models\BgDiller;
+use backend\modules\guard\models\BgDillerAll;
 use backend\modules\guard\models\BgPackage;
 use kartik\checkbox\CheckboxX;
 
@@ -59,7 +59,7 @@ use kartik\checkbox\CheckboxX;
                     <div class="col-sm-4">
                         <?= $form->field($model, 'id_diller_reteiler', ['showLabels' => false])->widget(Select2::classname(), 
                             [
-                                'data' => ArrayHelper::map(BgDiller::find()->all(), 'id_diller_reteiler', 'name_diller_reteiler'),
+                                'data' => ArrayHelper::map(BgDillerAll::find()->all(), 'id_diller', 'name_diller', 'name_city'),
                                 'options' => ['placeholder' => 'Укажите диллера...'],
                                 'pluginOptions' => ['allowClear' => true]
                             ]) ?>

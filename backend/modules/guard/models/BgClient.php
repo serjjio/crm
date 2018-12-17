@@ -51,7 +51,7 @@ class BgClient extends \yii\db\ActiveRecord
             //['email', 'required', 'message' => 'Необходимо заполнить поле'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            [['id_diller_reteiler'], 'exist', 'skipOnError' => true, 'targetClass' => BgDiller::className(), 'targetAttribute' => ['id_diller_reteiler' => 'id_diller_reteiler']],
+            [['id_diller_reteiler'], 'exist', 'skipOnError' => true, 'targetClass' => BgDillerAll::className(), 'targetAttribute' => ['id_diller_reteiler' => 'id_diller']],
             [['id_package'], 'exist', 'skipOnError' => true, 'targetClass' => BgPackage::className(), 'targetAttribute' => ['id_package' => 'id_package']],
         ];
     }
@@ -82,7 +82,7 @@ class BgClient extends \yii\db\ActiveRecord
      */
     public function getIdDillerReteiler()
     {
-        return $this->hasOne(BgDiller::className(), ['id_diller_reteiler' => 'id_diller_reteiler']);
+        return $this->hasOne(BgDillerAll::className(), ['id_diller' => 'id_diller_reteiler']);
     }
 
     /**

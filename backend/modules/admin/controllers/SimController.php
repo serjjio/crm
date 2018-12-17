@@ -91,24 +91,21 @@ class SimController extends Controller
                         continue;
                     }
                     /* name model backend\modules\guard\models\Bg*/
-                    $diller_inst_model = new \backend\modules\guard\models\BgDillerInstaller();
-                    $diller_model = new \backend\modules\guard\models\BgDiller();
+                   
+                    $diller = new \backend\modules\guard\models\BgDillerAll();
 
                     
                     $id_city = $rowData[0][0];
                     $name_city =  $rowData[0][1];
                     $name_diller = $rowData[0][3].', '.$rowData[0][2];
                     
-                    $diller_model->name_diller_reteiler = $name_diller;
-                    $diller_inst_model->name_diller_installer = $name_diller;
+                    $diller->name_diller = $name_diller;
 
-                    $diller_model->id_city = $id_city;
-                    $diller_inst_model->id_city = $id_city; 
+                    $diller->id_city = $id_city; 
 
-                    $diller_model->name_city = $name_city;
-                    $diller_inst_model->name_city = $name_city;
+                    $diller->name_city = $name_city;
 
-                    //$diller_model->save();
+                    $diller->save();
                     //$diller_inst_model->save();
 
 

@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 use kartik\editable\Editable;
 use yii\bootstrap\Modal;
 use backend\modules\guard\models\BgUnit;
-use backend\modules\guard\models\BgDiller;
+use backend\modules\guard\models\BgDillerAll;
 use backend\modules\guard\models\BgPackage;
 
 $this->title = 'Детали';
@@ -164,10 +164,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 			[
                                 'attribute'=> 'id_diller_reteiler',
                                 'label' => 'Диллер',
-                                'value' => ArrayHelper::getValue(BgDiller::findOne($model->id_diller_reteiler), 'name_diller_reteiler'),
+                                'value' => ArrayHelper::getValue(BgDillerAll::findOne($model->id_diller_reteiler), 'name_diller'),
                                 'type' => DetailView::INPUT_SELECT2,
                                 'widgetOptions'=>[
-                                    'data'=>ArrayHelper::map(BgDiller::find()->orderBy('name_diller_reteiler')->asArray()->all(), 'id_diller_reteiler', 'name_diller_reteiler'),
+                                    'data'=>ArrayHelper::map(BgDillerAll::find()->orderBy('name_diller')->asArray()->all(), 'id_diller', 'name_diller', 'name_city'),
                                     'options'=> ['placeholder'=> 'Укажите диллера...'],
                                     'pluginOptions'=>['allowClear'=>true, 'width'=>'37%']
                                 ],

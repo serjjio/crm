@@ -65,4 +65,8 @@ class BgCity extends \yii\db\ActiveRecord
     {
         return $this->hasMany(BgUnit::className(), ['id_city' => 'id_city']);
     }
+    public function getBgDillerAlls()
+    {
+        return $this->hasMany(BgDillerAll::className(), ['id_city' => 'id_city']);
+    }
 }

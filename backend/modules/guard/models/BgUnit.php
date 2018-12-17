@@ -74,7 +74,7 @@ class BgUnit extends \yii\db\ActiveRecord
             [['installer', 'contact_installer', 'vin_number', 'name_model', 'gos_number', 'color', 'passport_number', 'name_owner'], 'string', 'max' => 256],
             [['id_client'], 'exist', 'skipOnError' => true, 'targetClass' => BgClient::className(), 'targetAttribute' => ['id_client' => 'id_client']],
             [['id_type_unit'], 'exist', 'skipOnError' => true, 'targetClass' => BgTypeUnit::className(), 'targetAttribute' => ['id_type_unit' => 'id_type_unit']],
-            [['id_diller_installer'], 'exist', 'skipOnError' => true, 'targetClass' => BgDillerInstaller::className(), 'targetAttribute' => ['id_diller_installer' => 'id_diller_installer']],
+            [['id_diller_installer'], 'exist', 'skipOnError' => true, 'targetClass' => BgDillerAll::className(), 'targetAttribute' => ['id_diller_installer' => 'id_diller']],
             [['id_tester_operator'], 'exist', 'skipOnError' => true, 'targetClass' => BgOperators::className(), 'targetAttribute' => ['id_tester_operator' => 'id_operator']],
             [['id_segment'], 'exist', 'skipOnError' => true, 'targetClass' => BgSegment::className(), 'targetAttribute' => ['id_segment' => 'id_segment']],
             [['id_insurance'], 'exist', 'skipOnError' => true, 'targetClass' => BgInsurance::className(), 'targetAttribute' => ['id_insurance' => 'id_insurance']],
@@ -148,7 +148,7 @@ class BgUnit extends \yii\db\ActiveRecord
      */
     public function getIdDillerInstaller()
     {
-        return $this->hasOne(BgDillerInstaller::className(), ['id_diller_installer' => 'id_diller_installer']);
+        return $this->hasOne(BgDillerAll::className(), ['id_diller' => 'id_diller_installer']);
     }
 
     /**
