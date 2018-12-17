@@ -47,6 +47,11 @@ class BgDillerAllSearch extends BgDillerAll
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'name_city' => SORT_ASC,
+                ]
+            ]
         ]);
 
         $this->load($params);

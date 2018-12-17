@@ -47,6 +47,10 @@ use backend\modules\guard\models\BgDillerAll;
                     'asPopover' => false
                 ],
             ], 
+            [
+                'class' => 'kartik\grid\CheckboxColumn',
+                'headerOptions' => ['class' => 'kartik-sheet-style']
+            ]
         ];
     }else{
         $columns = [
@@ -114,6 +118,15 @@ use backend\modules\guard\models\BgDillerAll;
                                 'class' =>'btn create',
                                 'title' => Yii::t('app', 'Добавить'),
                             ]) : false,
+            'after' => Html::a('<i class="glyphicon glyphicon-trash"></i> Удалить выбраные', 
+                            ['delete-selected'], 
+                            [
+                                //'data-pjax'=>0, 
+                                'class' => !Yii::$app->user->can('admin') ? 'btn btn-danger disabled hide' : 'btn btn-danger delete-selected disabled',
+                                'title' => Yii::t('app', 'Delete Selected'),
+                                //'id' => 'delete-selected',
+                            ]),
+            'afterOptions' => ['class' => 'kv-panel-after pull-right']
             
 
         ],

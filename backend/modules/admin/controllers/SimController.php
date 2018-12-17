@@ -105,7 +105,7 @@ class SimController extends Controller
 
                     $diller->name_city = $name_city;
 
-                    $diller->save();
+                    //$diller->save();
                     //$diller_inst_model->save();
 
 

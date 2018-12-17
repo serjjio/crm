@@ -42,6 +42,11 @@ class BgDillerAllController extends Controller
                         'allow' => true,
                         'roles' => ['createGuard'],
                     ],
+                    [
+                        'actions' => ['delete-selected'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
                 ],
             ],
             'verbs' => [
@@ -170,6 +175,19 @@ class BgDillerAllController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+    public function actionDeleteSelected(){
+        $post = Yii::$app->request->post();
+        if (Yii::$app->request->isAjax && isset($post['keys'])){
+            $keys = $post[keys];
+            for ($i=0; $i<count($keys); $i++){
+                $unit = $this->findModel($keys[$i]);
+                
+                $unit->delete();
+
+            }
+            return true;
+        }
     }
 
     /**
