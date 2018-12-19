@@ -135,6 +135,16 @@ use backend\modules\guard\models\BgClient;
                 'falseLabel' => 'Неактивный',
                 'width' => '20px',
             ],
+            [
+                'class' => 'kartik\grid\BooleanColumn',
+                'attribute' => 'activate_status',
+                'vAlign' => 'middle',
+                'label' => 'Статус активации',
+                'width' => '100px',
+                'trueLabel' => 'Активный',
+                'falseLabel' => 'Неактивный',
+                'width' => '20px',
+            ],
 
             [
                 'class' => 'kartik\grid\CheckboxColumn',

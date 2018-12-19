@@ -231,7 +231,7 @@ use kartik\checkbox\CheckboxX;
             </div>      
             <div class="col-sm-3">
                 <?= $form->field($model, 'test_status', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => $model->test_status === 0 ? 0 : 1],
+                            'options' => ['value' => !$model->test_status ? 0 : $model->test_status],
                             'pluginOptions' => [
                                 'threeState' => false,
                             ] 
@@ -265,7 +265,7 @@ use kartik\checkbox\CheckboxX;
         <div class="form-group">
             <div class="col-sm-3">
                 <?= $form->field($model, 'can_module', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => $model->can_module === 0 ? 0 : 1],
+                            'options' => ['value' => !$model->can_module ? 0 : $model->can_module],
                             'pluginOptions' => [
                                 'threeState' => false,
                             ],
@@ -290,7 +290,7 @@ use kartik\checkbox\CheckboxX;
         <div class="form-group">
             <div class="col-sm-3">
                 <?= $form->field($model, 'volume_sensor', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => $model->volume_sensor === 0 ? 0 : 1],
+                            'options' => ['value' => !$model->volume_sensor ? 0 : $model->volume_sensor],
                             'pluginOptions' => [
                                 'threeState' => false,
                             ],
@@ -315,7 +315,7 @@ use kartik\checkbox\CheckboxX;
         <div class="form-group">
             <div class="col-sm-3">
                 <?= $form->field($model, 'shock_sensor', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => $model->shock_sensor === 0 ? 0 : 1],
+                            'options' => ['value' => !$model->shock_sensor ? 0 : $model->shock_sensor],
                             'pluginOptions' => [
                                 'threeState' => false,
                             ],
@@ -326,7 +326,7 @@ use kartik\checkbox\CheckboxX;
                     ])?>
                 
                 <?= $form->field($model, 'rfid_tags', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => $model->rfid_tags === 0 ? 0 : 1],
+                            'options' => ['value' => !$model->rfid_tags ? 0 : $model->rfid_tags],
                             'pluginOptions' => [
                                 'threeState' => false,
                             ],
@@ -363,7 +363,7 @@ use kartik\checkbox\CheckboxX;
             </div>      
             <div class="col-sm-3">
                 <?= $form->field($model, 'activate_status', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => $model->activate_status === 0 ? 0 : 1],
+                            'options' => ['value' => !$model->activate_status ? 0 : $model->activate_status],
                             'pluginOptions' => [
                                 'threeState' => false,
                             ] 
