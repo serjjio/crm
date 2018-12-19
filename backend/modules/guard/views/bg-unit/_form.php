@@ -20,6 +20,8 @@ use backend\modules\guard\models\BgMarka;
 use backend\modules\guard\models\BgModel;
 use backend\modules\guard\models\BgSegment;
 use backend\modules\guard\models\BgInsurance;
+use backend\modules\guard\models\BgVolumeSensor;
+use backend\modules\guard\models\BgCanSensor;
 use kartik\checkbox\CheckboxX;
 
 
@@ -229,7 +231,7 @@ use kartik\checkbox\CheckboxX;
             </div>      
             <div class="col-sm-3">
                 <?= $form->field($model, 'test_status', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => 0],
+                            'options' => ['value' => $model->test_status === 0 ? 0 : 1],
                             'pluginOptions' => [
                                 'threeState' => false,
                             ] 
@@ -263,7 +265,7 @@ use kartik\checkbox\CheckboxX;
         <div class="form-group">
             <div class="col-sm-3">
                 <?= $form->field($model, 'can_module', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => 0],
+                            'options' => ['value' => $model->can_module === 0 ? 0 : 1],
                             'pluginOptions' => [
                                 'threeState' => false,
                             ],
@@ -272,18 +274,23 @@ use kartik\checkbox\CheckboxX;
                                 'position' => CheckboxX::LABEL_RIGHT
                             ]
                     ])?>
-                <?= $form->field($model, 'shock_sensor', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => 0],
-                            'pluginOptions' => [
-                                'threeState' => false,
-                            ],
-                            'labelSettings'  => [
-                                'label' => 'Датчик удара',
-                                'position' => CheckboxX::LABEL_RIGHT
-                            ] 
-                    ])?>
+            </div>
+            <div class="col-sm-3" id="can">
+                <?= $form->field($model, 'id_can', ['showLabels' => false])->widget(Select2::classname(), 
+                    [
+                        'data' => ArrayHelper::map(BgCanSensor::find()->all(), 'id_can_sensor', 'name_can_sensor'),
+                        'options' => ['placeholder' => 'Укажите тип CAN-модуля...'],
+                        'pluginOptions' => ['allowClear' => true]
+                    ]) ?>
+            </div>
+        </div>
+        <div class="col-sm-3" style="text-align: left">
+            <?= Html::activeLabel($model, 'id_unit', ['label' => false])?>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3">
                 <?= $form->field($model, 'volume_sensor', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => 0],
+                            'options' => ['value' => $model->volume_sensor === 0 ? 0 : 1],
                             'pluginOptions' => [
                                 'threeState' => false,
                             ],
@@ -292,8 +299,34 @@ use kartik\checkbox\CheckboxX;
                                 'position' => CheckboxX::LABEL_RIGHT
                             ] 
                     ])?>
+            </div>
+            <div class="col-sm-3" id="volume">
+                <?= $form->field($model, 'id_volume', ['showLabels' => false])->widget(Select2::classname(), 
+                    [
+                        'data' => ArrayHelper::map(BgVolumeSensor::find()->all(), 'id_volume_sensor', 'name_volume_sensor'),
+                        'options' => ['placeholder' => 'Укажите тип датчика объема...'],
+                        'pluginOptions' => ['allowClear' => true]
+                    ]) ?>
+            </div>
+        </div>
+        <div class="col-sm-3" style="text-align: left">
+            <?= Html::activeLabel($model, 'id_unit', ['label' => false])?>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3">
+                <?= $form->field($model, 'shock_sensor', ['showLabels' => false])->widget(CheckboxX::classname(), [
+                            'options' => ['value' => $model->shock_sensor === 0 ? 0 : 1],
+                            'pluginOptions' => [
+                                'threeState' => false,
+                            ],
+                            'labelSettings'  => [
+                                'label' => 'Датчик удара',
+                                'position' => CheckboxX::LABEL_RIGHT
+                            ] 
+                    ])?>
+                
                 <?= $form->field($model, 'rfid_tags', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => 0],
+                            'options' => ['value' => $model->rfid_tags === 0 ? 0 : 1],
                             'pluginOptions' => [
                                 'threeState' => false,
                             ],
@@ -330,7 +363,7 @@ use kartik\checkbox\CheckboxX;
             </div>      
             <div class="col-sm-3">
                 <?= $form->field($model, 'activate_status', ['showLabels' => false])->widget(CheckboxX::classname(), [
-                            'options' => ['value' => 0],
+                            'options' => ['value' => $model->activate_status === 0 ? 0 : 1],
                             'pluginOptions' => [
                                 'threeState' => false,
                             ] 

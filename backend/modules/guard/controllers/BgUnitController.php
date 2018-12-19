@@ -243,6 +243,13 @@ class BgUnitController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {   
 
+            if($model->id_segment != 2) $model->id_insurance = null;
+            if($model->can_module != 1) $model->id_can = null;
+            if($model->volume_sensor != 1) $model->id_volume = null;
+
+
+            
+
             if($model->test_date){
                 $test_date= strtotime($model->test_date);
                 $model->test_date = date('Y-m-d', $test_date);

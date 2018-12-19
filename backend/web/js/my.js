@@ -45,10 +45,58 @@ $(document).on({
 	})
 }
 })
+
+
+
 $(document).on({
 	ready: function(){
 		if ($('#bgunit-id_segment').val() == 2){
 				$('#insurance').show();
+			}
+
+	
+}
+})
+
+/*Select Sensors*/
+
+$(document).on({
+	ready: function(){
+		return $('body').on('change', '#bgunit-can_module', function(){
+			if ($('#bgunit-can_module').val() == 1){
+				$('#can').show();
+			}else{
+				$('#can').hide();
+			}
+
+	})
+}
+})
+$(document).on({
+	ready: function(){
+		if ($('#bgunit-can_module').val() == 1){
+				$('#can').show();
+			}
+
+	
+}
+})
+$(document).on({
+	ready: function(){
+		return $('body').on('change', '#bgunit-volume_sensor', function(){
+			if ($('#bgunit-volume_sensor').val() == 1){
+				$('#volume').show();
+			}else{
+				$('#volume').hide();
+			}
+
+	})
+}
+})
+$(document).on({
+	ready: function(){
+		if ($('#bgunit-volume_sensor').val() == 1){
+				$('#volume').show();
 			}
 
 	

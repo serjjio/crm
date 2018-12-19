@@ -16,6 +16,8 @@ use Yii;
  */
 class BgModel extends \yii\db\ActiveRecord
 {
+
+    
     /**
      * @inheritdoc
      */

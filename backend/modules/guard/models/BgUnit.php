@@ -51,6 +51,8 @@ class BgUnit extends \yii\db\ActiveRecord
 {
     public $file;
     public $id_operator;
+
+
     /**
      * @inheritdoc
      */
@@ -67,7 +69,7 @@ class BgUnit extends \yii\db\ActiveRecord
         return [
             [['file'], 'file'],
             [['unit_number', 'sim_number'], 'required', 'message' => 'Необходимо заполнить поле'],
-            [['unit_number', 'id_client', 'id_type_unit', 'id_city', 'id_diller_installer', 'test_status', 'can_module', 'shock_sensor', 'volume_sensor', 'rfid_tags', 'id_tester_operator', 'activate_status', 'id_activate_operator', 'id_marka', 'id_model', 'id_segment', 'id_insurance', 'id_operator', 'status'], 'integer'],
+            [['unit_number', 'id_client', 'id_type_unit', 'id_city', 'id_diller_installer', 'id_volume', 'id_can', 'test_status', 'can_module', 'shock_sensor', 'volume_sensor', 'rfid_tags', 'id_tester_operator', 'activate_status', 'id_activate_operator', 'id_marka', 'id_model', 'id_segment', 'id_insurance', 'id_operator', 'status'], 'integer'],
             [['unit_number'], 'unique', 'message' => 'Такой номер блока уже существует'],
             [['test_date', 'activate_date', 'made_auto_date'], 'safe'],
             [['sim_number', 'garant_term', 'ext_garant', 'comment'], 'string', 'max' => 32],
@@ -75,6 +77,8 @@ class BgUnit extends \yii\db\ActiveRecord
             [['id_client'], 'exist', 'skipOnError' => true, 'targetClass' => BgClient::className(), 'targetAttribute' => ['id_client' => 'id_client']],
             [['id_type_unit'], 'exist', 'skipOnError' => true, 'targetClass' => BgTypeUnit::className(), 'targetAttribute' => ['id_type_unit' => 'id_type_unit']],
             [['id_diller_installer'], 'exist', 'skipOnError' => true, 'targetClass' => BgDillerAll::className(), 'targetAttribute' => ['id_diller_installer' => 'id_diller']],
+            [['id_volume'], 'exist', 'skipOnError' => true, 'targetClass' => BgVolumeSensor::className(), 'targetAttribute' => ['id_volume' => 'id_volume_sensor']],
+            [['id_can'], 'exist', 'skipOnError' => true, 'targetClass' => BgCanSensor::className(), 'targetAttribute' => ['id_can' => 'id_can_sensor']],
             [['id_tester_operator'], 'exist', 'skipOnError' => true, 'targetClass' => BgOperators::className(), 'targetAttribute' => ['id_tester_operator' => 'id_operator']],
             [['id_segment'], 'exist', 'skipOnError' => true, 'targetClass' => BgSegment::className(), 'targetAttribute' => ['id_segment' => 'id_segment']],
             [['id_insurance'], 'exist', 'skipOnError' => true, 'targetClass' => BgInsurance::className(), 'targetAttribute' => ['id_insurance' => 'id_insurance']],
@@ -149,6 +153,16 @@ class BgUnit extends \yii\db\ActiveRecord
     public function getIdDillerInstaller()
     {
         return $this->hasOne(BgDillerAll::className(), ['id_diller' => 'id_diller_installer']);
+    }
+
+    public function getIdVolume()
+    {
+        return $this->hasOne(BgVolumeSensor::className(), ['id_volume_sensor' => 'id_volume']);
+    }
+
+    public function getIdCan()
+    {
+        return $this->hasOne(BgCanSensor::className(), ['id_can_sensor' => 'id_can']);
     }
 
     /**
