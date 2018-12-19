@@ -47,6 +47,11 @@ class BgCitySearch extends BgCity
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'name_oblast' => SORT_ASC,
+                ]
+            ]
         ]);
 
         $this->load($params);

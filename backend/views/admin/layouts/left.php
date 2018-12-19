@@ -40,7 +40,7 @@ use yii\helpers\Url;
                     //['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
-                        'label' => 'Данные',
+                        'label' => 'Спаравочник монитор',
                         'icon' => 'share',
                         'url' => '#',
                         'items' => [
@@ -48,6 +48,22 @@ use yii\helpers\Url;
                             ['label' => 'Тип оборудования', 'icon' => 'dashboard', 'url' => ['type-unit/'], 'active' => ($item == 'type-unit')],
                             ['label' => 'Програмное обеспечение', 'icon' => 'dashboard', 'url' => ['server/'], 'active' => ($item == 'server')],
                             ['label' => 'Сегмент', 'icon' => 'dashboard', 'url' => ['segment/'], 'active' => ($item == 'segment')],
+                            
+                        ],
+                    ],
+                    [
+                        'label' => 'Спаравочник охрана',
+                        'icon' => 'share',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Тип устройства', 'icon' => 'dashboard', 'url' => Url::to(['bg-type-unit/']), 'active' => ($item == 'bg-type-unit')],
+                            ['label' => 'Диллер', 'icon' => 'dashboard', 'url' => Url::to(['bg-diller-all/']), 'active' => ($item == 'bg-diller')],
+                            ['label' => 'Операторы', 'icon' => 'dashboard', 'url' => Url::to(['bg-operators/']), 'active' => ($item == 'bg-tester-operator')],
+                            ['label' => 'Страховые', 'icon' => 'dashboard', 'url' => Url::to(['bg-insurance/']), 'active' => ($item == 'bg-insurance')],
+                            ['label' => 'Тарифный план', 'icon' => 'dashboard', 'url' => Url::to(['bg-package/']), 'active' => ($item == 'bg-package')],
+                            ['label' => 'Модель ТС', 'icon' => 'dashboard', 'url' => Url::to(['bg-model/']), 'active' => ($item == 'bg-model')],
+                            ['label' => 'Города', 'icon' => 'dashboard', 'url' => Url::to(['bg-city/']), 'active' => ($item == 'bg-city')],
+                            
                             
                         ],
                     ],

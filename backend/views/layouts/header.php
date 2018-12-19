@@ -47,15 +47,16 @@ use common\widgets\Alert;
             . Html::endForm()
             . '</li>';
     }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-left' ],
-        'items' => $menuItems,
-    ]);
+    
    
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuLogin,
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right' ],
+        'items' => $menuItems,
     ]);
     NavBar::end();
     ?>

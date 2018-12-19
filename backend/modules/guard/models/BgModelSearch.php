@@ -47,6 +47,11 @@ class BgModelSearch extends BgModel
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'id_marka' => SORT_ASC,
+                ]
+            ]
         ]);
 
         $this->load($params);
