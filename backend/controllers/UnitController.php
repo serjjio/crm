@@ -122,9 +122,10 @@ class UnitController extends Controller
             
 
             Yii::$app->session->setFlash('kv-detail-success', 'Объект успешно создан!');
-            return $this->redirect(Yii::$app->request->referrer);
+            //return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect('/unit');
         } else {
-            return $this->renderAjax('create', [
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }

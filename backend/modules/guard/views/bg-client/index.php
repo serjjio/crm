@@ -129,7 +129,7 @@ use yii\web\JsExpression;
         'hover' => true,
         'persistResize' => false,
         'rowOptions' => function($model){
-            return $model->status ? ['style' => 'word-wrap:break-word'] : ['style' => 'word-wrap:break-word', 'class' => GridView::TYPE_DANGER];
+            return $model->status ? ['style' => 'word-wrap:break-word'] : ['style' => 'background-color:#DCDCDC'];
         },
         'export' => false,
         'toggleDataOptions' => [
@@ -138,7 +138,7 @@ use yii\web\JsExpression;
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
             //'type' => 'success',
-            //'heading' => 'Блоки',
+            'heading' => 'Охрана',
             'before' => Yii::$app->user->can('createGuard') ? Html::a('<i class="glyphicon glyphicon-plus"></i> Добавить клиента', 
                             ['create'], 
                             [

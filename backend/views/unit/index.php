@@ -220,14 +220,14 @@ use kartik\export\ExportMenu;
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
             //'type' => 'success',
-            //'heading' => 'Блоки',
-            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Добавить блок', 
+            'heading' => 'Мониторинг',
+            'before' => Yii::$app->user->can('createObject') ? Html::a('<i class="glyphicon glyphicon-plus"></i> Добавить блок', 
                             ['create'], 
                             [
-                                'data-pjax'=>1, 
-                                'class' => !Yii::$app->user->can('createObject') ? 'btn create create-object disabled' : 'btn create create-object',
+                                'data-pjax'=>0, 
+                                'class' => 'btn create',
                                 'title' => Yii::t('app', 'Добавить блок'),
-                            ]),
+                            ]) : false,
             'after' => Html::a('<i class="glyphicon glyphicon-trash"></i> Удалить выбраные', 
                             ['delete-selected'], 
                             [

@@ -94,7 +94,7 @@ use backend\modules\guard\models\BgClient;
                 'label' => 'Имя клиента', 
                 'value' => function ($model){
                     $name =  ArrayHelper::getValue(BgClient::findOne($model->id_client), 'client_name');
-                    return Html::a($name, [Url::to('bg-client/update/'.$model->id_client)], ['data-pjax' => 0]);
+                    return Html::a($name, [Url::to('bg-client/detail-view/'.$model->id_client)], ['data-pjax' => 0]);
                 },
                 'contentOptions' => ['style' => 'max-width:300px; white-space:normal'],
                 'format' => 'raw',
@@ -177,7 +177,7 @@ use backend\modules\guard\models\BgClient;
         'headerRowOptions'=>['class'=>'kartik-sheet-style'],
         'filterRowOptions'=>['class'=>'kartik-sheet-style'],
         'rowOptions' => function($model){
-            return $model->status ? ['style' => 'word-wrap:break-word'] : ['style' => 'word-wrap:break-word', 'class' => GridView::TYPE_DANGER];
+            return $model->status ? ['style' => 'word-wrap:break-word'] : ['style' => 'background-color:#DCDCDC'];
         },
         
         //'layout' => $layout,
@@ -198,7 +198,7 @@ use backend\modules\guard\models\BgClient;
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
             //'type' => 'success',
-            //'heading' => 'Блоки',
+            'heading' => 'Охрана',
             'before' => Yii::$app->user->can('createGuard') ? Html::a('<i class="glyphicon glyphicon-plus"></i> Добавить блок', 
                             ['create'], 
                             [

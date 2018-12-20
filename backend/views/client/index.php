@@ -209,15 +209,16 @@ use app\models\Segment;
             'type'=>30,
         ],
         'panel' => [
+            'heading' => 'Мониторинг',
             'type' => GridView::TYPE_DEFAULT,
             //'type' => 'success',
-            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Добавить клиента', 
+            'before' => Yii::$app->user->can('createClient') ? Html::a('<i class="glyphicon glyphicon-plus"></i> Добавить клиента', 
                                 ['create'], 
                                 [
                                     'data-pjax'=>0, 
-                                    'class'=> !Yii::$app->user->can('createClient') ? "btn btn-default disabled" : "btn btn-default", 
+                                    'class'=> 'btn create',
                                     'title' => Yii::t('app', 'Добавить клиента')
-                                ]),
+                                ]) : false,
             
         ],
         
