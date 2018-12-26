@@ -133,7 +133,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'title' => Yii::t('app', 'Создать пользователя'),
                             ]),
             //'after' => false,
-            'footer' => false,
+            //'footer' => false,
 
         ],
     ]); ?>
