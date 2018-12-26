@@ -132,7 +132,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'class' => 'btn create create-object',
                                 'title' => Yii::t('app', 'Создать пользователя'),
                             ]),
-            'after' => false,
+            //'after' => false,
             'footer' => false,
 
         ],
