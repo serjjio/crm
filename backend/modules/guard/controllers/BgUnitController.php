@@ -120,10 +120,10 @@ class BgUnitController extends Controller
                 $activate_date= strtotime($model->activate_date);
                 $model->activate_date = date('Y-m-d', $activate_date);
             }
-            if($model->made_auto_date){
+            /*if($model->made_auto_date){
                 $made_auto_date= strtotime($model->made_auto_date);
-                $model->made_auto_date = date('Y-m-d', $made_auto_date);
-            }
+                $model->made_auto_date = date('Y', $made_auto_date);
+            }*/
             if($model->id_client != null){
                 $client = BgClient::findOne($model->id_client);
                 $client->count_obj++;
@@ -260,10 +260,12 @@ class BgUnitController extends Controller
                 $activate_date= strtotime($model->activate_date);
                 $model->activate_date = date('Y-m-d', $activate_date);
             }
-            if($model->made_auto_date){
+            /*if($model->made_auto_date){
                 $made_auto_date= strtotime($model->made_auto_date);
-                $model->made_auto_date = date('Y-m-d', $made_auto_date);
-            }
+                
+                $model->made_auto_date = date('Y', $made_auto_date);
+            }*/
+
             if($id_client_current != $model->id_client){
                 if (!is_null($id_client_current)){
                     $countOld = BgClient::findOne($id_client_current);

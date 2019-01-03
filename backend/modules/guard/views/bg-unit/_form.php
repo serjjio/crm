@@ -457,7 +457,7 @@ use kartik\checkbox\CheckboxX;
         <!-- Date made-->
         <div class="form-group">
             <div class="col-sm-2" style="text-align: left">
-                <?= Html::activeLabel($model, 'id_unit', ['label' => 'Дата выпуска'])?>
+                <?= Html::activeLabel($model, 'id_unit', ['label' => 'Год выпуска'])?>
             </div>      
             <div class="col-sm-3">
                  <?= $form->field($model, 'made_auto_date', ['showLabels' => false])->widget(DatePicker::classname(),[
@@ -466,7 +466,7 @@ use kartik\checkbox\CheckboxX;
                                 //'value' => '28-May-1989',
                                 'pluginOptions'=> [
                                     'autoclose' => true,
-                                    'format' => 'yyyy-m-dd'
+                                    'format' => 'yyyy'
                                 ],
                         ])?>
             </div>

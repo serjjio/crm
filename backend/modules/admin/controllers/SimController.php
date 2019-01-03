@@ -83,7 +83,7 @@ class SimController extends Controller
                 $sheet = $objPHPExcel->getSheet(0);
                 $highestRow = $sheet->getHighestRow();
                 $highestColumn = $sheet->getHighestColumn();
-
+                $i=1;
                 for($row = 0; $row<= $highestRow; $row++)
                 {
                     $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
@@ -92,18 +92,35 @@ class SimController extends Controller
                     }
                     /* name model backend\modules\guard\models\Bg*/
                    
-                    $diller = new \backend\modules\guard\models\BgDillerAll();
+                    $unit = new \backend\modules\guard\models\BgUnit();
 
                     
-                    $id_city = $rowData[0][0];
-                    $name_city =  $rowData[0][1];
-                    $name_diller = $rowData[0][3].', '.$rowData[0][2];
+                    $unit->unit_number = $rowData[0][0];
+                    if ($marka = \backend\modules\guard\models\BgMarka::find()->where(['name_marka'=> $rowData[0][1]])->one()){
+                        $unit->id_marka = $marka->id_marka;
+                        if ($model = \backend\modules\guard\models\BgModel::find()->where(['name_model'=> $rowData[0][2]])->one()){
+                            $unit->id_model = $model->id_model;
+                        }
+                    }
+                    $unit->status = $rowData[0][3];
+                    $unit->id_type_unit = $rowData[0][4];
+                    $ts = mktime(0,0,0,1,$rowData[0][5]-1,1900);
+                    $unit->test_date = date('Y-m-d', $ts);
+                    if ($rowData[0][6]){
+                        $unit->made_auto_date = $rowData[0][6];
+                    }
+                    $unit->vin_number = $rowData[0][11];
+                    $unit->passport_number = $rowData[0][8];
+                    $unit->sim_number = $rowData[0][9];
+                    $unit->gos_number = $rowData[0][10];
+                    $unit->color = $rowData[0][12];
+
+                    echo $i.' '.$unit->unit_number.' '.$unit->id_marka.' '.$unit->id_model.' '.$unit->status.' '.$unit->id_type_unit.' '.$unit->test_date.'  '.$unit->made_auto_date.' '.$unit->vin_number.' '.$unit->passport_number.' '.$unit->sim_number.' '.$unit->gos_number.' '.$unit->color.'<br>';
+                    $i++;
+
+
+
                     
-                    $diller->name_diller = $name_diller;
-
-                    $diller->id_city = $id_city; 
-
-                    $diller->name_city = $name_city;
 
                     //$diller->save();
                     //$diller_inst_model->save();
