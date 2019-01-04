@@ -95,57 +95,29 @@ class SimController extends Controller
                     $unit = \backend\modules\guard\models\BgUnit::find()->where(['unit_number'=> trim($rowData[0][0])])->one();
                     
                     
-                    $unit->activate_status = 1;
+                    
+                    
 
-                    if(!$unit->save()) print_r($unit->errors);
+
+                   
+                    $ts = mktime(0,0,0,1,$rowData[0][1]-1,1900);
+                    $unit->activate_date = date('Y-m-d', $ts);
+
+                    $unit->activate_status = trim($rowData[0][2]);
+                    
+                    
+                    echo $unit->unit_number.'           '.$unit->activate_date.'                   '.$unit->activate_status.'<br>';
+
+                    //if(!$unit->save()) print_r($unit->errors);
                  
 
                     
-                    /*echo $i.' '.$unit->unit_number.' '.$unit->id_marka.' '.$unit->id_model.' '.$unit->status.' '.$unit->id_type_unit.' '.$unit->test_date.'  '.$unit->made_auto_date.' '.$unit->vin_number.' '.$unit->passport_number.' '.$unit->sim_number.' '.$unit->gos_number.' '.$unit->color.'<br>';*/
-                    
 
 
 
                     
 
-                    //$diller->save();
-                    //$diller_inst_model->save();
 
-
-
-
-
-
-                   /* $unit = new Unit;
-                    $unit->number = $rowData[0][0];
-                    $unit->imei = number_format($rowData[0][1],0,'','');
-                    if(!$unit->imei){
-                        $unit->imei = 0;
-                    }
-                    $unit->idTypeUnit = $rowData[0][2];
-                    $unit->idClient = $rowData[0][4];                                    
-                    $num_sim = $rowData[0][3];
-
-                    if (strlen($num_sim) > 9){
-                        $num_sim = substr($num_sim, -9);
-                       }
-                    if($sim = Sim::find()->where(['sim' => $num_sim])->one()){
-                        $unit->idSim = $sim->idSim;
-                        $unit->idIcc = $sim->idSim;
-                    }else{
-                        $sim = new Sim;
-                        $sim->sim = $num_sim;
-                        $sim->save();
-                        $unit->idSim = $sim->idSim;
-                        $unit->idIcc = $sim->idSim;
-                    }
-                    if (!$unit->save()){
-                        print_r($unit->getErrors());
-                    }else{
-                        $count_client = Client::findOne($unit->idClient);
-                        $count_client->clientCountObj++;
-                        $count_client->save();
-                    }*/
 
                 }
                 return $this->redirect('/guard/bg-unit');
