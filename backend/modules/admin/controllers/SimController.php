@@ -92,7 +92,7 @@ class SimController extends Controller
                     }
                     /* name model backend\modules\guard\models\Bg*/
                    
-                    $unit = \backend\modules\guard\models\BgUnit::find()->where(['name_model'=> trim($rowData[0][0])])->one();
+                    $unit = \backend\modules\guard\models\BgUnit::find()->where(['unit_number'=> trim($rowData[0][0])])->one();
                     
                     
                     $unit->activate_status = 1;
