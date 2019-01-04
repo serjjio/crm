@@ -106,7 +106,7 @@ class SimController extends Controller
                     $unit->activate_status = trim($rowData[0][2]);*/
                     
                     
-                    echo $unit->activate_date;
+                    echo $unit->unit_number;
 
                     //if(!$unit->save()) print_r($unit->errors);
                  
