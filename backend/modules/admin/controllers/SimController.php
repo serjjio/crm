@@ -92,36 +92,10 @@ class SimController extends Controller
                     }
                     /* name model backend\modules\guard\models\Bg*/
                    
-                    $unit = new \backend\modules\guard\models\BgUnit();
-                    $name_model = trim($rowData[0][2]);
+                    $unit = \backend\modules\guard\models\BgUnit::find()->where(['name_model'=> trim($rowData[0][0])])->one();
                     
-                    $unit->unit_number = $rowData[0][0];
-                    if ($marka = \backend\modules\guard\models\BgMarka::find()->where(['name_marka'=> $rowData[0][1]])->one()){
-                        $unit->id_marka = $marka->id_marka;
-                        if ($model_auto = \backend\modules\guard\models\BgModel::find()->where(['name_model'=> $name_model])->one()){
-                            $unit->id_model = $model_auto->id_model;
-                        }
-                    }
-                   
-
-
-                    $unit->status = trim($rowData[0][3]);
-                    $unit->id_type_unit = trim($rowData[0][4]);
-                    $ts = mktime(0,0,0,1,$rowData[0][5]-1,1900);
-                    $unit->test_date = date('Y-m-d', $ts);
-                    if ($rowData[0][6]){
-                        $unit->made_auto_date = $rowData[0][6];
-                    }
-                    $unit->vin_number = strval(trim($rowData[0][11]));
-                    $unit->passport_number = strval(trim($rowData[0][8]));
-                    if ($rowData[0][9]){
-                        $unit->sim_number = trim($rowData[0][9]);
-                    }else{
-                        $unit->sim_number = 0;
-                    }
-                    $unit->gos_number = strval(trim($rowData[0][10]));
-                    $unit->color = strval(trim($rowData[0][12]));
-                    //var_dump($unit->vin_number);
+                    
+                    $unit->activate_status = 1;
 
                     if(!$unit->save()) print_r($unit->errors);
                  
