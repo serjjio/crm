@@ -92,7 +92,7 @@ class SimController extends Controller
                     }
                     /* name model backend\modules\guard\models\Bg*/
                    
-                    $unit = \backend\modules\guard\models\BgUnit::find()->where(['unit_number'=> trim($rowData[0][0])])->one();
+                    if ($unit = \backend\modules\guard\models\BgUnit::find()->where(['unit_number'=> trim($rowData[0][0])])->one()){
                     
                     
                     
@@ -101,12 +101,12 @@ class SimController extends Controller
 
                    
                     $ts = mktime(0,0,0,1,$rowData[0][1]-1,1900);
-                    $activate_date = date('Y-m-d', $ts);
+                    $unit->activate_date = date('Y-m-d', $ts);
 
                     //$unit->activate_status = trim($rowData[0][2]);
+                    }
                     
-                    
-                    echo $activate_date.'<br>';
+                    echo $unit->activate_date.'<br>';
 
                     //if(!$unit->save()) print_r($unit->errors);
                  
