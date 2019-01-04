@@ -103,10 +103,10 @@ class SimController extends Controller
                     /*$ts = mktime(0,0,0,1,$rowData[0][1]-1,1900);
                     $unit->activate_date = date('Y-m-d', $ts);*/
 
-                    //$unit->activate_status = trim($rowData[0][2]);
+                    $unit->activate_status = trim($rowData[0][2]);
                     
                     
-                    echo $unit->unit_number;
+                    echo $unit->unit_number.'           '.$unit->activate_status.'<br>';
 
                     //if(!$unit->save()) print_r($unit->errors);
                  
