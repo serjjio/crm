@@ -17,6 +17,7 @@ use yii\web\UploadedFile;
 use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
+use yii\db\Query;
 
 /**
  * BgUnitController implements the CRUD actions for BgUnit model.
@@ -43,7 +44,7 @@ class BgUnitController extends Controller
                         'roles' => ['viewGuard'],
                     ],
                     [
-                        'actions' => ['create', 'delete', 'update', 'change-marka', 'delete-selected'],
+                        'actions' => ['create', 'delete', 'update', 'change-marka', 'delete-selected', 'cities-list'],
                         'allow' => true,
                         'roles' => ['createGuard'],
                     ],
