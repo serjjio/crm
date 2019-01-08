@@ -245,7 +245,7 @@ use backend\modules\guard\models\BgPackage;
                                         'noResults' => new JsExpression("function () {return 'Совпадений не найдено'}"),
                                     ],
                                     'ajax' => [
-                                        'url' => '/admin/bg-city/cities-list',
+                                        'url' => '/guard/bg-unit/cities-list',
                                         'dataType' => 'json',
                                         'data' => new JsExpression("function (params) {return {q:params.term};}"),
                                     ],

@@ -25,9 +25,9 @@ class Module extends \yii\base\Module
 
             //Yii::$app->getResponse()->redirect('site/login');
         }
-        /*if (!Yii::$app->user->can('admin')){
+        if (!Yii::$app->user->can('admin')){
             throw new ForbiddenHttpException('Access denied');
-        }*/
+        }
         //Yii::$app->view->params['status'] = 'data';
         $this->setLayoutPath('@app/views/admin/layouts');
         $this->layout = 'main';
