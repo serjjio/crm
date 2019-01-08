@@ -75,7 +75,17 @@ use backend\modules\guard\models\BgPackage;
     
         </div>
 
+        <!-- Contract Number -->
+        <div class="form-group">
 
+                    <div class="col-sm-2" style="text-align: left">
+                        <?= Html::activeLabel($model, 'id_unit', ['label' => 'Номер договора'])?>
+                    </div>      
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'contract_number', ['showLabels' => false])->textInput()?>
+                    </div> 
+    
+                </div>
         <!-- Type  unit-->
          <div class="form-group">
             <div class="col-sm-2" style="text-align: left">
