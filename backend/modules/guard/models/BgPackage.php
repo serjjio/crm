@@ -47,8 +47,8 @@ class BgPackage extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getBgClient()
+    public function getBgUnit()
     {
-        return $this->hasOne(BgClient::className(), ['id_package' => 'id_package']);
+        return $this->hasOne(BgUnit::className(), ['id_package' => 'id_package']);
     }
 }

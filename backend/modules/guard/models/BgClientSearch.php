@@ -19,7 +19,7 @@ class BgClientSearch extends BgClient
     {
         return [
             [['id_client', 'id_diller_reteiler', 'count_obj', 'status'], 'integer'],
-            [['client_name', 'name_manager', 'contract_number', 'contract_date', 'contact1', 'contact2', 'email', 'comment', 'id_package'], 'safe'],
+            [['client_name', 'name_manager', 'contract_number', 'contract_date', 'contact1', 'contact2', 'email', 'comment'], 'safe'],
         ];
     }
 
@@ -56,7 +56,6 @@ class BgClientSearch extends BgClient
             // $query->where('0=1');
             return $dataProvider;
         }
-        $query->joinWith('idPackage');
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -69,7 +68,6 @@ class BgClientSearch extends BgClient
         ]);
 
         $query->andFilterWhere(['like', 'client_name', $this->client_name])
-            ->andFilterWhere(['like', 'bg_package.name_package', $this->id_package])
             ->andFilterWhere(['like', 'name_manager', $this->name_manager])
             ->andFilterWhere(['like', 'contract_number', $this->contract_number])
             ->andFilterWhere(['like', 'contact1', $this->contact1])

@@ -32,7 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'client_name',
             'id_diller_reteiler',
             'name_manager',
-            'id_package',
             'contract_number',
             'contract_date',
             'contact1',

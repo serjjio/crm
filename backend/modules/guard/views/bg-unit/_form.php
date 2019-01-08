@@ -23,6 +23,7 @@ use backend\modules\guard\models\BgInsurance;
 use backend\modules\guard\models\BgVolumeSensor;
 use backend\modules\guard\models\BgCanSensor;
 use kartik\checkbox\CheckboxX;
+use backend\modules\guard\models\BgPackage;
 
 
 /* @var $this yii\web\View */
@@ -80,7 +81,7 @@ use kartik\checkbox\CheckboxX;
             <div class="col-sm-2" style="text-align: left">
                 <?= Html::activeLabel($model, 'id_unit', ['label' => 'Тип устройства'])?>
             </div>      
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?= $form->field($model, 'id_type_unit', ['showLabels' => false])->widget(Select2::classname(), 
                     [
                         'data' => ArrayHelper::map(BgTypeUnit::find()->all(), 'id_type_unit', 'name_type_unit'),
@@ -96,7 +97,7 @@ use kartik\checkbox\CheckboxX;
             <div class="col-sm-2" style="text-align: left">
                 <?= Html::activeLabel($model, 'id_unit', ['label' => 'Имя клиента'])?>
             </div>      
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?= $form->field($model, 'id_client', ['showLabels' => false])->widget(Select2::classname(), 
                     [
                         'data' => ArrayHelper::map(BgClient::find()->all(), 'id_client', 'client_name'),
@@ -112,7 +113,7 @@ use kartik\checkbox\CheckboxX;
             <div class="col-sm-2" style="text-align: left">
                 <?= Html::activeLabel($model, 'id_unit', ['label' => 'Сегмент'])?>
             </div>      
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?= $form->field($model, 'id_segment', ['showLabels' => false])->widget(Select2::classname(), 
                     [
                         'data' => ArrayHelper::map(BgSegment::find()->all(), 'id_segment', 'name_segment'),
@@ -136,6 +137,33 @@ use kartik\checkbox\CheckboxX;
             </div>
                     
         </div>
+
+         <!-- Pakage -->
+                <div class="form-group">
+                    <div class="col-sm-2" style="text-align: left">
+                        <?= Html::activeLabel($model, 'id_unit', ['label' => 'Тарифный план'])?>
+                    </div>      
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'id_package', ['showLabels' => false])->widget(Select2::classname(), 
+                            [
+                                'data' => ArrayHelper::map(BgPackage::find()->all(), 'id_package', 'name_package'),
+                                'options' => ['placeholder' => 'Укажите тп...'],
+                                'pluginOptions' => ['allowClear' => true]
+                            ]) ?>
+                    </div>
+                    
+                </div>
+        <!-- Name Manager -->
+                <div class="form-group">
+
+                    <div class="col-sm-2" style="text-align: left">
+                        <?= Html::activeLabel($model, 'id_unit', ['label' => 'Менеджер'])?>
+                    </div>      
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'name_manager', ['showLabels' => false])->textInput()?>
+                    </div> 
+    
+                </div>
 
         <!-- Install-->
         

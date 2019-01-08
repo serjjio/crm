@@ -69,11 +69,11 @@ class BgUnit extends \yii\db\ActiveRecord
         return [
             [['file'], 'file'],
             [['unit_number', 'sim_number'], 'required', 'message' => 'Необходимо заполнить поле'],
-            [['unit_number', 'id_client', 'id_type_unit', 'id_city', 'id_diller_installer', 'id_volume', 'id_can', 'test_status', 'can_module', 'shock_sensor', 'volume_sensor', 'rfid_tags', 'id_tester_operator', 'activate_status', 'id_activate_operator', 'id_marka', 'id_model', 'id_segment', 'id_insurance', 'id_operator', 'status', 'sim_number'], 'integer'],
+            [['unit_number', 'id_client', 'id_type_unit', 'id_city', 'id_diller_installer', 'id_volume', 'id_can', 'test_status', 'can_module', 'shock_sensor', 'volume_sensor', 'rfid_tags', 'id_tester_operator', 'activate_status', 'id_activate_operator', 'id_marka', 'id_model', 'id_segment', 'id_insurance', 'id_operator', 'status', 'sim_number', 'id_package'], 'integer'],
             [['unit_number'], 'unique', 'message' => 'Такой номер блока уже существует'],
             [['test_date', 'activate_date', 'made_auto_date'], 'safe'],
             [['garant_term', 'ext_garant', 'comment'], 'string', 'max' => 32],
-            [['installer', 'contact_installer', 'vin_number', 'name_model', 'gos_number', 'color', 'passport_number', 'name_owner'], 'string', 'max' => 256],
+            [['installer', 'contact_installer', 'vin_number', 'name_model', 'name_manager', 'gos_number', 'color', 'passport_number', 'name_owner'], 'string', 'max' => 256],
             [['id_client'], 'exist', 'skipOnError' => true, 'targetClass' => BgClient::className(), 'targetAttribute' => ['id_client' => 'id_client']],
             [['id_type_unit'], 'exist', 'skipOnError' => true, 'targetClass' => BgTypeUnit::className(), 'targetAttribute' => ['id_type_unit' => 'id_type_unit']],
             [['id_diller_installer'], 'exist', 'skipOnError' => true, 'targetClass' => BgDillerAll::className(), 'targetAttribute' => ['id_diller_installer' => 'id_diller']],
@@ -86,6 +86,7 @@ class BgUnit extends \yii\db\ActiveRecord
             [['id_marka'], 'exist', 'skipOnError' => true, 'targetClass' => BgMarka::className(), 'targetAttribute' => ['id_marka' => 'id_marka']],
             [['id_model'], 'exist', 'skipOnError' => true, 'targetClass' => BgModel::className(), 'targetAttribute' => ['id_model' => 'id_model']],
             [['id_city'], 'exist', 'skipOnError' => true, 'targetClass' => BgCity::className(), 'targetAttribute' => ['id_city' => 'id_city']],
+            [['id_package'], 'exist', 'skipOnError' => true, 'targetClass' => BgPackage::className(), 'targetAttribute' => ['id_package' => 'id_package']],
         ];
     }
 
@@ -153,6 +154,13 @@ class BgUnit extends \yii\db\ActiveRecord
     public function getIdDillerInstaller()
     {
         return $this->hasOne(BgDillerAll::className(), ['id_diller' => 'id_diller_installer']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdPackage()
+    {
+        return $this->hasOne(BgPackage::className(), ['id_package' => 'id_package']);
     }
 
     public function getIdVolume()

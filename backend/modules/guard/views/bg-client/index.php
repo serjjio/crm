@@ -70,11 +70,7 @@ use yii\web\JsExpression;
                 'contentOptions' => ['style' => 'max-width:300px; white-space:normal']
             ],
 
-            [
-                'attribute' => 'id_package',
-                'label' => 'Тарифный план', 
-                'value' => 'idPackage.name_package'
-            ],
+            
 
             [
                 'attribute' => 'count_obj',

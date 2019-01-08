@@ -159,7 +159,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		                    
                 		]
                 	],
-                	[
+                	/*[
                 		'columns' => [
                 			[
                                 'attribute'=> 'id_diller_reteiler',
@@ -174,8 +174,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             ],
                 		]
-                	],
-                	[
+                	],*/
+                	/*[
                 		'columns' => [
                 			[
                                 'attribute'=> 'id_package',
@@ -191,7 +191,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             ],
                 		]
-                	],
+                	],*/
                 	[
                 		'columns' => [
                 			[

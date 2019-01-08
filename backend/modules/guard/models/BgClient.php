@@ -44,7 +44,7 @@ class BgClient extends \yii\db\ActiveRecord
         return [
             [['client_name'], 'required', 'message' => 'Необходимо заполнить поле'],
             [['id_diller_reteiler', 'count_obj', 'status'], 'integer'],
-            [['contract_date', 'id_package', 'contract_number'], 'safe'],
+            [['contract_date', 'contract_number'], 'safe'],
             [['comment'], 'string'],
             [['client_name', 'name_manager', 'contract_number', 'contact1', 'contact2'], 'string', 'max' => 256],
             ['email', 'trim'],
@@ -52,7 +52,7 @@ class BgClient extends \yii\db\ActiveRecord
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             [['id_diller_reteiler'], 'exist', 'skipOnError' => true, 'targetClass' => BgDillerAll::className(), 'targetAttribute' => ['id_diller_reteiler' => 'id_diller']],
-            [['id_package'], 'exist', 'skipOnError' => true, 'targetClass' => BgPackage::className(), 'targetAttribute' => ['id_package' => 'id_package']],
+            
         ];
     }
 
@@ -85,13 +85,7 @@ class BgClient extends \yii\db\ActiveRecord
         return $this->hasOne(BgDillerAll::className(), ['id_diller' => 'id_diller_reteiler']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIdPackage()
-    {
-        return $this->hasOne(BgPackage::className(), ['id_package' => 'id_package']);
-    }
+    
 
     /**
      * @return \yii\db\ActiveQuery

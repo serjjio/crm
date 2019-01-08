@@ -9,7 +9,7 @@ use kartik\date\DatePicker;
 use yii\web\JsExpression;
 use backend\modules\guard\models\BgClient;
 use backend\modules\guard\models\BgDillerAll;
-use backend\modules\guard\models\BgPackage;
+
 use kartik\checkbox\CheckboxX;
 
 /* @var $this yii\web\View */
@@ -52,20 +52,7 @@ use kartik\checkbox\CheckboxX;
                 </div>
                 <!-- Diller -->
 
-                <div class="form-group">
-                    <div class="col-sm-2" style="text-align: left">
-                        <?= Html::activeLabel($model, 'id_client', ['label' => 'Диллер'])?>
-                    </div>      
-                    <div class="col-sm-4">
-                        <?= $form->field($model, 'id_diller_reteiler', ['showLabels' => false])->widget(Select2::classname(), 
-                            [
-                                'data' => ArrayHelper::map(BgDillerAll::find()->all(), 'id_diller', 'name_diller', 'name_city'),
-                                'options' => ['placeholder' => 'Укажите диллера...'],
-                                'pluginOptions' => ['allowClear' => true]
-                            ]) ?>
-                    </div>
-                    
-                </div>
+                
                 <!-- Name Manager -->
                 <div class="form-group">
 
@@ -78,21 +65,7 @@ use kartik\checkbox\CheckboxX;
     
                 </div>
 
-                <!-- Pakage -->
-                <div class="form-group">
-                    <div class="col-sm-2" style="text-align: left">
-                        <?= Html::activeLabel($model, 'id_client', ['label' => 'Тарифный план'])?>
-                    </div>      
-                    <div class="col-sm-4">
-                        <?= $form->field($model, 'id_package', ['showLabels' => false])->widget(Select2::classname(), 
-                            [
-                                'data' => ArrayHelper::map(BgPackage::find()->all(), 'id_package', 'name_package'),
-                                'options' => ['placeholder' => 'Укажите тп...'],
-                                'pluginOptions' => ['allowClear' => true]
-                            ]) ?>
-                    </div>
-                    
-                </div>
+                
 
                 <!-- Contract Number -->
                 <div class="form-group">
