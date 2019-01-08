@@ -54,7 +54,7 @@ $this->title = false;
                                         'noResults' => new JsExpression("function () {return 'Совпадений не найдено'}"),
                                     ],
                                     'ajax' => [
-                                        'url' => '/guard/bg-city/city-list',
+                                        'url' => '/admin/bg-city/city-list',
                                         'dataType' => 'json',
                                         'data' => new JsExpression("function (params) {return {q:params.term};}"),
                                     ],
