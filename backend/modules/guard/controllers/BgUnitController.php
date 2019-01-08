@@ -120,6 +120,10 @@ class BgUnitController extends Controller
                 $activate_date= strtotime($model->activate_date);
                 $model->activate_date = date('Y-m-d', $activate_date);
             }
+            if($model->contract_date){
+                $contract_date= strtotime($model->contract_date);
+                $model->contract_date = date('Y-m-d', $contract_date);
+            }
             /*if($model->made_auto_date){
                 $made_auto_date= strtotime($model->made_auto_date);
                 $model->made_auto_date = date('Y', $made_auto_date);
@@ -259,6 +263,10 @@ class BgUnitController extends Controller
             if($model->activate_date){
                 $activate_date= strtotime($model->activate_date);
                 $model->activate_date = date('Y-m-d', $activate_date);
+            }
+            if($model->contract_date){
+                $contract_date= strtotime($model->contract_date);
+                $model->contract_date = date('Y-m-d', $contract_date);
             }
             /*if($model->made_auto_date){
                 $made_auto_date= strtotime($model->made_auto_date);

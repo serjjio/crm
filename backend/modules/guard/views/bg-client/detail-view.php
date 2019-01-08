@@ -192,7 +192,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                 		]
                 	],*/
-                	[
+                	/*[
                 		'columns' => [
                 			[
 		                        'attribute' => 'contract_number',
@@ -216,7 +216,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     		],
 		                    
                 		]
-                	],
+                	],*/
                 	[
                 		'group' => true,
                 		'label' => 'Контактная информация',

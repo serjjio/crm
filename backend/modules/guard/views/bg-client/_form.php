@@ -68,7 +68,7 @@ use kartik\checkbox\CheckboxX;
                 
 
                 <!-- Contract Number -->
-                <div class="form-group">
+                <!-- <div class="form-group">
 
                     <div class="col-sm-2" style="text-align: left">
                         <?= Html::activeLabel($model, 'id_client', ['label' => 'Номер договора'])?>
@@ -92,7 +92,7 @@ use kartik\checkbox\CheckboxX;
                             ])?>
                     </div>
     
-                </div>
+                </div> -->
 
                 <hr size="3px" style="border-top:1px solid #cecece">
 

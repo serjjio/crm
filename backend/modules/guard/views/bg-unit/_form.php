@@ -75,17 +75,7 @@ use backend\modules\guard\models\BgPackage;
     
         </div>
 
-        <!-- Contract Number -->
-        <div class="form-group">
 
-                    <div class="col-sm-2" style="text-align: left">
-                        <?= Html::activeLabel($model, 'id_unit', ['label' => 'Номер договора'])?>
-                    </div>      
-                    <div class="col-sm-4">
-                        <?= $form->field($model, 'contract_number', ['showLabels' => false])->textInput()?>
-                    </div> 
-    
-                </div>
         <!-- Type  unit-->
          <div class="form-group">
             <div class="col-sm-2" style="text-align: left">
@@ -174,6 +164,31 @@ use backend\modules\guard\models\BgPackage;
                     </div> 
     
                 </div>
+        <!-- Contract Number -->
+        <div class="form-group">
+
+                    <div class="col-sm-2" style="text-align: left">
+                        <?= Html::activeLabel($model, 'id_unit', ['label' => 'Номер договора'])?>
+                    </div>      
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'contract_number', ['showLabels' => false])->textInput()?>
+                    </div>
+                    <div class="col-sm-2" style="text-align: right">
+                        <?= Html::activeLabel($model, 'id_unit', ['label' => 'Дата договора'])?>
+                    </div>  
+                    <div class="col-sm-4">
+                         <?= $form->field($model, 'contract_date', ['showLabels' => false])->widget(DatePicker::classname(),[
+                                        'name' => 'dp_1',
+                                        'type' => DatePicker::TYPE_COMPONENT_PREPEND,
+                                        //'value' => '28-May-1989',
+                                        'pluginOptions'=> [
+                                            'autoclose' => true,
+                                            'format' => 'yyyy-m-dd'
+                                        ],
+                            ])?>
+                    </div>
+    
+        </div>
 
         <!-- Install-->
         
