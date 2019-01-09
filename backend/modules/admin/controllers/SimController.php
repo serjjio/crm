@@ -94,10 +94,64 @@ class SimController extends Controller
                    
                     if ($unit = \backend\modules\guard\models\BgUnit::find()->where(['unit_number'=> trim($rowData[0][0])])->one()){
                         
-                        $unit->status=0;
-                        $unit->activate_status=0;
-                        $unit->save();
-                        
+                        $can = trim($rowData[0][1]);
+                        if($can == 29){
+                            $unit->can_module = 0;
+                        }else if($can == 30){
+                            $unit->can_module = 1;
+                            $unit->id_can = 1;
+                        }else if($can == 31){
+                            $unit->can_module = 1;
+                            $unit->id_can = 3;
+                        }else if($can == 32){
+                            $unit->can_module = 1;
+                            $unit->id_can = 2;
+                        }else if($can == 33){
+                            $unit->can_module = 1;
+                            $unit->id_can = 4;
+                        }else{
+                            $unit->can_module = 0;
+                        }
+
+                        if($rowData[0][2]){
+                            $unit->shock_sensor = trim($rowData[0][2]);
+                        }
+
+                        $volume = trim($rowData[0][3]);
+                        if($volume == 1){
+                            $unit->volume_sensor = 0;
+                        }else if($volume == 2){
+                            $unit->volume_sensor = 1;
+                            $unit->id_volume = 2;
+                        }else if($volume == 3){
+                            $unit->volume_sensor = 1;
+                            $unit->id_volume = 1;
+                        }else if($volume == 4){
+                            $unit->volume_sensor = 1;
+                            $unit->id_volume = 3;
+                        }else{
+                            $unit->volume_sensor = 0;
+                        }
+
+                        if($rowData[0][4]){
+                            $unit->rfid_tags = trim($rowData[0][4]);
+                        }
+                        $unit->test_status = 1;
+
+                        $city_name = trim($rowData[0][5]);
+                        if($city = \backend\modules\guard\models\BgCity::find()->where(['name_sity'=> $city_name])->one()){
+                            $unit->id_city = $city->id_city;
+                        }
+
+                        if($rowData[0][6]){
+                            $unit->installer = trim($rowData[0][6]);
+                        }
+                        if($rowData[0][7]){
+                            $unit->contact_installer = trim($rowData[0][7]);
+                        }
+
+                        if(!$unit->save()) print_r($unit->errors);
+
                     }else{
                         continue;
                     }
