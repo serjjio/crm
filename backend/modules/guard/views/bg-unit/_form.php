@@ -197,7 +197,7 @@ use backend\modules\guard\models\BgPackage;
             <div class="col-sm-2" style="text-align: left">
                 <?= Html::activeLabel($model, 'id_unit', ['label' => 'Диллер'])?>
             </div>      
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?= $form->field($model, 'id_diller_installer', ['showLabels' => false])->widget(Select2::classname(), 
                     [
                         'data' => ArrayHelper::map(BgDillerAll::find()->all(), 'id_diller', 'name_diller', 'name_city'),
@@ -213,13 +213,13 @@ use backend\modules\guard\models\BgPackage;
             <div class="col-sm-2" style="text-align: left">
                 <?= Html::activeLabel($model, 'id_unit', ['label' => 'Установщик'])?>
             </div>      
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?= $form->field($model, 'installer', ['showLabels' => false])->textInput()?>
             </div> 
             <div class="col-sm-2" style="text-align: right">
                 <?= Html::activeLabel($model, 'id_unit', ['label' => 'Контакты'])?>
             </div> 
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?= $form->field($model, 'contact_installer', ['showLabels' => false])->textInput()?>
             </div>      
         </div>
@@ -458,7 +458,7 @@ use backend\modules\guard\models\BgPackage;
         <!-- Model / marka -->
         <div class="form-group">
             <div class="col-sm-2" style="text-align: left">
-                <?= Html::activeLabel($model, 'id_unit', ['label' => 'Марка Авто'])?>
+                <?= Html::activeLabel($model, 'id_unit', ['label' => 'Модель Авто'])?>
             </div>      
             <div class="col-sm-3">
                 <?= $form->field($model, 'id_marka', ['showLabels' => false])->widget(Select2::classname(), 
@@ -468,9 +468,7 @@ use backend\modules\guard\models\BgPackage;
                         'pluginOptions' => ['allowClear' => true]
                     ]) ?>
             </div>
-            <div class="col-sm-2" style="text-align: right">
-                <?= Html::activeLabel($model, 'id_unit', ['label' => 'Модель Авто'])?>
-            </div> 
+            
             <div class="col-sm-3">
                 <?= $form->field($model, 'id_model', ['showLabels' => false])->widget(Select2::classname(), [
                                         'initValueText' => BgModel::findOne($model->id_model)->name_model,
@@ -478,6 +476,9 @@ use backend\modules\guard\models\BgPackage;
                                         'pluginOptions' => ['allowClear' => true]
                                 ])?>
             </div>
+             <div class="col-sm-3">
+                <?= $form->field($model, 'modification', ['showLabels' => false])->textInput(['placeholder' => 'Модификация'])?>
+            </div>  
                     
         </div>
 
