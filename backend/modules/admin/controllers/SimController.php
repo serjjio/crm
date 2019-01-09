@@ -96,6 +96,7 @@ class SimController extends Controller
                         
                         $unit->status=0;
                         $unit->activate_status=0;
+                        $unit->save();
                         
                     }else{
                         continue;
