@@ -94,33 +94,8 @@ class SimController extends Controller
                    
                     if ($unit = \backend\modules\guard\models\BgUnit::find()->where(['unit_number'=> trim($rowData[0][0])])->one()){
                         
-                        $unit->contract_number = trim($rowData[0][2]);
-                        if($rowData[0][4]){
-                            $unit->id_segment = 2;
-                            $unit->id_insurance = trim($rowData[0][4]);
-                            //$unit->id_insurance = 2;
-                        }else{
-                            $unit->id_segment = 1;
-                        }
-                        if($rowData[0][3]){
-                            $ts = strtotime(trim($rowData[0][3]));
-                            $unit->contract_date = date('Y-m-d', $ts);
-                        }
-
-                        $name_client = trim($rowData[0][1]);
-                        if($client = \backend\modules\guard\models\BgClient::find()->where(['client_name' => $name_client])->one()){
-                            $unit->id_client = $client->id_client;
-                            $client->count_obj++;
-                            $client->save();
-                        }else{
-                            $client = new \backend\modules\guard\models\BgClient;
-                            $client->client_name = $name_client;
-                            $client->count_obj++;
-                            $client->save();
-                            $unit->id_client = $client->id_client;
-                        }
-
-                        if(!$unit->save()) print_r($unit->errors);
+                        $unit->status=0;
+                        $unit->activate_status=0;
                         
                     }else{
                         continue;
