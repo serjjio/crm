@@ -98,7 +98,7 @@ class SimController extends Controller
                     }else{
                         $model = new \backend\modules\guard\models\BgModel;
                         $model->name_model = trim($rowData[0][0]);
-                        $model->id_marka = 43;
+                        $model->id_marka = 6;
                         if(!$model->save()) print_r($model->errors);
                     }
                     //if(!$unit->save()) print_r($unit->errors);
