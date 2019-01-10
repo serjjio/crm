@@ -44,7 +44,7 @@ class BgUnitController extends Controller
                         'roles' => ['viewGuard'],
                     ],
                     [
-                        'actions' => ['create', 'delete', 'update', 'change-marka', 'delete-selected', 'cities-list'],
+                        'actions' => ['create', 'delete', 'update', 'change-marka', 'delete-selected', 'cities-list', 'create-client', 'client-list'],
                         'allow' => true,
                         'roles' => ['createGuard'],
                     ],
@@ -145,6 +145,64 @@ class BgUnitController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    /*Create Client*/
+
+    public function actionCreateClient()
+    {
+
+        Yii::$app->language = 'ru-RU';
+        $model = new BgClient();
+
+        /*if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())){
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+            return ActiveForm::validate($model);
+        }*/
+
+        if ($model->load(Yii::$app->request->post())) {
+
+
+            if($model->count_obj < 1){
+                $model->count_obj = 0;
+            }
+            echo $model->save() ? "<option value = '".$model->id_client."'>".$model->client_name."</option>" : null;
+        } else {
+            return $this->renderAjax('_form-client', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /*Ajax request for to search Models*/
+    public function actionClientList($q = null, $id = null){
+
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if(!is_null($q)){
+            
+            $query = new Query;
+            $query->select(['id_client AS id', 'client_name AS text'])
+                    ->from('bg_client')
+                    ->where(['like', 'client_name', $q])
+                    ->limit(50);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            //var_dump($id);
+            //exit;
+            $out['results'] = array_values($data);
+            //var_dump($out);
+            //exit;
+            
+        }
+        elseif ($id > 0){
+            
+            $out['results'] = ['id' => $id, 'text' => BgClientl::find($id_client)->client_name];
+        }
+       
+        return $out;
     }
 
 

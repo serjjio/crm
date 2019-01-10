@@ -253,6 +253,21 @@ $(document).on({
 	}
 })
 
+/*Create client into unit*/
+
+$(document).on({
+	ready:function(){
+		return $('body').on('click', '#create-client', function(){
+			//$('#alert-message').css('display', 'none').removeClass();
+			$('#root').modal('show')
+					.find('#modalContent')
+					.load($(this).attr('data-attribute-url'));
+					
+		})
+			
+	}
+})
+
 $(document).on({
 	ready: function(){
 		return $('body').on('click', '.modalLink', function(e){

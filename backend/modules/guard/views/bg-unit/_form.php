@@ -32,6 +32,19 @@ use backend\modules\guard\models\BgPackage;
 
 ?>
 
+<?php
+
+        Modal::begin([
+                'options' => ['tabindex' => false],
+                'id' => 'root',
+                'size' => 'modal-lg',
+
+            ]);
+        echo "<div id='modalContent'></div>";
+        Modal::end();
+
+    ?>
+
 <div class="panel panel-default">
     <div class="panel-heading" style="background-color: #337ab7; color: white">
         <h3 class="panel-title">Информация об устройстве</h3>
@@ -84,7 +97,7 @@ use backend\modules\guard\models\BgPackage;
             <div class="col-sm-4">
                 <?= $form->field($model, 'id_type_unit', ['showLabels' => false])->widget(Select2::classname(), 
                     [
-                        'data' => ArrayHelper::map(BgTypeUnit::find()->all(), 'id_type_unit', 'name_type_unit'),
+                        //'data' => ArrayHelper::map(BgTypeUnit::find()->all(), 'id_type_unit', 'name_type_unit'),
                         'options' => ['placeholder' => 'Укажите тип устройства...'],
                         'pluginOptions' => ['allowClear' => true]
                     ]) ?>
@@ -100,14 +113,31 @@ use backend\modules\guard\models\BgPackage;
             <div class="col-sm-4">
                 <?= $form->field($model, 'id_client', ['showLabels' => false])->widget(Select2::classname(), 
                     [
-                        'data' => ArrayHelper::map(BgClient::find()->all(), 'id_client', 'client_name'),
+                        'initValueText' => $model->id_client ? BgClient::findOne($model->id_client)->client_name : '',
+                        //'data' => ArrayHelper::map(BgClient::find()->all(), 'id_client', 'client_name'),
                         'options' => ['placeholder' => 'Укажите клиента...'],
-                        'pluginOptions' => ['allowClear' => true]
+                        'pluginOptions' => [
+                            'allowClear' => true,
+                            'minimumInputLength' => 3,
+                                    'language' => [
+                                        'errorLoading' => new JsExpression("function () {return 'Ожидание...'}"),
+                                        'inputTooShort' => new JsExpression("function () {return 'Введите больше 3 символов'}"),
+                                        'noResults' => new JsExpression("function () {return 'Совпадений не найдено'}"),
+                                    ],
+                                    'ajax' => [
+                                        'url' => '/guard/bg-unit/client-list',
+                                        'dataType' => 'json',
+                                        'data' => new JsExpression("function (params) {return {q:params.term};}"),
+                                    ],
+                                    'escapeMarkup' => new JsExpression("function (markup) {return markup;}"),
+                                    'templateResult' => new JsExpression("function (id_client) {return id_client.text;}"),
+                                    'templateSelection' => new JsExpression("function (id_client) {return id_client.text;}"),
+                        ]
                     ]) ?>
             </div>
             <? if(is_null($model->id_client)){ ?>
             <div class="col-sm-5" id="add-sim">
-                <?=Html::button('Добавить клиента', ['class'=>'btn', 'id'=>'create-client'])?>
+                <?=Html::button('Добавить клиента', ['class'=>'btn', 'id'=>'create-client' , 'data-attribute-url' => '/guard/bg-unit/create-client'])?>
                         
             </div>
             <? }else ''?>

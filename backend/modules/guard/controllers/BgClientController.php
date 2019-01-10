@@ -100,10 +100,7 @@ class BgClientController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            if($model->contract_date){
-                $contract_date= strtotime($model->contract_date);
-                $model->contract_date = date('Y-m-d', $contract_date);
-            }
+            
 
             if($model->count_obj < 1){
                 $model->count_obj = 0;
