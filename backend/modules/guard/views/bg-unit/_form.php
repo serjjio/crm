@@ -97,7 +97,7 @@ use backend\modules\guard\models\BgPackage;
             <div class="col-sm-4">
                 <?= $form->field($model, 'id_type_unit', ['showLabels' => false])->widget(Select2::classname(), 
                     [
-                        //'data' => ArrayHelper::map(BgTypeUnit::find()->all(), 'id_type_unit', 'name_type_unit'),
+                        'data' => ArrayHelper::map(BgTypeUnit::find()->all(), 'id_type_unit', 'name_type_unit'),
                         'options' => ['placeholder' => 'Укажите тип устройства...'],
                         'pluginOptions' => ['allowClear' => true]
                     ]) ?>
