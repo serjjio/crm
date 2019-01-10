@@ -105,6 +105,12 @@ use backend\modules\guard\models\BgPackage;
                         'pluginOptions' => ['allowClear' => true]
                     ]) ?>
             </div>
+            <? if(is_null($model->id_client)){ ?>
+            <div class="col-sm-5" id="add-sim">
+                <?=Html::button('Добавить клиента', ['class'=>'btn', 'id'=>'create-client'])?>
+                        
+            </div>
+            <? }else ''?>
                     
         </div>
 
