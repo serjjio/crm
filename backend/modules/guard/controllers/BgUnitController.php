@@ -5,6 +5,8 @@ namespace backend\modules\guard\controllers;
 use Yii;
 use backend\modules\guard\models\BgUnit;
 use backend\modules\guard\models\BgUnitSearch;
+use backend\modules\guard\models\BgCommentSearch;
+use backend\modules\guard\models\BgComment;
 use backend\modules\guard\models\BgModel;
 use backend\modules\guard\models\BgCity;
 use backend\modules\guard\models\BgOblast;
@@ -44,7 +46,7 @@ class BgUnitController extends Controller
                         'roles' => ['viewGuard'],
                     ],
                     [
-                        'actions' => ['create', 'delete', 'update', 'change-marka', 'delete-selected', 'cities-list', 'create-client', 'client-list'],
+                        'actions' => ['create', 'delete', 'update', 'change-marka', 'delete-selected', 'cities-list', 'create-client', 'client-list', 'create-comment'],
                         'allow' => true,
                         'roles' => ['createGuard'],
                     ],
@@ -66,6 +68,7 @@ class BgUnitController extends Controller
     public function actionIndex()
     {
         $searchModel = new BgUnitSearch();
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $id=false);
 
         return $this->render('index', [
@@ -134,12 +137,24 @@ class BgUnitController extends Controller
                 $client->count_obj++;
                 !$client->save() ? print_r($client->getErrors()) : '';
             }
+            $comment = $model->comment;
             
-            if ($model->save()) return $this->redirect('/guard/bg-unit');
+            if ($model->save()){
+                if($comment){
+                    $model_comment = new BgComment;
+                    $model_comment->text_comment = $comment;
+                    $model_comment->date = date('Y-m-d H:m:s', time());
+                    $model_comment->id_unit = $model->id_unit;
+                    $model_comment->id_user = Yii::$app->user->identity->id;
+                    $model_comment->save();
+                }
+                return $this->redirect('/guard/bg-unit');
+            }
                 
                 
             
         } else {
+            
             $model->test_date = date('Y-m-d');
             return $this->render('create', [
                 'model' => $model,
@@ -387,10 +402,38 @@ class BgUnitController extends Controller
                 
             
         } else {
+            $searchModel = new BgCommentSearch();
+            
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $id);
+            
             return $this->render('update', [
                 'model' => $model,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'id' => $id,
             ]);
         }
+    }
+
+
+    /*Create Comment for unit*/
+
+    public function actionCreateComment($id)
+    {
+        $model = new BgComment();
+        $post = Yii::$app->request->post();
+        if(Yii::$app->request->isAjax && isset($post)){
+            $data = $_POST['data'];
+            if ($data){
+                date_default_timezone_set('Europe/Kiev');
+                $model->date = date('Y-m-d H:i:s', time());
+                $model->text_comment = $data;
+                $model->id_unit = $id;
+                $model->id_user = Yii::$app->user->identity->id;
+                return $model->save() ? true : false;
+            }
+        }
+        
     }
 
     /**

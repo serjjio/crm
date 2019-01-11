@@ -24,6 +24,7 @@ use backend\modules\guard\models\BgVolumeSensor;
 use backend\modules\guard\models\BgCanSensor;
 use kartik\checkbox\CheckboxX;
 use backend\modules\guard\models\BgPackage;
+use kartik\grid\GridView;
 
 
 /* @var $this yii\web\View */
@@ -135,7 +136,7 @@ use backend\modules\guard\models\BgPackage;
                         ]
                     ]) ?>
             </div>
-            <? if(is_null($model->id_client)){ ?>
+            <? if(!$model->id_client){ ?>
             <div class="col-sm-5" id="add-sim">
                 <?=Html::button('Добавить клиента', ['class'=>'btn', 'id'=>'create-client' , 'data-attribute-url' => '/guard/bg-unit/create-client'])?>
                         
@@ -592,6 +593,7 @@ use backend\modules\guard\models\BgPackage;
 
         <!--Comment -->
          <div class="form-group">
+            <?if (!$model->id_unit){?>
             <div class="col-sm-2" style="text-align: left">
                 <?= Html::activeLabel($model, 'id_unit', ['label' => 'Примечание'])?>
             </div>      
@@ -599,7 +601,56 @@ use backend\modules\guard\models\BgPackage;
                         <?= $form->field($model, 'comment', ['showLabels' => false])->textArea([
                             'rows' => 3,
                         ])?>
-            </div>     
+            </div>  
+            <?}else{?>
+            <hr size="3px" style="border-top:1px solid #cecece">
+            <div class="col-sm-2" style="text-align: left">
+                <?= Html::activeLabel($model, 'id_unit', ['label' => 'Примечание'])?>
+            </div>  
+            <div class="col-sm-10">
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    //'filterModel' => $searchModel,
+                    'columns' => [
+
+                        [
+                            'attribute' => 'date',
+                            //'hAlign' => 'center',
+                            'label' => 'Дата'
+                        ],
+                        [
+                            'attribute' => 'text_comment',
+                            //'hAlign' => 'center',
+                            'label' => 'Примечание',
+                            'format' => 'html',
+                            'contentOptions' => ['style' => 'white-space: pre-wrap; overflow:auto; word-wrap:break-word']
+                        ],
+                    ],
+                    'pjax' => true,
+                    'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container']],
+                    'striped' => true,
+                    'hover' => true,
+                    //'beforeFooter' => 'My fancy content',
+                    'toolbar' => false,
+
+                    'panel' => [
+                        //'type' => false,
+                        //'type' => 'success',
+                        'heading' => false,
+                        'after' => false,
+                        'footer' => false,
+                        'before' =>'<textarea id="dynamic-input" type="text" rows="2" placeholder="Примечание" class="form-control" style="width:50%;display:inline;float:left"></textarea><div>'.Html::a('<i class="glyphicon glyphicon-plus"></i> Добавить', 
+                                        ['bg-unit/create-comment/'.$id], 
+                                        [
+                                            'data-pjax'=>0, 
+                                            'class' => !Yii::$app->user->can('createGuard') ? 'btn create hide' : 'btn dynamic-create',
+                                            'title' => Yii::t('app', 'Добавить'),
+                                        ]).'</div>',
+                        ]
+                                
+        ]); ?>
+            <?}?> 
+            </div>  
         </div>
 
         <hr size="3px" style="border-top:1px solid #cecece">
