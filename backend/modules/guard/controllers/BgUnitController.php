@@ -146,6 +146,7 @@ class BgUnitController extends Controller
                     $model_comment->date = date('Y-m-d H:m:s', time());
                     $model_comment->id_unit = $model->id_unit;
                     $model_comment->id_user = Yii::$app->user->identity->id;
+                    $model_comment->username = Yii::$app->user->identity->username;
                     $model_comment->save();
                 }
                 return $this->redirect('/guard/bg-unit');
@@ -430,6 +431,7 @@ class BgUnitController extends Controller
                 $model->text_comment = $data;
                 $model->id_unit = $id;
                 $model->id_user = Yii::$app->user->identity->id;
+                $model->username = Yii::$app->user->identity->username;
                 return $model->save() ? true : false;
             }
         }

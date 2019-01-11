@@ -625,6 +625,11 @@ use kartik\grid\GridView;
                             'format' => 'html',
                             'contentOptions' => ['style' => 'white-space: pre-wrap; overflow:auto; word-wrap:break-word']
                         ],
+                        [
+                            'attribute' => 'username',
+                            //'hAlign' => 'center',
+                            'label' => 'Пользователь'
+                        ],
                     ],
                     'pjax' => true,
                     'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container']],

@@ -33,7 +33,7 @@ class BgComment extends \yii\db\ActiveRecord
         return [
             [['text_comment', 'date', 'id_user'], 'required'],
             [['text_comment'], 'string'],
-            [['date'], 'safe'],
+            [['date', 'username'], 'safe'],
             [['id_user', 'id_unit'], 'integer'],
             [['id_unit'], 'exist', 'skipOnError' => true, 'targetClass' => BgUnit::className(), 'targetAttribute' => ['id_unit' => 'id_unit']],
         ];

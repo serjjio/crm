@@ -19,7 +19,7 @@ class BgCommentSearch extends BgComment
     {
         return [
             [['id_comment', 'id_user', 'id_unit'], 'integer'],
-            [['text_comment', 'date'], 'safe'],
+            [['text_comment', 'date', 'username'], 'safe'],
         ];
     }
 
@@ -74,7 +74,8 @@ class BgCommentSearch extends BgComment
             $query->andFilterWhere(['bg_unit.id_unit' => $id]);
         }
 
-        $query->andFilterWhere(['like', 'text_comment', $this->text_comment]);
+        $query->andFilterWhere(['like', 'text_comment', $this->text_comment])
+                ->andFilterWhere(['like', 'username', $this->username]);
 
         return $dataProvider;
     }
