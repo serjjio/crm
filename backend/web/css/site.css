@@ -317,6 +317,13 @@ a.create {
     display: none;
 }
 
+#BgUnit .file-preview{
+    border:none;
+}
+#BgUnit .fileinput-remove{
+    display: none;
+}
+
 
 
 

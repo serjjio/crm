@@ -11,11 +11,12 @@ use backend\modules\guard\models\BgModel;
 use backend\modules\guard\models\BgCity;
 use backend\modules\guard\models\BgOblast;
 use backend\modules\guard\models\BgClient;
+use backend\modules\guard\models\BgDoc;
+use yii\web\UploadedFile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 //use yii\httpclient\XmlParser;
-use yii\web\UploadedFile;
 use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
@@ -397,6 +398,11 @@ class BgUnitController extends Controller
 
                 
             }
+
+            if($model->file){
+                //$model->file = UploadedFile::getInstance($model->file, 'file');
+                
+            }
             
             if ($model->save()) return $this->redirect('/guard/bg-unit');
                 
@@ -414,6 +420,17 @@ class BgUnitController extends Controller
                 'id' => $id,
             ]);
         }
+    }
+
+    /*Upliad Files on Server*/
+
+    protected function uploadFiles($file, $id){
+        $model = new BgDoc;
+
+        $file = UploadedFile::getInstance($file, 'file');
+        var_dump($file);
+        exit;
+
     }
 
 

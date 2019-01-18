@@ -180,7 +180,9 @@ class ClientController extends Controller
             if($model->clientCountObj < 1){
                 $model->clientCountObj = 0;
             }
+            
             $model->imgLogo= UploadedFile::getInstance($model, 'imgLogo');
+            
             if ($model->imgLogo !== NULL){
                
                 $fileName = uniqid();

@@ -293,6 +293,16 @@ $(document).on({
 
 $(document).on({
 	ready:function(){
+		return $('body').on('click', '#units-tabs a', function(e){
+			e.preventDefault()
+			$(this).tab('show')
+		})
+			
+	}
+})
+
+$(document).on({
+	ready:function(){
 		return $('body').on('click', '.dynamic-create', function(e){
 			e.preventDefault()
 			var url = $(this).attr('href');

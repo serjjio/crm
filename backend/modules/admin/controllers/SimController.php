@@ -93,12 +93,16 @@ class SimController extends Controller
                     /* name model backend\modules\guard\models\Bg*/
                    
                     if ($model = \backend\modules\guard\models\BgModel::find()->where(['name_model'=> trim($rowData[0][0])])->one()){
-                        continue;
                         
+                        $model->id_segment = 2;
+                        if($ins = \backend\modules\guard\models\BgInsurance::find()->where(['name_insurance'=> trim($rowData[0][1])])->one()){
+
+                            $model->id_insurance = $ins->id_insurance;
+                        
+                        }
+                        $model->save();
                     }else{
-                        $model = new \backend\modules\guard\models\BgModel;
-                        $model->name_model = trim($rowData[0][0]);
-                        $model->id_marka = 6;
+                        continue;
                         //if(!$model->save()) print_r($model->errors);
                     }
                     //if(!$unit->save()) print_r($unit->errors);

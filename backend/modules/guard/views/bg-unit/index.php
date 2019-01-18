@@ -124,6 +124,27 @@ use backend\modules\guard\models\BgClient;
                 'label' => 'Модель', 
                 'value' => 'idModel.name_model'
             ],*/
+            [
+                'attribute' => 'test_date',
+                'value' => 'test_date',
+                'label' => 'Дата тестирования',
+                'format' => ['date', 'php:Y-m-d'],
+                //'width' => 'auto',
+                'filterType' => GridView::FILTER_DATE_RANGE,
+                'filterWidgetOptions' => [
+                    'model' => $model,
+                    'attribute' => 'test_date',
+                    'presetDropdown' => true,
+                    'defaultPresetValueOptions' => [
+                       'style' => 'display:none',
+                    ],
+                    //hideInput' => true,
+                    'convertFormat' => true,
+                    'pluginOptions' => [
+                        'locale' => ['format' => 'Y-m-d', 'separator' => ' : ']
+                    ]
+                ]
+            ],
 
             [
                 'class' => 'kartik\grid\BooleanColumn',
