@@ -142,6 +142,17 @@ use backend\modules\guard\models\BgClient;
                     'convertFormat' => true,
                     'pluginOptions' => [
                         'locale' => ['format' => 'Y-m-d', 'separator' => ' : ']
+                    ],
+                    'pluginEvents' => [
+                        "cancel.daterangepicker" => "function(ev, picker){
+                            picker.element[0].children[1].textContent='';
+                            $(picker.element[0].nextElementSibling).val('').trigger('change');
+                        }",
+                        'apply.daterangepicker'=>'function(ev, picker){
+                            var val = picker.startDate.format(picker.locale.format) + picker.locale.separator + picker.endDate.format(picker.locale.format);
+                            picker.element[0].children[1].textContent = val;
+                            $(picker.element[0].nextElementSibling).val(val);
+                        }',
                     ]
                 ]
             ],
@@ -163,6 +174,17 @@ use backend\modules\guard\models\BgClient;
                     'convertFormat' => true,
                     'pluginOptions' => [
                         'locale' => ['format' => 'Y-m-d', 'separator' => ' : ']
+                    ],
+                    'pluginEvents' => [
+                        "cancel.daterangepicker" => "function(ev, picker){
+                            picker.element[0].children[1].textContent='';
+                            $(picker.element[0].nextElementSibling).val('').trigger('change');
+                        }",
+                        'apply.daterangepicker'=>'function(ev, picker){
+                            var val = picker.startDate.format(picker.locale.format) + picker.locale.separator + picker.endDate.format(picker.locale.format);
+                            picker.element[0].children[1].textContent = val;
+                            $(picker.element[0].nextElementSibling).val(val);
+                        }',
                     ]
                 ]
             ],
