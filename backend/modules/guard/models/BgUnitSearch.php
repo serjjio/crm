@@ -19,7 +19,7 @@ class BgUnitSearch extends BgUnit
     {
         return [
             [['id_unit', 'unit_number', 'id_city', 'id_diller_installer', 'test_status', 'can_module', 'shock_sensor', 'volume_sensor', 'rfid_tags', 'id_tester_operator', 'activate_status', 'id_activate_operator', 'id_marka', 'status'], 'integer'],
-            [['sim_number', 'test_date', 'id_type_unit', 'installer', 'contact_installer', 'vin_number', 'activate_date', 'garant_term', 'name_model', 'gos_number', 'color', 'made_auto_date', 'passport_number', 'name_owner', 'comment', 'id_model', 'id_client', 'from_date', 'to_date'], 'safe'],
+            [['sim_number', 'test_date', 'id_type_unit', 'installer', 'contact_installer', 'vin_number', 'activate_date', 'garant_term', 'name_model', 'gos_number', 'color', 'made_auto_date', 'passport_number', 'name_owner', 'comment', 'id_model', 'id_client', 'from_date', 'to_date', 'from_date_act', 'to_date_act'], 'safe'],
         ];
     }
 
@@ -64,6 +64,14 @@ class BgUnitSearch extends BgUnit
                 $query->andFilterWhere(['test_date' => $this->test_date]);
             }
         }
+        if(!is_null($this->activate_date)){
+            if(strpos($this->activate_date, ':')!==false){
+                list($start_date, $end_date)=explode(':', $this->activate_date);
+                $query->andFilterWhere(['between', 'activate_date', $start_date, $end_date]);
+            }else{
+                $query->andFilterWhere(['activate_date' => $this->activate_date]);
+            }
+        }
         $query->joinWith('idTypeUnit');
         $query->joinWith('idModel');
         $query->joinWith('idClient');
@@ -82,7 +90,7 @@ class BgUnitSearch extends BgUnit
             'volume_sensor' => $this->volume_sensor,
             'rfid_tags' => $this->rfid_tags,
             'id_tester_operator' => $this->id_tester_operator,
-            'activate_date' => $this->activate_date,
+            //'activate_date' => $this->activate_date,
             'activate_status' => $this->activate_status,
             'id_activate_operator' => $this->id_activate_operator,
             'id_marka' => $this->id_marka,
@@ -100,6 +108,8 @@ class BgUnitSearch extends BgUnit
             ->andFilterWhere(['like', 'bg_type_unit.name_type_unit', $this->id_type_unit])
             ->andFilterWhere(['>=', 'test_date', $this->from_date])
             ->andFilterWhere(['<=', 'test_date', $this->to_date])
+            ->andFilterWhere(['>=', 'test_date', $this->from_date_act])
+            ->andFilterWhere(['<=', 'test_date', $this->to_date_act])
             ->andFilterWhere(['like', 'bg_client.client_name', $this->id_client])
             ->andFilterWhere(['like', 'bg_model.name_model', $this->id_model])
             ->andFilterWhere(['like', 'contact_installer', $this->contact_installer])

@@ -145,6 +145,27 @@ use backend\modules\guard\models\BgClient;
                     ]
                 ]
             ],
+            [
+                'attribute' => 'activate_date',
+                'value' => 'activate_date',
+                'label' => 'Дата активации',
+                'format' => ['date', 'php:Y-m-d'],
+                //'width' => 'auto',
+                'filterType' => GridView::FILTER_DATE_RANGE,
+                'filterWidgetOptions' => [
+                    'model' => $model,
+                    'attribute' => 'activate_date',
+                    'presetDropdown' => true,
+                    'defaultPresetValueOptions' => [
+                       'style' => 'display:none',
+                    ],
+                    //hideInput' => true,
+                    'convertFormat' => true,
+                    'pluginOptions' => [
+                        'locale' => ['format' => 'Y-m-d', 'separator' => ' : ']
+                    ]
+                ]
+            ],
 
             [
                 'class' => 'kartik\grid\BooleanColumn',
