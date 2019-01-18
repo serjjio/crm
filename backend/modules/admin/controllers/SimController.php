@@ -95,8 +95,9 @@ class SimController extends Controller
                     if ($model = \backend\modules\guard\models\BgUnit::find()->where(['unit_number'=> trim($rowData[0][0])])->one()){
                         
                         $model->id_segment = 2;
-                        $moel->id_insurance = trim($rowData[0][1]);
-                        $model->save();
+                        $model->id_insurance = intval(trim($rowData[0][1]));
+                        //var_dump($model->id_insurance);
+                        if(!$model->save()) print_r($model->errors);
                     }else{
                         continue;
                         //if(!$model->save()) print_r($model->errors);
