@@ -9,6 +9,7 @@ use yii\widgets\Pjax;
 use yii\bootstrap\Alert;
 use yii\web\JsExpression;
 use backend\modules\guard\models\BgClient;
+use kartik\export\ExportMenu;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\guard\models\BgUnitSearch */
@@ -217,7 +218,114 @@ use backend\modules\guard\models\BgClient;
         ]
     ?>
     
-        <?= GridView::widget([
+        
+
+    <!-- Export data -->
+    <?php
+    $columnsExport = [
+            //['class' => 'yii\grid\SerialColumn'],
+            'unit_number',
+            'sim_number',
+            'idTypeUnit.name_type_unit',
+            'idClient.client_name',
+            'idPackage.name_package',
+            'idSegment.name_segment',
+            [
+                'class' => 'yii\grid\DataColumn',
+                'attribute' => 'test_date',
+                'format' => ['date', 'php:Y-m-d'],
+            ],
+            [
+                'class' => 'yii\grid\DataColumn',
+                'attribute' => 'activate_date',
+                'format' => ['date', 'php:Y-m-d'],
+            ],
+            'idMarka.name_marka',
+            'idModel.name_model',
+            'vin_number',
+            'gos_number',
+
+
+            
+
+            
+        ]
+    ?>
+
+        <?php
+
+        $fullExport = ExportMenu::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => $columnsExport,
+                'target' => ExportMenu::TARGET_BLANK,
+                'filename' => 'units_'.date('Y-m-d_H-i', time()),
+                'exportConfig' => [
+                    ExportMenu::FORMAT_TEXT => false,
+                    //ExportMenu::FORMAT_PDF => false,
+                    //ExportMenu::FORMAT_CSV => false,
+                    //ExportMenu::FORMAT_HTML => false,
+                    ExportMenu::FORMAT_EXCEL => false,
+
+                    ExportMenu::FORMAT_HTML => [
+                        'label' => Yii::t('app', 'HTML'),
+                        'alertMsg' => Yii::t('app', 'HTML файл экспорта будет создан для скачивания'),
+                        'showHeader' => true,
+                        'showPageSummary' => true,
+                        'showFooter' => true,
+                        'showCaption' => true,
+                        
+                        'mime' => 'text/html',
+                        'extension' => 'html',
+                        'writer' => 'HTML',
+                        'config' => [
+                            'cssFile' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'
+                        ],
+                    ],
+
+                    ExportMenu::FORMAT_EXCEL_X => [
+                        'label' => Yii::t('app', 'Excel (xlsx)'),
+                        'alertMsg' => Yii::t('app', 'Excel файл экспорта будет создан для скачивания')
+                    ],
+                    
+
+                ],
+                //'noExportColumns' => ['8'],
+                'pdfLibraryPath' => '@vendor/kartik-v/mpdf',
+                'pdfLibrary' => PHPExcel_Settings::PDF_RENDERER_MPDF,
+                'fontAwesome' => true,
+                
+                'pjaxContainerId' => 'kv-pjax-container',
+                'options' => ['class' => 'hidden-xs'],
+                'showConfirmAlert' => false,
+                'dropdownOptions' => [
+                    'label' => 'Экспорт',
+                    //'title' => Yii::t('app', 'Экспорт данных таблици'),
+                    'class' => 'btn btn-default',
+                    /*'itemsBefore' => [
+                        '<li class="dropdown-header">Экспорт данных</li>',
+                    ],*/
+                ],
+                /*'columnSelectorOptions' => [
+                    'title' => Yii::t('app', 'Выберите колонки для экспорта')
+                ],*/
+                /*'columnBatchToggleSettings' => [
+                    'label' => 'Выбрать все'
+                ],*/
+                /*'messages' => [
+                    'allowPopups' => Yii::t('app', 'Отключите все блокировщики всплывающих окон в вашем браузере, чтобы обеспечить правильную загрузку'),
+                    'confirmDownload' => Yii::t('app', 'Хотите продолжить?'),
+                    'downloadProgress' => Yii::t('app', 'Создание файла. Пожалуйста, подождите...'),
+                    'downloadComplete' => Yii::t('app', 'Загрузка завершена. Можете закрыть окно'),
+                    
+                ],*/
+
+            ])
+
+
+
+    ?>
+
+    <?= GridView::widget([
         'id' => 'pl-grid-units',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -255,7 +363,9 @@ use backend\modules\guard\models\BgClient;
             'type'=>30,
         ],
 
-        'export' => false,
+        'toolbar' => [
+                $fullExport, 
+        ],
         
         
 

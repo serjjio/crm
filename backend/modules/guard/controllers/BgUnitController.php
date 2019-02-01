@@ -47,7 +47,7 @@ class BgUnitController extends Controller
                         'roles' => ['viewGuard'],
                     ],
                     [
-                        'actions' => ['create', 'delete', 'update', 'change-marka', 'delete-selected', 'cities-list', 'create-client', 'client-list', 'create-comment'],
+                        'actions' => ['create', 'test', 'delete', 'update', 'change-marka', 'delete-selected', 'cities-list', 'create-client', 'client-list', 'create-comment'],
                         'allow' => true,
                         'roles' => ['createGuard'],
                     ],
@@ -71,11 +71,24 @@ class BgUnitController extends Controller
         $searchModel = new BgUnitSearch();
 
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $id=false);
-
+        date_default_timezone_set('Europe/Kiev');
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    public function actionTest()
+    {
+        $a = 0;
+        $b = 1;
+        while ($c<100){
+            $c = $a + $b;
+            $a = $b;
+            $b = $c;
+            if ($c < 100)  echo $c. '   '; else break;
+            
+
+        }
     }
 
     /**
@@ -144,7 +157,8 @@ class BgUnitController extends Controller
                 if($comment){
                     $model_comment = new BgComment;
                     $model_comment->text_comment = $comment;
-                    $model_comment->date = date('Y-m-d H:m:s', time());
+                    date_default_timezone_set('Europe/Kiev');
+                    $model_comment->date = date('Y-m-d H:i:s', time());
                     $model_comment->id_unit = $model->id_unit;
                     $model_comment->id_user = Yii::$app->user->identity->id;
                     $model_comment->username = Yii::$app->user->identity->username;

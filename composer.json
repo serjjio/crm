@@ -32,7 +32,6 @@
         "kartik-v/bootstrap-fileinput": "@dev",
         "kartik-v/yii2-export": "*",
         "kartik-v/yii2-grid": "@dev",
-        "kartik-v/yii2-mpdf": "@dev",
         "kartik-v/yii2-widget-sidenav": "*",
         "kartik-v/yii2-widget-colorinput": "*",
         "kartik-v/yii2-checkbox-x": "*",

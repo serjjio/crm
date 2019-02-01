@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "70eec6853e7c403411d9279bfae7f12a",
+    "content-hash": "615cbfef7d2ef3337e4a9653b2579645",
     "packages": [
         {
             "name": "2amigos/yii2-gallery-widget",
@@ -4960,7 +4960,6 @@
         "kartik-v/yii2-widget-fileinput": 20,
         "kartik-v/bootstrap-fileinput": 20,
         "kartik-v/yii2-grid": 20,
-        "kartik-v/yii2-mpdf": 20,
         "kartik-v/yii2-date-range": 20
     },
     "prefer-stable": false,
