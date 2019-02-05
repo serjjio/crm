@@ -97,7 +97,7 @@ class SimController extends Controller
                         $model->status = 0;
                         //$model->id_insurance = intval(trim($rowData[0][1]));
                         //var_dump($model->id_insurance);
-                        if(!$model->save()) print_r($model->errors);
+                        //if(!$model->save()) print_r($model->errors);
                     }else{
                         continue;
                         //if(!$model->save()) print_r($model->errors);
