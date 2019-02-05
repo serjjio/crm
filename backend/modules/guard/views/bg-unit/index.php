@@ -363,7 +363,7 @@ use kartik\export\ExportMenu;
             'type'=>30,
         ],
 
-        'toolbar' => Yii::$app->user->can('admin') ? 
+        'toolbar' => Yii::$app->user->can('export') ? 
             [
                 $fullExport, 
             ] : false,
