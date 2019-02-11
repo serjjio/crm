@@ -485,9 +485,7 @@ class BgUnitController extends Controller
 
             
             $model->file = UploadedFile::getInstance($model, 'file');
-            if($model->file == NULL){
-                return true;
-            }else{
+            if($model->file){
                 $document = new BgDoc;
                 if(!is_dir(Yii::getAlias('@webroot').'/bg-docs/'.$id)){
                     //chmod(Yii::getAlias('@webroot').'/bg-docs', 0744);
