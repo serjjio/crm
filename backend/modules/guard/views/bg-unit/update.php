@@ -19,6 +19,8 @@ $this->params['breadcrumbs'][] = 'Update';*/
         'searchModel' => $searchModel,
         'dataProvider' => $dataProvider,
         'id' => $id,
+        'initialPreview' => $initialPreview,
+        'initialPreviewConfig' => $initialPreviewConfig
     ]) ?>
 
 </div>

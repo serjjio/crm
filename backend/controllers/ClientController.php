@@ -341,7 +341,7 @@ class ClientController extends Controller
         if(Yii::$app->request->isPost){
             $key = $_POST['key'];
             $model = Doc::findOne($key);
-            $filename = Yii::getAlias('@webroot').'/docs/'.$model->idClient.'/'.$model->docName;
+            $filename = Yii::getAlias('@webroot').'/docs/'.$model->id_unit.'/'.$model->name_path;
             if (file_exists($filename)){
                 @unlink($filename);
             }
@@ -359,6 +359,7 @@ class ClientController extends Controller
         $model = new Doc;
 
         if(Yii::$app->request->isPost){
+            
             $model->doc_file = UploadedFile::getInstance($model, 'doc_file');
             if($model->doc_file == NULL){
                 return true;
@@ -367,7 +368,7 @@ class ClientController extends Controller
                 if(!is_dir(Yii::getAlias('@webroot').'/docs/'.$folder_name)){
                         mkdir(Yii::getAlias('@webroot').'/docs/'.$folder_name);
                         chmod(Yii::getAlias('@webroot').'/docs/'.$folder_name, 0777);
-                    };
+                };
                 $size = $model->doc_file->size;
 
                 $model->docName = $model->doc_file->baseName.'.'.$model->doc_file->extension;

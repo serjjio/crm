@@ -47,19 +47,25 @@ use kartik\grid\GridView;
 
     ?>
 
-
+<?php
+$download = <<< HTML
+        
+        <a class="btn btn-xs btn-default download-docs" {dataKey} title="Скачать документ">
+            <i class="glyphicon glyphicon-floppy-save"></i>
+        </a>
+HTML;
     
-
+?>
 
 <div class="panel panel-default">
     <div class="panel-heading" style="background-color: #337ab7; color: white">
         <h3 class="panel-title">Информация об устройстве</h3>
     </div>
     <div class="panel-body" style="color: #337ab7; background-color: #f6f6f6">
-  <!--   <ul class="nav nav-tabs" role="tablist" id="units-tabs">
+    <ul class="nav nav-tabs" role="tablist" id="units-tabs">
         <li class="active"><a href="#basic" aria-controls="basic" role="tab" date-toggle="tab">Общее</a></li>
         <li><a href="#files" aria-controls="files" role="tab" date-toggle="tab">Файлы</a></li>
-    </ul> -->
+    </ul>
          <?php $form = ActiveForm::begin(['id' => $model->formName(), 'options' => ['enctype' => 'multipart/form-data'], 'type' => ActiveForm::TYPE_HORIZONTAL, 'enableAjaxValidation' => true, 'disabled' => !Yii::$app->user->can('createGuard') ? true : false]); ?>
         <div class="panel">
             <div class="tab-content">
@@ -673,8 +679,8 @@ use kartik\grid\GridView;
                 </div>
                 <div role="tabpanel" class="tab-pane" id="files">
                     
-                        <?=$form->field($model, 'file[]', ['showLabels' => false])->widget(FileInput::classname(),[
-                            //'options' => ['multiple' => true,],
+                        <?=$form->field($model, 'file', ['showLabels' => false])->widget(FileInput::classname(),[
+                            'options' => ['multiple' => false],
                             'pluginOptions' => [
                                 'showUpload' => false,
                                 'dropZoneEnabled' => true,
@@ -689,13 +695,13 @@ use kartik\grid\GridView;
                                     'other' => ['width' => 'auto',  'max-height'=> '90%'],
                                 ],
                                 'showPreview' => true,
-                                //'initialPreview' => $initialPreview,
+                                'initialPreview' => $initialPreview,
                                 'initialPreviewAsData' => true,
                                 'uploadAsync' => true,
                                 'overwriteInitial' => false,
-                                //'initialPreviewConfig' => $initialPreviewConfig,
+                                'initialPreviewConfig' => $initialPreviewConfig,
                                 'browseLabel' => 'Выберите файлы',
-                                //'otherActionButtons' => $download,
+                                'otherActionButtons' => $download,
                                 'fileActionSettings' => [
                                     'showUpload' => false,
                                 ],
@@ -739,6 +745,14 @@ $('#bgunit-id_marka').change(function(){
         success: funcSuccess
     })
 })
+
+$('.download-docs').click(function(){
+        var key = $(this).attr('data-key');
+        var url = "/guard/bg-unit/download-doc/"
+        $('body').append('<a href="'+url+ key+'" style="display:none" id="clickk"></a>');
+        document.getElementById('clickk').click();
+        $('#clickk').remove();
+    });
 
 
 JS;

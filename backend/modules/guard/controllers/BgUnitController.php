@@ -47,7 +47,7 @@ class BgUnitController extends Controller
                         'roles' => ['viewGuard'],
                     ],
                     [
-                        'actions' => ['create', 'test', 'delete', 'update', 'change-marka', 'delete-selected', 'cities-list', 'create-client', 'client-list', 'create-comment'],
+                        'actions' => ['create', 'doc-delete', 'download-doc', 'test', 'delete', 'update', 'change-marka', 'delete-selected', 'cities-list', 'create-client', 'client-list', 'create-comment'],
                         'allow' => true,
                         'roles' => ['createGuard'],
                     ],
@@ -152,8 +152,35 @@ class BgUnitController extends Controller
                 !$client->save() ? print_r($client->getErrors()) : '';
             }
             $comment = $model->comment;
+
+
+            $model->file = UploadedFile::getInstance($model, 'file');
+            
+            
+
             
             if ($model->save()){
+                if($model->file == NULL){
+                return true;
+                }else{
+                    $document = new BgDoc;
+                    
+                    if(!is_dir(Yii::getAlias('@webroot').'/bg-docs/'.$model->id_unit)){
+                        //chmod(Yii::getAlias('@webroot').'/bg-docs', 0744);
+                            mkdir(Yii::getAlias('@webroot').'/bg-docs/'.$model->id_unit, 0744);
+                            //chmod(Yii::getAlias('@webroot').'/bg-docs/'.$id, 0744);
+                    }
+                    $size = $model->file->size;
+                    $document->name_path = $model->file->baseName.'.'.$model->file->extension;
+                    $document->size = "$size";
+                    $document->id_unit = $model->id_unit;
+                    if($document->save()){
+                        $model->file->saveAs(Yii::getAlias('@webroot').'/bg-docs/'.$model->id_unit.'/'.$model->file->baseName.'.'.$model->file->extension);
+                        $model->file = NULL;
+                    }else{
+                        echo "Error save in DB";
+                    }
+                }
                 if($comment){
                     $model_comment = new BgComment;
                     $model_comment->text_comment = $comment;
@@ -362,8 +389,52 @@ class BgUnitController extends Controller
      */
     public function actionUpdate($id)
     {
+        Yii::$app->language = 'en-EN';
 
         $model = $this->findModel($id);
+        $docs = BgDoc::find()
+                    ->where(['id_unit' => $id])
+                    ->all();
+        if (!$docs){
+            //$model->id_unit = $id;
+            $initialPreview = [];
+            $initialPreviewConfig=[];
+        }else{
+            foreach($docs as $doc){
+                $explode = explode(".", $doc->name_path);
+                $type = array_pop($explode);
+                
+                if ($type == 'jpg' || $type =='png' || $type=='bmp' || $type=='jpeg'){
+                    $initialPreview[] = '/bg-docs/'.$id.'/'.$doc->name_path;
+                    $initialPreviewConfig[] = ['caption' => $doc->name_path, 'size' => $doc->size, 'url' => '/guard/bg-unit/doc-delete', 'key' => $doc->id_doc,];
+                }elseif($type == 'docx' || $type == 'doc'){
+
+                    $initialPreview[] = '/bg-docs/bg-docs.png';
+
+                    $initialPreviewConfig[] = [
+                            'caption' => $doc->name_path, 
+                            'size' => $doc->size, 
+                            'url' => '/guard/bg-unit/doc-delete',
+                            'key' => $doc->id_doc,
+                    ];
+                }elseif($type == 'zip'){
+                    $initialPreview[] = '/bg-docs/Zip-icon.png';
+                    $initialPreviewConfig[] = ['caption' => $doc->name_path, 'size' => $doc->size, 'url' => '/guard/bg-unit/doc-delete', 'key' => $doc->id_doc,];
+                }elseif($type == 'txt'){
+                    $file = Yii::getAlias('@webroot').'/bg-docs/'.$id.'/'.$doc->name_path;
+                    $text = utf8_encode(file_get_contents($file));
+                    $initialPreview[] = $text;
+                    $initialPreviewConfig[] = ['type' => 'text', 'caption' => $doc->name_path, 'size' => $doc->size, 'url' => '/guard/bg-unit/doc-delete', 'key' => $doc->id_doc,];
+                }elseif($type == 'xlsx' || $type == 'xls'){
+                    $initialPreview[] = '/bg-docs/xls.jpg';
+                    $initialPreviewConfig[] = ['caption' => $doc->name_path, 'size' => $name_path->size, 'url' => '/guard/bg-unit/doc-delete', 'key' => $doc->id_doc,];
+                }else{
+                    $initialPreview[] = '/bg-docs/'.$id.'/'.$doc->name_path;
+                    $initialPreviewConfig[] = ['type' => $type, 'caption' => $doc->name_path, 'size' => $doc->size, 'url' => '/guard/bg-unit/doc-delete', 'key' => $doc->id_doc,];
+                }
+  
+            }
+        }
         $id_client_current = $model->id_client;
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())){
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -413,9 +484,27 @@ class BgUnitController extends Controller
                 
             }
 
-            if($model->file){
-                //$model->file = UploadedFile::getInstance($model->file, 'file');
-                
+            
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if($model->file == NULL){
+                return true;
+            }else{
+                $document = new BgDoc;
+                if(!is_dir(Yii::getAlias('@webroot').'/bg-docs/'.$id)){
+                    //chmod(Yii::getAlias('@webroot').'/bg-docs', 0744);
+                        mkdir(Yii::getAlias('@webroot').'/bg-docs/'.$id, 0744);
+                        //chmod(Yii::getAlias('@webroot').'/bg-docs/'.$id, 0744);
+                }
+                $size = $model->file->size;
+                $document->name_path = $model->file->baseName.'.'.$model->file->extension;
+                $document->size = "$size";
+                $document->id_unit = $id;
+                if($document->save()){
+                    $model->file->saveAs(Yii::getAlias('@webroot').'/bg-docs/'.$id.'/'.$model->file->baseName.'.'.$model->file->extension);
+                    $model->file = NULL;
+                }else{
+                    echo "Error save in DB";
+                }
             }
             
             if ($model->save()) return $this->redirect('/guard/bg-unit');
@@ -432,6 +521,8 @@ class BgUnitController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
                 'id' => $id,
+                'initialPreview' => $initialPreview,
+                'initialPreviewConfig' => $initialPreviewConfig
             ]);
         }
     }
@@ -498,6 +589,36 @@ class BgUnitController extends Controller
             }
             return true;
         }
+    }
+
+
+        public function actionDocDelete(){
+
+        if(Yii::$app->request->isPost){
+            $key = $_POST['key'];
+            $model = BgDoc::findOne($key);
+            $filename = Yii::getAlias('@webroot').'/bg-docs/'.$model->id_unit.'/'.$model->name_path;
+            if (file_exists($filename)){
+                @unlink($filename);
+            }
+            $model->delete();
+            return true;
+        }
+    }
+
+    /**
+     * Ajax download document.
+     * If process is successful, the browser will be required true.
+     * @return mixed
+     */
+    public function actionDownloadDoc($id){
+            $model = BgDoc::findOne($id);
+            $file = Yii::getAlias('@webroot').'/bg-docs/'.$model->id_unit.'/'.$model->name_path;
+            if(file_exists($file)){
+                return Yii::$app->response->sendFile($file);
+
+            }
+        
     }
 
     /**

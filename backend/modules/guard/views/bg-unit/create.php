@@ -12,6 +12,8 @@ use yii\helpers\Html;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'initialPreview' => $initialPreview = [],
+        'initialPreviewConfig' => $initialPreviewConfig = []
     ]) ?>
 
 </div>
