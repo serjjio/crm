@@ -389,7 +389,6 @@ class BgUnitController extends Controller
      */
     public function actionUpdate($id)
     {
-        Yii::$app->language = 'en-EN';
 
         $model = $this->findModel($id);
         $docs = BgDoc::find()
