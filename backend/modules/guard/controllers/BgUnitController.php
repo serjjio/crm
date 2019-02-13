@@ -160,9 +160,7 @@ class BgUnitController extends Controller
 
             
             if ($model->save()){
-                if($model->file == NULL){
-                return true;
-                }else{
+                if($model->file){
                     $document = new BgDoc;
                     
                     if(!is_dir(Yii::getAlias('@webroot').'/bg-docs/'.$model->id_unit)){
